@@ -3,6 +3,9 @@ Discord bot for getCRAG-ed - Main entry point.
 Channel-first setup: each server channel is linked to one course via /auth.
 DMs use per-user links. Students must /auth and be approved before asking.
 """
+import asyncio
+import os
+
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -27,6 +30,29 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+async def _health_check(reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
+    """Serve Render/UptimeRobot health checks without blocking Discord client."""
+    try:
+        await asyncio.wait_for(reader.readuntil(b"\r\n\r\n"), timeout=5)
+    except (asyncio.IncompleteReadError, asyncio.LimitOverrunError, TimeoutError):
+        pass
+
+    status = "200 OK" if bot.is_ready() else "503 Service Unavailable"
+    body = b'{"status":"ok"}\n' if bot.is_ready() else b'{"status":"starting"}\n'
+    writer.write(
+        (
+            f"HTTP/1.1 {status}\r\n"
+            "Content-Type: application/json\r\n"
+            f"Content-Length: {len(body)}\r\n"
+            "Connection: close\r\n\r\n"
+        ).encode("ascii")
+        + body
+    )
+    await writer.drain()
+    writer.close()
+    await writer.wait_closed()
+
+
 # ---------------------------------------------------------------------------
 # Bot
 # ---------------------------------------------------------------------------
@@ -34,6 +60,11 @@ class CRAGBot(commands.Bot):
     """Syncs slash commands on startup."""
 
     async def setup_hook(self) -> None:
+        port = int(os.getenv("PORT", "10000"))
+        self.health_server = await asyncio.start_server(
+            _health_check, host="0.0.0.0", port=port
+        )
+        logger.info("Health server listening on 0.0.0.0:%d", port)
         try:
             synced = await self.tree.sync()
             logger.info(

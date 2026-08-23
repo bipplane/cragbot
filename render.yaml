@@ -33,7 +33,7 @@ services:
       - key: RESEARCH_ADMIN_SHARED_SECRET
         sync: false
 
-  - type: worker
+  - type: web
     name: getcrag-discord-bot
     runtime: python
     rootDir: discord_bot
