@@ -35,7 +35,7 @@ Course-grounded AI assistants must align with students' study practices, source 
 
 CRAG operationalises course-grounded retrieval, instructor validation, pedagogical interaction modes, learning analytics, and web/Discord deployment.
 
-Of 110 invited students, 42 responded (38.2\%). Most already use general AI tools frequently for studying and rely on multi-turn interaction, and a majority selected instructor-verified answers and exact-slide citations as desired adoption features. These baseline findings demonstrate a strong reliance on multi-turn interactions and a demand for verifiable outputs.
+Of 110 invited students, 42 responded (38.2\%). Among respondents, 35/42 reported frequent general-AI use for studying and 38/41 reported at least four prompts per conversation. Instructor-verified answers and exact-slide citations were selected as adoption features by 33/41 and 31/41 respondents, respectively. These self-reported habits and preferences motivate studying multi-turn interaction and verifiable evidence in course-specific assistance.
 
 We relate these habits to the tool's architecture and propose a research direction grounded by Holistic Cognitive Development (HCD): thinking, creating, criticising and reflecting. As the survey measures prior habits rather than the tool's usage or educational effectiveness, it establishes a framework for examining engagement quality within extended AI conversation. Earlier developer-reported safety vulnerabilities remain an open limitation, and neither current safety effectiveness nor HCD learning outcomes are evaluated in this phase.
 \end{abstract}
@@ -45,24 +45,19 @@ AI in education, retrieval-augmented generation, course-grounded chatbot, large 
 \end{IEEEkeywords}
 
 \section{Introduction}
-Large language models (LLMs) offer accessible explanations, but effective course-related assistance requires both alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}. General-purpose generative systems produce plausible but stereotypical content that lacks the course-specific context that instructors use to evaluate an explanation~\cite{b_bender,b_heersmink}. Consequently, students value the fluency of such content without recognising their structural or factual limitations.
+Large language models (LLMs) offer accessible explanations, but course-related assistance requires both alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
+General-purpose generative systems produce plausible but stereotypical content that lacks the course-specific context needed to evaluate an explanation~\cite{b_bender,b_heersmink}. Consequently, students value the fluency of such content without recognising their structural or factual limitations.
+Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, yet retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations} or prevent indirect prompt injection~\cite{b_greshake}. Beyond answer reliability, research showing improved understanding through prompted self-explanation~\cite{b_chi} strongly motivates interactions that encourage students to focus on what they explain, question and revise during AI-supported studies.
 
-To address factual inaccuracies, retrieval-augmented generation (RAG) conditions language generation on passages retrieved from an external corpus~\cite{b_lewis}. However, retrieving evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}, and retrieved content can introduce indirect prompt-injection attacks~\cite{b_greshake}. Beyond reliability of generated answers, educational assistance must also consider how students engage with an explanation. Chi et al.\ found that prompting students to explain an expository text improved understanding~\cite{b_chi}. This finding motivates a design focus on eliciting students' own reasoning and a corresponding evaluation focus on what they explain, question and revise during AI-supported study.
+We report a pre-use needs assessment in CS3103 Computer Networks at the National University of Singapore, with 42 responses from 110 invited students. The survey examines prior AI study habits, conversational practices and preferences for course-specific assistance. We relate these needs to CRAG, a platform combining course-grounded retrieval, instructor-reviewed Q\&A, pedagogical modes and learning analytics. Holistic Cognitive Development (HCD)~\cite{b_hcd} informs a proposed follow-up study of how students critique AI feedback and justify their reasoning.
 
-An initial step towards this evaluation is to understand students' existing study practices and expectations of AI assistance. This paper reports a pre-use needs assessment in the Computer Networks course (CS3103) at the National University of Singapore. We examine students' reported use of AI for studying, interaction patterns within AI conversations, and features that would attract them to educational assistants.
-
-CRAG provides the platform context to connect the needs assessment to concrete system capabilities, by combining course materials, instructor-reviewed Q\&A, pedagogical modes, and quiz analytics.
-
-We further propose an evaluation direction informed by Holistic Cognitive Development (HCD)~\cite{b_hcd}, a theoretical framework for examining how learners critique AI responses and justify their own reasoning.
-
-\textbf{This paper makes four contributions.}
+\textbf{This paper makes three contributions:}
 \begin{itemize}
-    \item A descriptive baseline needs assessment of student AI study practices and adoption preferences in CS3103.
-    \item An integrated account of CRAG's design principles and their implementation through course-grounded retrieval, instructor-reviewed Q\&A, three pedagogical modes, learning analytics and web/Discord access.
-    \item An interpretation of reported student needs in relation to these design principles and capabilities, identifying priorities for subsequent system evaluation.
-    \item A proposed HCD-informed evaluation framework linking AI dialogue to student-generated explanations, critique and reflective revision, to guide future assessment of engagement quality and learning.
+    \item A baseline assessment of student AI study practices and adoption preferences.
+    \item An account of CRAG's design and implementation, relating its five design principles to reported student needs.
+    \item An HCD-informed evaluation proposal linking AI dialogue to student explanations, critique and revision.
 \end{itemize}
-We do not infer system effectiveness from stated preferences or cognitive development from conversation length. The earlier prototype's behavioural evaluation and two-week CS3247 pilot provide historical background and motivate unresolved design and safety questions; they are separate from the CS3103 needs assessment and do not validate the current implementation or the proposed HCD-informed framework.
+The survey measures reported habits and preferences, not CRAG effectiveness or learning gains; the earlier CS3247 prototype evaluations provide separate historical context, and do not validate the current implementation or the proposed HCD-informed framework.
 
 \section{Related Work}
 
