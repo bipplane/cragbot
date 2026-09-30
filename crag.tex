@@ -31,7 +31,13 @@ e0957509@u.nus.edu}
 \maketitle
 
 \begin{abstract}
-Students increasingly rely on general-purpose Large Language Models (LLMs) such as ChatGPT for course-related help, yet these tools may hallucinate, drift from the curriculum, and remain invisible to instructors. This paper presents CRAG, an instructor-governed, course-grounded AI teaching assistant platform that returns authority over the AI tutor to course staff while preserving the conversational convenience students value. CRAG operationalises course-grounded retrieval, instructor validation, pedagogical interaction modes, learning analytics, and web/Discord deployment. We update the implementation account and retain two historical evaluations of an earlier prototype: a 50-case controlled behavioural test suite covering grounding, fallback, robustness, and safety; and a two-week deployment with 30 undergraduates in CS3247 Game Development at the National University of Singapore (NUS). That prototype achieved a 0.78 behavioural pass rate, with grounding at 0.80, fallback at 0.90 and safety at 0.60. Earlier survey results suggested perceived value, but did not establish learning gains. The current implementation instead uses Gemini planning, bounded corrective retrieval, selective visual ingestion and an LMS review inbox; its effectiveness is not measured by the historical results. Our findings expose a tension between strict grounding and the generative flexibility students expect, and surface concrete design lessons for course-grounded educational AI.
+Course-grounded AI assistants must align with students' study practices, source materials, and instructor oversight. We report a pre-use needs assessment for a Corrective Retrieval-Augmented Generation (CRAG) tool deployed in an undergraduate computer science course. 
+
+CRAG operationalises course-grounded retrieval, instructor validation, pedagogical interaction modes, learning analytics, and web/Discord deployment.
+
+Of 110 invited students, 42 responded (38.2\%). Most already use general AI tools frequently for studying and rely on multi-turn interaction, and a majority selected instructor-verified answers and exact-slide citations as desired adoption features. These baseline findings demonstrate a strong reliance on multi-turn interactions and a demand for verifiable outputs.
+
+We relate these habits to the tool's architecture and propose a research direction grounded by Holistic Cognitive Development (HCD): thinking, creating, criticising and reflecting. As the survey measures prior habits rather than the tool's usage or educational effectiveness, it establishes a framework for examining engagement quality within extended AI conversation. Earlier developer-reported safety vulnerabilities remain an open limitation, and neither current safety effectiveness nor HCD learning outcomes are evaluated in this phase.
 \end{abstract}
 
 \begin{IEEEkeywords}
