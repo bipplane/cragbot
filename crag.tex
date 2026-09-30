@@ -41,18 +41,26 @@ We relate these habits to the tool's architecture and propose a research directi
 \end{abstract}
 
 \begin{IEEEkeywords}
-AI in education, retrieval-augmented generation, course-grounded chatbot, large language models, instructor governance, learning analytics, human-in-the-loop
+AI in education, retrieval-augmented generation, course-grounded chatbot, large language models, instructor governance, Holistic Cognitive Development, reflective learning
 \end{IEEEkeywords}
 
 \section{Introduction}
+Large language models (LLMs) offer accessible explanations, but effective course-related assistance requires both alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}. General-purpose generative systems produce plausible but stereotypical content that lacks the course-specific context that instructors use to evaluate an explanation~\cite{b_bender,b_heersmink}. Consequently, students value the fluency of such content without recognising their structural or factual limitations.
 
-The rapid adoption of large language models (LLMs) has changed how students seek help. In our pre-deployment survey of 30 undergraduates in CS3247 Game Development, 83.3\% reported using external AI tools to clarify course concepts, 96.7\% used them specifically to explain difficult ideas, and 73.3\% said an always-available study assistant would make their learning more effective. This pattern mirrors broader findings on student use of ChatGPT and similar systems for concept clarification and problem solving \cite{b_yayeh}.
+To address factual inaccuracies, retrieval-augmented generation (RAG) conditions language generation on passages retrieved from an external corpus~\cite{b_lewis}. However, retrieving evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}, and retrieved content can introduce indirect prompt-injection attacks~\cite{b_greshake}. Separately, research on self-explanation found that prompting students to explain an expository text improved understanding~\cite{b_chi}.
 
-While general-purpose LLMs are convenient, three educational risks are now well documented. First, they hallucinate plausible but incorrect content \cite{b_bender,b_heersmink}; even low error rates are pedagogically harmful when students internalise explanations as authoritative. Second, they are misaligned with curricula, having been trained on broad internet data rather than on the sequence of topics, terminology, and conventions of any given course \cite{b_delikoura}. Third, instructors have no visibility into what students ask AI tools or what answers they receive, eroding their ability to identify misconceptions and adapt teaching.
+This paper evaluates a pre-use survey conducted in a Computer Networks course (CS3103) at the National University of Singapore. We examine how respondents currently use AI for studying, their specific behavioral patterns within AI conversations, and the features that would attract them to a course-specific assistant. CRAG provides the platform context for this study, combining course materials, instructor-reviewed Q\&A, pedagogical modes, and learning analytics. Holistic Cognitive Development (HCD)~\cite{b_hcd} supplies the theoretical framework for investigating student critique and reflective revision beyond reported usefulness.
 
-Course-grounded Retrieval-Augmented Generation (RAG) is a partial answer: by constraining the model to instructor-provided materials and showing citations, traceability and curricular alignment improve \cite{b_lewis}. However, grounding alone does not guarantee pedagogically appropriate behaviour. Students benefit from varied learning support---direct answers, scaffolded explanations, and Socratic questioning \cite{b_dejong,b_chi}---and educational systems must remain safe under adversarial inputs and academic-misuse attempts. Effective deployment additionally requires instructor governance and learning analytics that close the loop between student questions and teaching practice.
+Our primary contributions of this work are:
+\begin{itemize}
+    \item A descriptive, baseline needs assessment with explicit respondent denominators to map current student AI behaviors.
+    \item An interpretation of identified user needs in relation to CRAG's design and pedagogical capabilities.
+    \item A proposed HCD-informed evaluation framework to link dialogue with student-generated work.
+\end{itemize}
+Crucially, we do not infer system effectiveness from subjective preferences, or cognitive development from conversation length. Earlier prototype findings are strictly treated as background context, separate from the CS3103 data analysed here
 
 \textbf{This paper makes four contributions.} First, we articulate a framework of five educational design principles for instructor-governed, course-grounded AI teaching assistants. Second, we present CRAG, a deployable platform that realises the framework end-to-end with course-bot creation, a verified-Q\&A human-in-the-loop workflow, three pedagogical interaction modes, learning analytics, and Web/Discord delivery. Third, we retain an earlier prototype evaluation covering grounding, fallback, robustness, and safety. Fourth, we report the historical two-week user-based study with 30 undergraduates from NUS, surfacing the central trade-off between strict grounding and the generative flexibility students value.
+
 
 \section{Related Work}
 
@@ -321,6 +329,9 @@ The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, and the CS3247 st
 \bibitem{b_zimmerman} B.~J. Zimmerman, ``Becoming a self-regulated learner: An overview,'' \emph{Theory Pract.}, vol.~41, no.~2, pp.~64--70, 2002.
 \bibitem{b_romeroventura} C.~Romero and S.~Ventura, ``Educational data mining: A review of the state of the art,'' \emph{IEEE Trans.\ Syst., Man, Cybern.\ C}, vol.~40, no.~6, pp.~601--618, 2010.
 \bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.\ Learn.\ Anal.}, vol.~6, no.~3, 2019.
+
+\bibitem{b_gao_citations} T.~Gao, H.~Yen, J.~Yu, and D.~Chen, ``Enabling large language models to generate text with citations,'' in \emph{Proc.\ Conf.\ on Empirical Methods in Natural Language Processing (EMNLP)}, 2023, pp.~6465--6488, doi: 10.18653/v1/2023.emnlp-main.398.
+\bibitem{b_greshake} K.~Greshake, S.~Abdelnabi, S.~Mishra, C.~Endres, T.~Holz, and M.~Fritz, ``Not what you've signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection,'' arXiv:2302.12173, 2023.
 \end{thebibliography}
 
 \end{document}
