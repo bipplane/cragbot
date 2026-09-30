@@ -47,20 +47,22 @@ AI in education, retrieval-augmented generation, course-grounded chatbot, large 
 \section{Introduction}
 Large language models (LLMs) offer accessible explanations, but effective course-related assistance requires both alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}. General-purpose generative systems produce plausible but stereotypical content that lacks the course-specific context that instructors use to evaluate an explanation~\cite{b_bender,b_heersmink}. Consequently, students value the fluency of such content without recognising their structural or factual limitations.
 
-To address factual inaccuracies, retrieval-augmented generation (RAG) conditions language generation on passages retrieved from an external corpus~\cite{b_lewis}. However, retrieving evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}, and retrieved content can introduce indirect prompt-injection attacks~\cite{b_greshake}. Separately, research on self-explanation found that prompting students to explain an expository text improved understanding~\cite{b_chi}.
+To address factual inaccuracies, retrieval-augmented generation (RAG) conditions language generation on passages retrieved from an external corpus~\cite{b_lewis}. However, retrieving evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}, and retrieved content can introduce indirect prompt-injection attacks~\cite{b_greshake}. Beyond reliability of generated answers, educational assistance must also consider how students engage with an explanation. Chi et al.\ found that prompting students to explain an expository text improved understanding~\cite{b_chi}. This finding motivates a design focus on eliciting students' own reasoning and a corresponding evaluation focus on what they explain, question and revise during AI-supported study.
 
-This paper evaluates a pre-use survey conducted in a Computer Networks course (CS3103) at the National University of Singapore. We examine how respondents currently use AI for studying, their specific behavioral patterns within AI conversations, and the features that would attract them to a course-specific assistant. CRAG provides the platform context for this study, combining course materials, instructor-reviewed Q\&A, pedagogical modes, and learning analytics. Holistic Cognitive Development (HCD)~\cite{b_hcd} supplies the theoretical framework for investigating student critique and reflective revision beyond reported usefulness.
+An initial step towards this evaluation is to understand students' existing study practices and expectations of AI assistance. This paper reports a pre-use needs assessment in the Computer Networks course (CS3103) at the National University of Singapore. We examine students' reported use of AI for studying, interaction patterns within AI conversations, and features that would attract them to educational assistants.
 
-Our primary contributions of this work are:
+CRAG provides the platform context to connect the needs assessment to concrete system capabilities, by combining course materials, instructor-reviewed Q\&A, pedagogical modes, and quiz analytics.
+
+We further propose an evaluation direction informed by Holistic Cognitive Development (HCD)~\cite{b_hcd}, a theoretical framework for examining how learners critique AI responses and justify their own reasoning.
+
+\textbf{This paper makes four contributions.}
 \begin{itemize}
-    \item A descriptive, baseline needs assessment with explicit respondent denominators to map current student AI behaviors.
-    \item An interpretation of identified user needs in relation to CRAG's design and pedagogical capabilities.
-    \item A proposed HCD-informed evaluation framework to link dialogue with student-generated work.
+    \item A descriptive baseline needs assessment of student AI study practices and adoption preferences in CS3103.
+    \item An integrated account of CRAG's design principles and their implementation through course-grounded retrieval, instructor-reviewed Q\&A, three pedagogical modes, learning analytics and web/Discord access.
+    \item An interpretation of reported student needs in relation to these design principles and capabilities, identifying priorities for subsequent system evaluation.
+    \item A proposed HCD-informed evaluation framework linking AI dialogue to student-generated explanations, critique and reflective revision, to guide future assessment of engagement quality and learning.
 \end{itemize}
-Crucially, we do not infer system effectiveness from subjective preferences, or cognitive development from conversation length. Earlier prototype findings are strictly treated as background context, separate from the CS3103 data analysed here
-
-\textbf{This paper makes four contributions.} First, we articulate a framework of five educational design principles for instructor-governed, course-grounded AI teaching assistants. Second, we present CRAG, a deployable platform that realises the framework end-to-end with course-bot creation, a verified-Q\&A human-in-the-loop workflow, three pedagogical interaction modes, learning analytics, and Web/Discord delivery. Third, we retain an earlier prototype evaluation covering grounding, fallback, robustness, and safety. Fourth, we report the historical two-week user-based study with 30 undergraduates from NUS, surfacing the central trade-off between strict grounding and the generative flexibility students value.
-
+We do not infer system effectiveness from stated preferences or cognitive development from conversation length. The earlier prototype's behavioural evaluation and two-week CS3247 pilot provide historical background and motivate unresolved design and safety questions; they are separate from the CS3103 needs assessment and do not validate the current implementation or the proposed HCD-informed framework.
 
 \section{Related Work}
 
@@ -332,6 +334,7 @@ The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, and the CS3247 st
 
 \bibitem{b_gao_citations} T.~Gao, H.~Yen, J.~Yu, and D.~Chen, ``Enabling large language models to generate text with citations,'' in \emph{Proc.\ Conf.\ on Empirical Methods in Natural Language Processing (EMNLP)}, 2023, pp.~6465--6488, doi: 10.18653/v1/2023.emnlp-main.398.
 \bibitem{b_greshake} K.~Greshake, S.~Abdelnabi, S.~Mishra, C.~Endres, T.~Holz, and M.~Fritz, ``Not what you've signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection,'' arXiv:2302.12173, 2023.
+\bibitem{b_hcd} A.~Bhojan, ``Pedagogical reflections on the Holistic Cognitive Development (HCD) framework and AI-augmented learning in creative computing,'' arXiv:2511.06779v2, Jan.~2026, doi: 10.48550/arXiv.2511.06779.
 \end{thebibliography}
 
 \end{document}
