@@ -84,17 +84,17 @@ Jill Watson 1.0 \cite{b_jillwatson} & Approved Q\&A bank & Confidence-gated & No
 
 \section{The CRAG Framework}
 
-We frame CRAG around five design principles for instructor-governed, course-grounded AI teaching assistants (Fig.~\ref{fig:framework}).
+We interpret the survey alongside CRAG's five principles, to identify design priorities.
 
-\textbf{(P1) Course-grounded generation.} Course answers should be grounded in instructor-provided materials, with visible citations to specific documents and pages.
+\textbf{(P1) Course-grounded generation.} Answers visibly cite documents and pages in instructor-provided materials
 
-\textbf{(P2) Instructor governance.} Educators configure scope and behaviour, and may verify, edit, approve, or reject AI-generated answers and quiz items. Verified responses are prioritised in subsequent retrieval, forming a feedback-driven improvement loop.
+\textbf{(P2) Instructor governance.} Educators configure scope and behaviour, and may approve, edit, or reject AI-generated responses; subsequent retrival of these verified responses form a feedback-driven improvement loop.
 
-\textbf{(P3) Pedagogical interaction modes.} The system supports multiple instructional styles---a Standard mode (concise direct answers), a Guided mode (step-by-step scaffolded explanation), and a Socratic mode (adaptive hints, feedback and questions supporting self-explanation \cite{b_chi})---so instructors can match interaction to learning intent.
+\textbf{(P3) Pedagogical interaction modes.} Three modes match style to learning intent: Standard (concise answers), Guided (step-by-step), and Socratic (questioning that prompts self-explanation \cite{b_chi})---so instructors can match interaction to learning intent.
 
-\textbf{(P4) Conversational learning analytics.} Student--AI interactions are aggregated into instructor-actionable signals: frequently asked questions, topic-level question density, quiz performance, and per-student engagement.
+\textbf{(P4) Conversational learning analytics.} Student--AI interactions aggregate into instructor-actionable signals: frequently asked questions, topic-level question density, quiz performance, and per-student engagement.
 
-\textbf{(P5) Deployment flexibility.} Students access the assistant through familiar environments, a web interface and a Discord bot.
+\textbf{(P5) Deployment flexibility.} Students access the assistant through environments they already use---currently a web interface and a Discord bot.
 
 \begin{figure}[t]
 \centering
@@ -127,7 +127,6 @@ We frame CRAG around five design principles for instructor-governed, course-grou
 \section{System Implementation}
 % Updated against docs/architecture/{01_high_level,04_upload_flow,10_query_processing,13_lms_answer_reviews}.md.
 % Describes current source, not confirmation that every feature is deployed.
-The following describes the current repository implementation. The evaluations in subsequent sections concern the earlier CS3247 prototype, whose classifier, providers and retrieval policy differed; they do not validate the updated architecture.
 
 \subsection{Educational features}
 Instructors create course bots, organise topics, upload PDF materials, manage Q\&A, configure available learning modes, review practice quizzes and inspect conversational analytics. Document processing runs within requests; the dashboard waits for results rather than polling a durable ingestion worker. Supplementary material without a topic remains searchable in course chat but is excluded from quiz generation and selection. Topic-linked materials can also support source-labelled suggested questions in the student workspace.
@@ -282,7 +281,6 @@ The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, and the CS3247 st
 \bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.\ Learn.\ Anal.}, vol.~6, no.~3, 2019.
 \bibitem{b_hcd} A.~Bhojan, ``Pedagogical reflections on the Holistic Cognitive Development (HCD) framework and AI-augmented learning in creative computing,'' arXiv:2511.06779v2, Jan.~2026, doi: 10.48550/arXiv.2511.06779.
 \bibitem{b_jillwatson} A.~K. Goel and L.~Polepeddi, ``Jill Watson: A virtual teaching assistant for online education,'' in \emph{Learning Engineering for Online Education}, C.~Dede \emph{et~al.}, Eds.\ Routledge, 2018, pp.~120--143.
-\bibitem{b_graesserperson} A.~C. Graesser and N.~K. Person, ``Question asking during tutoring,'' \emph{Am.\ Educ.\ Res.\ J.}, vol.~31, no.~1, pp.~104--137, 1994.
 \end{thebibliography}
 
 \end{document}
