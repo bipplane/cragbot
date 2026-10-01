@@ -51,10 +51,11 @@ AI in education, retrieval-augmented generation, course-grounded chatbot, large 
 General-purpose large language models (LLMs) offer flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. Course assistance additionally requires alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
 Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}. Conversational tutors such as AutoTutor~\cite{b_autotutor} established dialogue as an educational interface. For contemporary assistants, self-explanation research~\cite{b_chi} motivates support for learners' reasoning alongside direct explanations. Learning analytics likewise require caution, as activity counts can expose behaviour without demonstrating understanding~\cite{b_ferguson}.
 
-We report a pre-use needs assessment in CS3103 Computer Networks at the National University of Singapore, with 42 responses from 110 invited students. The survey examines prior AI study habits, conversational practices and preferences for course-specific assistance. We relate these needs to CRAG, a platform combining course-grounded retrieval, instructor-reviewed Q\&A, pedagogical modes and learning analytics. Holistic Cognitive Development (HCD)~\cite{b_hcd} informs a proposed follow-up study of how students critique AI feedback and justify their reasoning.
-Existing systems address parts of this space: general-purpose LLMs offer fluent support, NotebookLM supports source-grounded study, Khanmigo and classical ITS provide structured tutoring, and Jill Watson demonstrates instructor escalation. However, few integrate course-grounded retrieval, instructor-governed validation, pedagogical interaction modes, and classroom-facing analytics in one deployable course platform (Table~\ref{tab:litcompare}).
+Our pre-use survey in CS3103 Computer Networks at the National University of Singapore examines AI study habits, conversational practices and adoption preferences. We interpret these findings alongside CRAG's design and use Holistic Cognitive Development (HCD) \cite{b_hcd} to propose a follow-up evaluation of students' explanations, critique and revision. CRAG combines course grounding, instructor review, pedagogical modes
+and analytics. This study examines how that combination relates to
+students' reported needs. (Table~\ref{tab:litcompare}).
 
-This paper makes three contributions: A baseline assessment of student AI study practices and adoption preferences; An interpretation of identified user needs in relation to CRAG's design and pedagogical capabilities; An HCD-informed evaluation proposal linking AI dialogue to student explanations, critique and revision.
+We contribute (1) a baseline needs assessment of student AI study practices, (2) design implications for CRAG's design and pedagogical capabilities, and (3) an HCD-informed evaluation proposal linking AI dialogue to student explanations, critique and revision..
 
 
 
@@ -84,17 +85,17 @@ Jill Watson 1.0 \cite{b_jillwatson} & Approved Q\&A bank & Confidence-gated & No
 
 \section{The CRAG Framework}
 
-We interpret the survey alongside CRAG's five principles, to identify design priorities.
+We use CRAG's five design principles to interpret the reported needs.
 
 \textbf{(P1) Course-grounded generation.} Answers visibly cite documents and pages in instructor-provided materials
 
-\textbf{(P2) Instructor governance.} Educators configure scope and behaviour, and may approve, edit, or reject AI-generated responses; subsequent retrival of these verified responses form a feedback-driven improvement loop.
+\textbf{(P2) Instructor governance.} Educators configure scope, review AI-generated responses; subsequent retrival of verified responses form a feedback-driven improvement loop.
 
-\textbf{(P3) Pedagogical interaction modes.} Three modes match style to learning intent: Standard (concise answers), Guided (step-by-step), and Socratic (questioning that prompts self-explanation \cite{b_chi})---so instructors can match interaction to learning intent.
+\textbf{(P3) Pedagogical interaction modes.} Three modes match style to learning intent: Standard (concise answers), Guided (step-by-step), and Socratic (questions prompting self-explanation \cite{b_chi})
 
-\textbf{(P4) Conversational learning analytics.} Student--AI interactions aggregate into instructor-actionable signals: frequently asked questions, topic-level question density, quiz performance, and per-student engagement.
+\textbf{(P4) Conversational learning analytics.} Student--AI interactions aggregate into instructwwwwor-actionable signals: frequently asked questions, topic-level question density, quiz performance, and per-student engagement.
 
-\textbf{(P5) Deployment flexibility.} Students access the assistant through environments they already use---currently a web interface and a Discord bot.
+\textbf{(P5) Deployment flexibility.} Students interact through web and Discord interfaces.
 
 \begin{figure}[t]
 \centering
