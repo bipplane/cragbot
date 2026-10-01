@@ -41,10 +41,9 @@ We relate these habits to the tool's architecture and propose a research directi
 AI in education, retrieval-augmented generation, course-grounded chatbot, large language models, instructor governance, Holistic Cognitive Development, reflective learning
 \end{IEEEkeywords}
 
-\section{Introduction}
-Large language models (LLMs) offer accessible explanations, but course-related assistance requires both alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
-General-purpose generative systems produce plausible but stereotypical content that lacks the course-specific context needed to evaluate an explanation~\cite{b_bender,b_heersmink}. Consequently, students value the fluency of such content without recognising their structural or factual limitations.
-Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, yet retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations} or prevent indirect prompt injection~\cite{b_greshake}. Beyond answer reliability, research showing improved understanding through prompted self-explanation~\cite{b_chi} strongly motivates interactions that encourage students to focus on what they explain, question and revise during AI-supported studies.
+\section{Introduction and Related Work}
+General-purpose large language models (LLMs) offer convenient explanations, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. Course assistance additionally requires alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
+Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}. Conversational tutors such as AutoTutor~\cite{b_autotutor} established dialogue as an educational interface. For contemporary assistants, self-explanation research~\cite{b_chi} motivates support for learners' reasoning alongside direct explanations. Learning analytics likewise require caution, as activity counts can expose behaviour without demonstrating understanding~\cite{b_ferguson}.
 
 We report a pre-use needs assessment in CS3103 Computer Networks at the National University of Singapore, with 42 responses from 110 invited students. The survey examines prior AI study habits, conversational practices and preferences for course-specific assistance. We relate these needs to CRAG, a platform combining course-grounded retrieval, instructor-reviewed Q\&A, pedagogical modes and learning analytics. Holistic Cognitive Development (HCD)~\cite{b_hcd} informs a proposed follow-up study of how students critique AI feedback and justify their reasoning.
 
@@ -54,25 +53,14 @@ We report a pre-use needs assessment in CS3103 Computer Networks at the National
     \item An account of CRAG's design and implementation, relating its five design principles to reported student needs.
     \item An HCD-informed evaluation proposal linking AI dialogue to student explanations, critique and revision.
 \end{itemize}
-The survey measures reported habits and preferences, not CRAG effectiveness or learning gains; the earlier CS3247 prototype evaluations provide separate historical context, and do not validate the current implementation or the proposed HCD-informed framework.
+The survey measures reported habits and preferences, not CRAG effectiveness or learning gains.
 
 \section{Related Work}
 
-\subsection{Conversational AI and intelligent tutoring systems}
-Educational AI has progressed from rule-based intelligent tutoring systems (ITS) such as AutoTutor \cite{b_autotutor}, which produced measurable learning gains through curriculum-specific dialogue and knowledge tracing, to modern LLM-based agents. Such systems illustrate curriculum-specific dialogue, whereas course-grounded LLM assistants aim to support reuse across instructor-provided corpora.
-
-\subsection{LLMs in education: opportunities and risks}
-Recent LLM-based educational tools extend earlier conversational tutors by enabling more flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but also raises concerns around reliability, transparency, hallucination, and trust \cite{b_bender,b_heersmink}. In course settings, these risks are heightened when fluent responses diverge from course terminology, emphasis, or assessment expectations, potentially encouraging superficial engagement \cite{b_delikoura}. Instructional design research further suggests that effective support often requires scaffolding, inquiry, self-explanation, or adaptation rather than direct answers alone \cite{b_dejong,b_chi}.
 
 
-\subsection{RAG for educational grounding}
-Retrieval-Augmented Generation (RAG) retrieves relevant passages from a knowledge base before generation \cite{b_lewis}, improving traceability and reducing reliance on unsupported model knowledge. In education, Google NotebookLM illustrates the value of source-grounded answers with citations, but is primarily organised around individual source-based study and document exploration. Khan Academy's Khanmigo highlights guided, pedagogically shaped interaction, but is embedded within a structured tutoring ecosystem.
 
-\subsection{Human-in-the-loop validation and governance}
-LLMs are systematically overconfident \cite{b_xiong}, motivating human review of high-stakes responses. Georgia Tech's Jill Watson 1.0 used a 97\% confidence threshold to route uncertain forum questions to instructors \cite{b_jillwatson}, demonstrating that confidence-aware escalation and instructor approval can scale safely. Few systems, however, expose this loop to instructors as a first-class workflow that learns from their edits.
 
-\subsection{Conversational learning analytics}
-Student-generated questions reveal knowledge states \cite{b_graesserperson}, and help-seeking patterns reflect self-regulated learning \cite{b_zimmerman}. Educational data mining can cluster recurring questions into FAQs and proactive prompts \cite{b_romeroventura}. Analytics must, however, respect ethical norms around data ownership and avoid stigmatising learners \cite{b_ferguson}.
 
 \subsection{Gap}
 Existing systems address parts of this space: general-purpose LLMs offer fluent support, NotebookLM supports source-grounded study, Khanmigo and classical ITS provide structured tutoring, and Jill Watson demonstrates instructor escalation. However, few integrate course-grounded retrieval, instructor-governed validation, pedagogical interaction modes, and classroom-facing analytics in one deployable course platform (Table~\ref{tab:litcompare}).
