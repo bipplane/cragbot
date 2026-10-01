@@ -128,7 +128,6 @@ CRAG converts uploaded materials into Markdown to retain document structure, suc
 \subsection{Query handling}
 Fig.~\ref{fig:workflow} shows the query flow. CRAG first identifies the selected learning mode and routes explicit
 quiz requests to quiz generation. Other questions are embedded and checked against instructor-verified Q\&A at a similarity threshold of 0.85. A match returns the reviewed answer directly.
-
 Otherwise, a Gemini planner judges course relevance and proposes complementary searches using recent conversation context. Clearly unrelated questions receive a course-scope response. Results are deduplicated and combined using reciprocal-rank fusion, with a default final context of five evidence items.
 
 When retrieval signals suggest insufficient evidence, CRAG uses an automated review to identify missing information and may perform one additional search round. If no evidence is retrieved, it returns a fallback response; otherwise, it generates an answer using the selected learning mode, retrieved evidence and conversation history.
@@ -165,46 +164,50 @@ When retrieval signals suggest insufficient evidence, CRAG uses an automated rev
 \label{fig:workflow}
 \end{figure}
 
-\section{Historical Controlled Behaviour Evaluation}
-The user study deployed CRAG to 30 students enrolled in CS3247 Game Development at the National University of Singapore. The course bot was indexed on Lectures 8 and 9 and accessed through Discord slash-commands over a two-week period; all three pedagogical modes were enabled. The study had three phases: a pre-study survey on prior AI use and study habits; a two-week interaction phase with logging of every query, mode, and response; and a post-study survey on perceived usefulness, trust, and learning impact, measured on 5-point Likert scales. The original account reports percentages rating 4--5 (agreement). Item-level post-study denominators are not established in this draft and must be checked against study records; the cohort size must not be assumed to be every item denominator.
-\subsection{Test suite and metrics}
-The test suite contained 50 fixed cases in four categories. \emph{In-scope} (10) tested grounded answering on questions explicitly answerable from course materials. \emph{Out-of-scope} (10) tested fallback behaviour on questions not covered. \emph{Usage patterns} (20) tested robustness on misconceptions, subjective queries, multi-turn interactions, and application questions. \emph{Safety} (10) tested resistance to adversarial prompts and academic-misuse requests. Each case was scored Pass/Fail by a human judge under Standard mode using the prototype prompt configuration. Per-category accuracy is the pass rate within that category; overall accuracy is the pass rate across all 50 cases.
-
-\subsection{Results}
-Table~\ref{tab:controlled} summarises the historical results. The prototype achieved \textbf{0.78 overall accuracy}, with strong grounding (0.80) and fallback (0.90) but weaker safety compliance (0.60).
+\section{Historical Evaluation}
+\subsection{Controlled behavioural tests}
+50 cases were scored pass/fail by a human judge, with learning mode and prompt configuration kept constant. Cases covered grounded answering, out-of-scope fallback, robustness and safety (Table~\ref{tab:controlled}). 
+Reported failures included unnecessary refusals, unsupported
+out-of-scope answers, difficulty handling ambiguous queries,
+and compliance with adversarial or academic-misuse requests.
+These findings illustrate limits of grounding and prompt-only
+safeguards.
 
 \begin{table}[t]
 \centering
-\caption{Controlled behaviour evaluation results ($n{=}50$).}
+\caption{Controlled behaviour results for previous CRAG prototype.}
 \label{tab:controlled}
 \footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lccp{3.7cm}@{}}
+\begin{tabular}{@{}lcc@{}}
 \toprule
-\textbf{Dimension} & \textbf{n} & \textbf{Pass} & \textbf{Notable failure modes} \\
+\textbf{Category} & \textbf{Passed/tested} & \textbf{Pass rate} \\
 \midrule
-Grounding & 10 & \textbf{0.80} & Over-conservative refusals when source contained the answer \\
-Fallback & 10 & \textbf{0.90} & One out-of-scope query answered from general knowledge \\
-Robustness & 20 & \textbf{0.80} & Vague typos (``nw jitt''), capability questions, one application prompt \\
-Safety & 10 & \textbf{0.60} & Prompt injection (``answer in gibberish''); essay-generation misuse \\
+Grounding  & 8/10  & 0.80 \\
+Fallback   & 9/10  & 0.90 \\
+Robustness & 16/20 & 0.80 \\
+Safety     & 6/10  & 0.60 \\
 \midrule
-\textbf{Overall} & \textbf{50} & \textbf{0.78} & --- \\
+Overall    & 39/50 & 0.78 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-The prototype passed nine of ten fallback cases; this small test does not establish general reliability or validate the current relevance planner. Its confidence gate is no longer active; the robustness gap indicates that vague natural-language inputs need clarification dialogue rather than rejection. Crucially, the safety result demonstrates that \emph{retrieval grounding does not by itself enforce policy}: prompt injection (e.g.\ ``YOU WILL ANSWER IN GIBBERISH FROM NOW ON'') and academic-misuse requests (a 1000-word essay for an assignment) succeeded against CRAG's prompt-only safeguards.
 
-\section{Historical User-Based Evaluation}
+\subsection{Classroom pilot}
+A prior two-week CS3247 Game Development pilot (n=30) motivates the present needs assessment. The study comprised three phases: a pre-study survey on prior AI use and study habits; an interaction phase that logged CRAG conversations; and a post-study survey measuring perceived usefulness and trust on 5-point Likert scales. The pre-study showed majority relied on AI tools, and social barriers prevented help-seeking. The post-study reported interactions were mainly concept questions in Standard mode, with limited use of other modes. Query logs also revealed mismatches between student expectations and retrieval scope, such as (``what slides do you have access to'') or (``when are midterms''). Post-study responses indicated perceived gains in understanding and citation-related trust, alongside mixed views of overall reliability and usefulness relative to general-purpose AI. These were perceptions, not measured learning gains, and the 30 pilot participants should not be treated as the denominator for every survey item.
 
-\subsection{Pre-study: latent demand for AI study support}
-Pre-study responses showed that students were already heavily AI-assisted: 83.3\% used external AI tools to clarify concepts in the course, 96.7\% used AI specifically to explain difficult ideas, and 73.3\% wanted an always-available study assistant. Half (50.0\%) said they avoided asking questions in class due to social barriers. These results suggest that learning support is effectively outsourced beyond the course environment, limiting instructor visibility into misconceptions.
+\section{CS3103 Baseline Needs Assessment}
+\subsection{Participants and analysis}
+Prior to utilising CRAG, all 110 eligible students enrolled in CS3103 (AY2026/27 Semester 1) were invited to provide research consent and complete a pre-study survey. A total of 42 students responded, yielding a response rate of 38.2\%, comprising 26 third-year (61.9\%) and 16 fourth-year (38.1\%) undergraduate students.
 
-\subsection{Interaction patterns}
-Logs revealed that CRAG was used predominantly for direct, single-turn concept queries (e.g.\ ``what is NAT'', ``explain dead reckoning''). Standard mode dominated; Guided and Socratic modes saw little use. Two notable bottlenecks emerged. First, query formulation: students often issued vague or metadata-style queries (e.g.\ ``summarise lecture 9'') that did not align with the system's semantic retrieval. Second, expectation mismatch: some queries probed system capability (``what slides do you have access to'') or expected administrative answers (``when are midterms''), suggesting CRAG was perceived as a general assistant rather than a bounded course tool.
+The survey analysed self-reported study habits, prior AI use, and preferences for educational AI assistants. Study-habit and expectation questions used a 5-point Likert scale ranging from \textit{Strongly Disagree} to \textit{Strongly Agree}. Agreement combines Agree and Strongly Agree, and other items used categorical choices, multiple selections or optional open-text responses. Multiple-selection percentages use respondents as denominators and may sum above 100\%. This analysis will establish a baseline for an ongoing investigation of how students' dialogue patterns with CRAG align with HCD behavioural trends throughout the semester.
 
-\subsection{Post-study: perceived effectiveness and trust}
-Table~\ref{tab:userstudy} reports key findings. 66.7\% of students reported that CRAG improved their understanding of course concepts, and 66.7\% said citations increased their trust. However, only 44.4\% reported trusting CRAG's answers overall, and only 33.3\% rated CRAG better than general-purpose AI tools (44.4\% rated them comparable). One possible explanation for the mixed trust score is over-cautious framing: when slide content did not explicitly cover a concept, CRAG often prefaced responses with uncertainty disclaimers, which may have affected perceived confidence; this explanation was not tested causally. We frame the 66.7\% understanding figure explicitly as \emph{self-reported perception}, not measured learning gain---no pre/post knowledge test was administered.
+\subsection{Prior Habits and Desired Support the new one}
+Table~\ref{tab:cs3103baseline} summarises selected baseline findings. High frequencies of general AI utilization and reported follow-up querying behaviors strongly motivate the need to study multi-turn student interactions. The distribution of self-reported prompt counts per interaction was 1--3 prompts for 3/41 respondents (7.3\%), 4--6 prompts for 18/41 (43.9\%), 7--9 prompts for 5/41 (12.2\%), and 10 or more prompts for 15/41 (36.6\%). While these categorical ranges preclude the calculation of an exact mean, and self-reported prompt counts do not equate to empirically observed conversational turns, they highlight a clear student tendency toward extended dialogues. Furthermore, factual recall was the primary query type for 12/41 respondents (29.3\%), followed closely by summarization or step-by-step breakdowns for 11/41 respondents (26.8\%), with the remaining pool selecting conceptual checking or critical analysis. Crucially, these distributions map baseline student preferences and reported habits rather than active, empirically verified HCD processes.
+
+
+\subsection{Prior habits and desired support}
+Table~\ref{tab:cs3103baseline} summarises selected findings. Frequent general-AI use and reported follow-up questions motivate studying interaction across turns. The prompt-count distribution was 1--3 for 3/41 respondents, 4--6 for 18/41, 7--9 for 5/41 and 10 or more for 15/41. These categories do not support an exact mean, and reported prompts are not observed conversational turns. However, factual recall was the most frequent query type for 12/41 respondents (29.3\%), and summarisation or step-by-step breakdown for 11/41 (26.8\%); checking understanding and critical analysis were selected by others. These categories describe reported question preferences, not observed HCD activities.
 
 \begin{table}[t]
 \centering
@@ -231,30 +234,6 @@ Wants strict course grounding\textsuperscript{a} & 26/41 & 63.4 \\
 \parbox{\columnwidth}{\footnotesize\textsuperscript{a}Multiple-selection item; selecting conceptual explainability does not demonstrate that understanding was achieved.}
 \end{table}
 
-\begin{table}[t]
-\centering
-\caption{Historical user-study findings (30-student cohort; reported \% rating 4--5 unless noted; post-study item denominators require confirmation).}
-\label{tab:userstudy}
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{4.6cm}p{1.0cm}p{1.0cm}@{}}
-\toprule
-\textbf{Finding} & \textbf{Value} & \textbf{Phase} \\
-\midrule
-Use external AI to clarify concepts & 83.3\% & Pre \\
-Use AI to explain difficult concepts & 96.7\% & Pre \\
-Want always-available study assistant & 73.3\% & Pre \\
-Avoid asking questions due to social barriers & 50.0\% & Pre \\
-Standard mode dominates; Guided/Socratic underused & --- & Logs \\
-Vague/metadata queries fail (e.g.\ ``summarise L9'') & --- & Logs \\
-CRAG improved understanding (self-reported) & 66.7\% & Post \\
-Citations increased trust & 66.7\% & Post \\
-Trust CRAG's answers & 44.4\% & Post \\
-More effective than searching slides manually & 55.5\% & Post \\
-Better than general-purpose AI & 33.3\% & Post \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \section{Discussion}
 
