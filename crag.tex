@@ -257,18 +257,21 @@ The prototype findings suggest a tension between students' expectations of flexi
 Previous tests describe the earlier prototype's behaviour, while the CS3103 survey describes prior habits and preferences. Neither establishes current CRAG effectiveness, learning gains or superiority over general-purpose assistants. Future evaluation should examine source location, claim support and citation coverage separately, alongside instructor review workload and student use of later clarifications.
 
 \section{Limitations and Future Work}
-The historical study covered two weeks, two lectures and one course at one institution. Outcomes were self-reported, without objective knowledge assessments. Standard-mode dominance limits conclusions about other modes. Post-survey item denominators, ethics arrangements and study procedures require confirmation from original records.
+The previous pilot covered two weeks, two lectures and one course. Learning outcomes were self-reported without objective knowledge assessments, and standard-mode dominance limited data capture for other modes. 
+The CS3103 baseline comprises 42 of 110 invited students. Only survey respondents received CRAG access, so subsequent usage findings will concern this self-selected group rather than the full cohort. Neither access nor survey participation establishes subsequent CRAG use; sustained use is a practical challenge, and limited or intermittent participation may not provide sufficient evidence to examine trends in reasoning and revision over time. Future work should report uptake, usage frequency and attrition, and examine barriers to continued use. Analyses must account for differences in students' voluntary participation; more frequent use should not itself be interpreted as better learning.
+CRAG includes selective visual ingestion, adaptive modes, corrective retrieval and LMS answer reviews, but historical results cannot validate these additions. LLM safety still remains an open research problem. Freeze the current corpus, build, model settings and scoring criteria; compare standard RAG and corrective retrieval on the same questions, including unsupported answers, benign queries, direct and document-borne prompt injection, and course-defined academic misuse. Report category counts and independent judge agreement.
 
-Current source includes selective visual ingestion, adaptive modes, corrective retrieval and LMS answer reviews, but historical results cannot validate these additions. LLM safety still remains an open research problem. Freeze the current corpus, build, model settings and scoring criteria; compare standard RAG and corrective retrieval on the same questions, including unsupported answers, benign queries, direct and document-borne prompt injection, and course-defined academic misuse. Report category counts and independent judge agreement.
-
-CRAG prioritises consent-eligible capture, response provenance, deterministic exports, independently validated coding and learner-authored work. A longitudinal study should link initial reasoning, AI feedback and justified revision, with independent or delayed outcomes. Conversation length, mode selection and cognitive annotations alone do not demonstrate learning. Operational logs must not automatically become research data; approval, consent, access and retention arrangements require explicit verification.
-
-The separate access-control release remains deferred and is not part of the current implementation. Its protections must not be claimed as deployed. Ordinary-upload recovery and durable ingestion workers also remain future work. Selective PDF visual processing is already implemented; extending support to recordings or other media remains distinct from validating this existing capability. Browser workflows, applied migrations and live deployment require checks beyond source inspection.
+An HCD-informed longitudinal study should link initial reasoning,
+AI feedback and justified revisions with independent assessments
+of understanding or delayed retention. Dialogue coding requires
+validation, as conversation length and mode selection alone do not demonstrate cognitive development.
 
 \section{Conclusion}
-CRAG integrates course grounding, instructor review, pedagogical modes and analytics. It uses a Gemini planner for weaker questions, bounded corrective retrieval, and LMS question updates. These design concerns are motivated by historical survey and usage, but current technical reliability, safety and educational effectiveness require a new, version-specific evaluation.
+CRAG integrates course grounding, instructor review, pedagogical modes and analytics, with bounded corrective retrieval and LMS question updates. The CS3103 baseline survey identifies frequent self-reported AI use and preferences for instructor-verified answers. These findings motivate an HCD-oriented evaluation of reasoning, critique, and revision, but do not establish learning gains. Future work should examine sustained use, technical reliability, and educational outcomes.
+
 \section*{Acknowledgment}
-The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, and the CS3247 students who participated in the study.
+The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, the CS3103 survey respondents, and the participants in the
+earlier CS3247 study.
 
 \begin{thebibliography}{00}
 \bibitem{b_yayeh} Y.~Yayeh, W.~Admass, Y.~B. Chekol, A.~M. Mekonnen, and M.~Asmare, ``ChatGPT in education: A systematic review on opportunities, challenges, and future directions,'' \emph{Algorithms}, vol.~18, no.~6, art.~352, 2025.
