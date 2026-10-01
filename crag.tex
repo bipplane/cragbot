@@ -42,10 +42,11 @@ AI in education, retrieval-augmented generation, course-grounded chatbot, large 
 \end{IEEEkeywords}
 
 \section{Introduction and Related Work}
-General-purpose large language models (LLMs) offer convenient explanations, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. Course assistance additionally requires alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
+General-purpose large language models (LLMs) offer flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. Course assistance additionally requires alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
 Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}. Conversational tutors such as AutoTutor~\cite{b_autotutor} established dialogue as an educational interface. For contemporary assistants, self-explanation research~\cite{b_chi} motivates support for learners' reasoning alongside direct explanations. Learning analytics likewise require caution, as activity counts can expose behaviour without demonstrating understanding~\cite{b_ferguson}.
 
 We report a pre-use needs assessment in CS3103 Computer Networks at the National University of Singapore, with 42 responses from 110 invited students. The survey examines prior AI study habits, conversational practices and preferences for course-specific assistance. We relate these needs to CRAG, a platform combining course-grounded retrieval, instructor-reviewed Q\&A, pedagogical modes and learning analytics. Holistic Cognitive Development (HCD)~\cite{b_hcd} informs a proposed follow-up study of how students critique AI feedback and justify their reasoning.
+Existing systems address parts of this space: general-purpose LLMs offer fluent support, NotebookLM supports source-grounded study, Khanmigo and classical ITS provide structured tutoring, and Jill Watson demonstrates instructor escalation. However, few integrate course-grounded retrieval, instructor-governed validation, pedagogical interaction modes, and classroom-facing analytics in one deployable course platform (Table~\ref{tab:litcompare}).
 
 \textbf{This paper makes three contributions:}
 \begin{itemize}
@@ -55,15 +56,13 @@ We report a pre-use needs assessment in CS3103 Computer Networks at the National
 \end{itemize}
 The survey measures reported habits and preferences, not CRAG effectiveness or learning gains.
 
-\section{Related Work}
 
 
 
 
 
 
-\subsection{Gap}
-Existing systems address parts of this space: general-purpose LLMs offer fluent support, NotebookLM supports source-grounded study, Khanmigo and classical ITS provide structured tutoring, and Jill Watson demonstrates instructor escalation. However, few integrate course-grounded retrieval, instructor-governed validation, pedagogical interaction modes, and classroom-facing analytics in one deployable course platform (Table~\ref{tab:litcompare}).
+
 
 \begin{table*}[t]
 \centering
@@ -278,19 +277,13 @@ The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, and the CS3247 st
 \bibitem{b_heersmink} R.~Heersmink, B.~de Rooij, M.~J. Clavel V\'azquez, and M.~Colombo, ``A phenomenology and epistemology of large language models: Transparency, trust, and trustworthiness,'' \emph{Ethics Inf.\ Technol.}, vol.~26, no.~3, 2024.
 \bibitem{b_delikoura} I.~Delikoura, Y.~R. Fung, and P.~Hui, ``From superficial outputs to superficial learning: Risks of large language models in education,'' arXiv:2509.21972, 2025.
 \bibitem{b_lewis} P.~Lewis \emph{et~al.}, ``Retrieval-augmented generation for knowledge-intensive NLP tasks,'' in \emph{Adv.\ Neural Information Processing Systems (NeurIPS)}, 2020.
-\bibitem{b_dejong} T.~de~Jong \emph{et~al.}, ``Beyond inquiry or direct instruction: Pressing issues for designing impactful science learning opportunities,'' \emph{Educ.\ Res.\ Rev.}, vol.~43, art.~100623, 2024.
-\bibitem{b_chi} M.~T.~H. Chi, N.~de Leeuw, M.-H. Chiu, and C.~LaVancher, ``Eliciting self-explanations improves understanding,'' \emph{Cogn.\ Sci.}, vol.~18, no.~3, pp.~439--477, 1994.
+\bibitem{b_gao_citations} T.~Gao, H.~Yen, J.~Yu, and D.~Chen, ``Enabling large language models to generate text with citations,'' in \emph{Proc.\ Conf.\ on Empirical Methods in Natural Language Processing (EMNLP)}, 2023, pp.~6465--6488, doi: 10.18653/v1/2023.emnlp-main.398.
 \bibitem{b_autotutor} A.~C. Graesser, K.~Wiemer-Hastings, P.~Wiemer-Hastings, and R.~Kreuz, ``AutoTutor: A simulation of a human tutor,'' \emph{Cogn.\ Syst.\ Res.}, vol.~1, no.~1, pp.~35--51, 1999.
-\bibitem{b_xiong} M.~Xiong \emph{et~al.}, ``Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs,'' in \emph{Int.\ Conf.\ on Learning Representations (ICLR)}, 2024.
+\bibitem{b_chi} M.~T.~H. Chi, N.~de Leeuw, M.-H. Chiu, and C.~LaVancher, ``Eliciting self-explanations improves understanding,'' \emph{Cogn.\ Sci.}, vol.~18, no.~3, pp.~439--477, 1994.
+\bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.\ Learn.\ Anal.}, vol.~6, no.~3, 2019.
+\bibitem{b_hcd} A.~Bhojan, ``Pedagogical reflections on the Holistic Cognitive Development (HCD) framework and AI-augmented learning in creative computing,'' arXiv:2511.06779v2, Jan.~2026, doi: 10.48550/arXiv.2511.06779.
 \bibitem{b_jillwatson} A.~K. Goel and L.~Polepeddi, ``Jill Watson: A virtual teaching assistant for online education,'' in \emph{Learning Engineering for Online Education}, C.~Dede \emph{et~al.}, Eds.\ Routledge, 2018, pp.~120--143.
 \bibitem{b_graesserperson} A.~C. Graesser and N.~K. Person, ``Question asking during tutoring,'' \emph{Am.\ Educ.\ Res.\ J.}, vol.~31, no.~1, pp.~104--137, 1994.
-\bibitem{b_zimmerman} B.~J. Zimmerman, ``Becoming a self-regulated learner: An overview,'' \emph{Theory Pract.}, vol.~41, no.~2, pp.~64--70, 2002.
-\bibitem{b_romeroventura} C.~Romero and S.~Ventura, ``Educational data mining: A review of the state of the art,'' \emph{IEEE Trans.\ Syst., Man, Cybern.\ C}, vol.~40, no.~6, pp.~601--618, 2010.
-\bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.\ Learn.\ Anal.}, vol.~6, no.~3, 2019.
-
-\bibitem{b_gao_citations} T.~Gao, H.~Yen, J.~Yu, and D.~Chen, ``Enabling large language models to generate text with citations,'' in \emph{Proc.\ Conf.\ on Empirical Methods in Natural Language Processing (EMNLP)}, 2023, pp.~6465--6488, doi: 10.18653/v1/2023.emnlp-main.398.
-\bibitem{b_greshake} K.~Greshake, S.~Abdelnabi, S.~Mishra, C.~Endres, T.~Holz, and M.~Fritz, ``Not what you've signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection,'' arXiv:2302.12173, 2023.
-\bibitem{b_hcd} A.~Bhojan, ``Pedagogical reflections on the Holistic Cognitive Development (HCD) framework and AI-augmented learning in creative computing,'' arXiv:2511.06779v2, Jan.~2026, doi: 10.48550/arXiv.2511.06779.
 \end{thebibliography}
 
 \end{document}
