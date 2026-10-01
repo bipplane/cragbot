@@ -116,16 +116,16 @@ Student interactions inform analytics for instructor review.}
 % Describes current source, not confirmation that every feature is deployed.
 
 \subsection{Educational Features and Instructor Governance}
-Instructors organise materials, review Q\&A and quizzes, and inspect cohort activity. Supplementary material is allowed for retrieval, but excluded from quiz generation and selection. Students ask questions, customise learning modes, and practise with quizzes. Learning modes have automatic mode switching to fit to the sentiment of the question.
+Instructors organise materials, review Q\&A and quizzes, and inspect cohort activity. Supplementary material is allowed for retrieval, but excluded from quiz generation and selection. Students ask questions, customise learning modes, and practise with quizzes. An automatic switching feature selects a mode from explicit or strongly implied requests in the student's question.
 The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and an explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
 
 \subsection{Course-material Ingestion}
-CRAG converts uploaded materials into Markdown to retain document structure, such as headings and lists. Selected visual regions, such as diagrams or images, are interpreted to produce searchable descriptions. The text is then divided and embedded into searchable passages. Answers are retrieved, generated, and supported with source citations for students to inspect.
+CRAG converts uploaded materials into Markdown to retain document structure, such as headings and lists. Selected visual regions, such as diagrams or images, are interpreted to produce searchable descriptions. The text is then divided and embedded into searchable passages. Retrieved passages support generated answers with source citations for students to inspect.
 
 \subsection{Query Handling}
 Fig.~\ref{fig:workflow} shows the query flow. CRAG first identifies the selected learning mode and routes explicit
 quiz requests to quiz generation. Other questions are embedded and checked against instructor-verified Q\&A at a similarity threshold of 0.85. A match returns the reviewed answer directly.
-Otherwise, a Gemini planner judges course relevance and proposes complementary searches using recent conversation context. Clearly unrelated questions receive a course-scope response. Results are deduplicated and combined using reciprocal-rank fusion, with a default final context of five evidence items.
+Otherwise, a Gemini planner judges course relevance and proposes complementary searches using recent conversation context. Clearly unrelated questions receive a course-scope response. Results are deduplicated and combined using reciprocal-rank fusion, with a default final context of up to five evidence items.
 
 When retrieval signals suggest insufficient evidence, CRAG uses an automated review to identify missing information and may perform one additional search round. If no evidence is retrieved, it returns a fallback response; otherwise, it generates an answer using the selected learning mode, retrieved evidence and conversation history.
 
@@ -138,7 +138,7 @@ When retrieval signals suggest insufficient evidence, CRAG uses an automated rev
  outbox/.style={rectangle,rounded corners=2pt,draw,semithick,fill=green!14,text width=2.0cm,inner sep=3pt},
  arr/.style={-{Latex[length=1.4mm]},semithick}]
 \node[proc] (q) {Question + resolved learning mode\\Explicit quiz requests routed separately};
-\node[dec,below=3mm of q] (v) {Embedding similarity $\geq 0.85$?};
+\node[dec,below=3mm of q] (v) {Verified Q\&A similarity $\geq 0.85$?};
 \node[outbox,right=8mm of v] (va) {Reviewed answer};
 \node[dec,below=3mm of v] (p) {Gemini relevance + search plan};
 \node[outbox,right=8mm of p,fill=red!10] (scope) {Course-scope\\response};
@@ -163,7 +163,7 @@ When retrieval signals suggest insufficient evidence, CRAG uses an automated rev
 
 \section{Historical Evaluation}
 \subsection{Controlled Behavioural Tests}
-Fifty cases were scored pass/fail by a human judge, with learning mode and prompt configuration kept constant. Cases covered grounded answering, out-of-scope fallback, robustness and safety (Table~\ref{tab:controlled}). 
+Fifty cases were scored pass/fail by one human judge, with Standard mode and prompt configuration kept constant. Cases covered grounded answering, out-of-scope fallback, robustness and safety (Table~\ref{tab:controlled}). 
 Reported failures included unnecessary refusals, unsupported
 out-of-scope answers, difficulty handling ambiguous queries,
 and compliance with adversarial or academic-misuse requests.
@@ -191,12 +191,11 @@ Overall    & 39/50 & 0.78 \\
 
 
 \subsection{CS3247 Classroom Pilot}
-A prior two-week CS3247 Game Development pilot ($n=30$) motivates the present needs assessment. The study comprised three phases: a pre-study survey on prior AI use and study habits; an interaction phase that logged CRAG conversations; and a post-study survey measuring perceived usefulness and trust on 5-point Likert scales. Pre-study responses indicated that most respondents relied on AI tools, and social barriers prevented help-seeking. The post-study reported interactions were mainly concept questions in Standard mode, with limited use of other modes. Query logs also revealed mismatches between student expectations and retrieval scope, such as (``what slides do you have access to'') or (``when are midterms''). Post-study responses indicated perceived gains in understanding and citation-related trust, alongside mixed views of overall reliability and usefulness relative to general-purpose AI. These were perceptions, not measured learning gains, and the 30 pilot participants should not be treated as the denominator for every survey item.
+A prior two-week CS3247 Game Development pilot ($n=30$) motivates the present needs assessment. The study comprised three phases: a pre-study survey on prior AI use and study habits; an interaction phase that logged CRAG conversations; and a post-study survey measuring perceived usefulness and trust on 5-point Likert scales. Pre-study responses indicated that most respondents relied on AI tools, and social barriers prevented help-seeking. The earlier report described interactions as mainly concept questions in Standard mode, with limited use of other modes. Query logs also revealed mismatches between student expectations and retrieval scope, such as ``what slides do you have access to'' or ``when are midterms''. Post-study responses indicated perceived gains in understanding and citation-related trust, alongside mixed views of overall reliability and usefulness relative to general-purpose AI. These were perceptions, not measured learning gains, and the 30 pilot participants should not be treated as the denominator for every survey item.
 
 \section{CS3103 Assessment}
 \subsection{Participants and Baseline Analysis}
-All 110 eligible CS3103 students (AY2026/27 Semester 1) were invited to provide research consent and complete a pre-study survey. A total of 42 students responded, yielding a response rate of 38.2\%, comprising 26 third-year (61.9\%) and 16 fourth-year (38.1\%) undergraduate students. Subsequent CRAG use
-among respondents has not been established.
+All 110 eligible CS3103 students (AY2026/27 Semester 1) were invited to provide research consent and complete a pre-study survey. A total of 42 students responded and consented, yielding a response rate of 38.2\%, comprising 26 third-year (61.9\%) and 16 fourth-year (38.1\%) undergraduate students. Only survey respondents received CRAG access, and subsequent CRAG use among respondents has not been established.
 The survey analysed self-reported study habits, prior AI use, and preferences for educational AI assistants. Study-habit and expectation questions used a 5-point Likert scale ranging from \textit{Strongly Disagree} to \textit{Strongly Agree}. Agreement combines Agree and Strongly Agree, while other items used categorical choices, multiple selections or optional open-text responses. Multiple-selection percentages use respondents as denominators and may sum above 100\%. 
 This analysis provides a baseline for investigating whether and how students' subsequent CRAG interactions exhibit HCD-related behaviours, including creation, critique and reflection, throughout the semester.
 
@@ -240,10 +239,10 @@ Second, preferences for instructor verification and source citations motivate in
 Third, 34/42 respondents (81.0\%) preferred step-by-step explanations, while 19/41 (46.3\%) selected guided hints as an adoption feature. These differently worded items suggest distinct support preferences, rather than directly comparable measures. Students may seek a direct explanation at one point and a challenge to their reasoning at another. Offering multiple modes is a design response to this variation; actual mode uptake, usefulness and instructional effects require observation.
 
 \subsection{An Iterative HCD Study}
-Students would explain their initial , create a solution or explanation, critique CRAG's feedback against course evidence, and reflect on and justify revisions. This sequence operationalises the proposed HCD cycle while retaining student responsibility for accepting or rejecting AI suggestions.
 
+These findings motivate the next stage of CRAG evaluation. Rather than treating interaction frequency or mode selection as evidence of learning, we use HCD to examine how students' reasoning develops through their interactions with CRAG. Students explain their initial reasoning, create a solution or explanation, critique CRAG's feedback against course evidence, and reflect on and justify subsequent revisions.
 We propose extending CRAG's assistance to the HCD cycle~\cite{b_hcd}. Students would explain their initial reasoning, critique CRAG's feedback against current evidence, and reflect on and justify revisions. This uses HCD while retaining students' responsibility for accepting or rejecting AI suggestions.
-The CS3103 baseline makes this distinction concrete: respondents report sustained conversations and understanding-oriented stopping criteria, but the survey does not test their explanations or revisions. A subsequent study must examine student-generated evidence rather than infer reflection from prompt counts.
+The CS3103 baseline makes this distinction concrete: respondents report multi-prompt conversations and understanding-oriented stopping criteria, but the survey does not test their explanations or revisions. A subsequent study must examine student-generated evidence rather than infer reflection from prompt counts.
 The evidence should link initial reasoning, feedback, and subsequent revision, while analysis should follow participants across observations and avoid treating multiple messages from one student as independent participants. The study should also examine whether CRAG's analytics effectively help instructors identify reasoning gaps in students and better tailor feedback for them.
 
 \section{Discussion}
@@ -255,7 +254,7 @@ The prototype findings suggest a tension between students' expectations of flexi
 Previous tests describe the earlier prototype's behaviour, while the CS3103 survey describes prior habits and preferences. Neither establishes current CRAG effectiveness, learning gains or superiority over general-purpose assistants. Future evaluation should examine source location, claim support and citation coverage separately, alongside instructor review workload and student use of later clarifications.
 
 \section{Limitations and Future Work}
-The previous pilot covered two weeks, two lectures and one course. Learning outcomes were self-reported without objective knowledge assessments, and Standard-mode dominance limited evaluation of other modes. 
+The previous pilot covered two weeks, two lectures and one course. Perceived learning benefits were self-reported without objective knowledge assessments, and Standard-mode dominance limited evaluation of other modes. 
 The CS3103 baseline comprises 42 of 110 invited students. Only survey respondents received CRAG access, so subsequent usage findings will concern this self-selected group rather than the full cohort. Access does not establish actual or sustained use, and sparse or intermittent participation may limit analysis of reasoning and revision over time. Future work should report uptake, usage frequency and attrition, examine barriers to continued use, and account for voluntary participation. Usage frequency alone does not establish learning gains.
 CRAG includes selective visual ingestion, adaptive modes, corrective retrieval and LMS answer reviews, but historical results do not validate these additions. Future evaluation should compare standard RAG and corrective retrieval under fixed corpus, build and model settings. Tests should assess answer support, responses to benign queries, and academic misuse. Scoring criteria, category counts and independent judge agreement should be reported.
 
@@ -263,10 +262,6 @@ An HCD-informed longitudinal study should link initial reasoning, AI feedback an
 
 \section{Conclusion}
 CRAG integrates course grounding, instructor review, pedagogical modes and analytics, with bounded corrective retrieval and LMS question updates. The CS3103 baseline survey identifies frequent self-reported AI use and preferences for instructor-verified answers. These findings motivate an HCD-oriented evaluation of reasoning, critique, and revision, but do not establish learning gains. Future work should examine sustained use, technical reliability, and educational outcomes.
-
-\section*{Acknowledgment}
-The authors thank Assoc.\ Prof.\ Anand Bhojan for supervision, the CS3103 survey respondents, and the participants in the
-earlier CS3247 study.
 
 \begin{thebibliography}{00}
 \bibitem{b_yayeh} Y.~Yayeh, W.~Admass, Y.~B. Chekol, A.~M. Mekonnen, and M.~Asmare, ``ChatGPT in education: A systematic review on opportunities, challenges, and future directions,'' \emph{Algorithms}, vol.~18, no.~6, art.~352, 2025.
@@ -278,7 +273,18 @@ earlier CS3247 study.
 \bibitem{b_autotutor} A.~C. Graesser, K.~Wiemer-Hastings, P.~Wiemer-Hastings, and R.~Kreuz, ``AutoTutor: A simulation of a human tutor,'' \emph{Cogn.\ Syst.\ Res.}, vol.~1, no.~1, pp.~35--51, 1999.
 \bibitem{b_chi} M.~T.~H. Chi, N.~de Leeuw, M.-H. Chiu, and C.~LaVancher, ``Eliciting self-explanations improves understanding,'' \emph{Cogn.\ Sci.}, vol.~18, no.~3, pp.~439--477, 1994.
 \bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.~Learn.~Anal.}, vol.~6, no.~3, pp.~25--30, 2019, doi: 10.18608/jla.2019.63.5.
-\bibitem{b_hcd} A.~Bhojan, ``Pedagogical reflections on the Holistic Cognitive Development (HCD) framework and AI-augmented learning in creative computing,'' arXiv:2511.06779v2, Jan.~2026, doi: 10.48550/arXiv.2511.06779.
+\bibitem{b_hcd1}
+B Anand,
+"The Holistic Cognitive Development Framework: Designing Human-Centred AI-Augmented Project-Based Learning,"
+in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for
+Engineering (TALE)}, 2026.
+\bibitem{b-hcd2}
+B. Anand,
+``Operationalising Human-Centred AI-Augmented Learning Through HCD:
+An Empirically Grounded Framework to Mitigate Cognitive
+Outsourcing,''
+in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for
+Engineering (TALE)}, 2026.
 \bibitem{b_jillwatson} A.~K. Goel and L.~Polepeddi, ``Jill Watson: A virtual teaching assistant for online education,'' in \emph{Learning Engineering for Online Education}, C.~Dede \emph{et~al.}, Eds.\ Routledge, 2018, pp.~120--143.
 \end{thebibliography}
 
