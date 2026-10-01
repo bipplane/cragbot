@@ -35,10 +35,13 @@ AI in education, retrieval-augmented generation, course-grounded chatbot, large 
 \end{IEEEkeywords}
 
 \section{Introduction and Related Work}
-General-purpose large language models (LLMs) offer flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. Course assistance additionally requires alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
-Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}. Conversational tutors such as AutoTutor~\cite{b_autotutor} established dialogue as an educational interface. Self-explanation research~\cite{b_chi} motivates support for learners' reasoning alongside direct explanations. In computing project showcases, students also reported using feedback to reflect on and refine their work~\cite{b_steps}. Learning analytics also raise concerns about consent, privacy and responsible interpretation~\cite{b_ferguson}.
+General-purpose large language models (LLMs) offer flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. In course settings,
+assistance must align with teaching materials while giving opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
+Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not guarantee that every generated claim is supported~\cite{b_gao_citations}. Grounding therefore needs mechanisms for checking answers and correcting errors. LLM overconfidence~\cite{b_xiong} reinforces the need for human oversight, as exemplified by Jill Watson's confidence-gated educational responses~\cite{b_jillwatson}. 
 
-Our pre-use survey in CS3103 Computer Networks at the National University of Singapore examines AI study habits, conversational practices and adoption preferences. We interpret these findings alongside CRAG's design and use Holistic Cognitive Development (HCD)~\cite{b_hcd1,b_hcd2} to propose a follow-up evaluation of students' explanations, critique and revision. CRAG combines course grounding, instructor review, pedagogical modes and analytics. This study examines how that combination relates to students' reported needs.
+Reliable answers alone do not establish learning; self-explanation research motivates asking learners to articulate their reasoning, rather than rely on direct explanations~\cite{b_chi}. In computing project showcases, students also reported using feedback to reflect on and refine their work~\cite{b_steps}. These findings motivate examining whether CRAG users similarly evaluate feedback and justify revisions, rather than simply accept generated answers. Learning analytics can support this investigation, but their use raises concerns about consent, privacy and responsible interpretation~\cite{b_ferguson}.
+
+Our pre-study survey in CS3103 Computer Networks at the National University of Singapore examines AI study habits, conversational practices and adoption preferences. We interpret these findings alongside CRAG's design and use Holistic Cognitive Development (HCD)~\cite{b_hcd1,b_hcd2} to propose a follow-up evaluation of students' explanations, critique and revision. CRAG combines course grounding, instructor review, pedagogical modes and analytics. This study examines how that combination relates to students' reported needs.
 
 We contribute (1) CRAG's integrated platform design and implementation,
 (2) a CS3103 baseline needs assessment informing its evaluation,
@@ -60,7 +63,6 @@ to students' reasoning, critique and revision.
 \toprule
 \textbf{System / Class} & \textbf{Course Grounding} & \textbf{Instructor Governance} & \textbf{Pedagogical Modes} & \textbf{Learning Analytics} & \textbf{Extensibility} \\
 \midrule
-AutoTutor \cite{b_autotutor} & Curriculum-bound & High (expert-designed) & Yes (scaffolded) & Domain-specific & Low (non-LLM) \\
 General LLMs (ChatGPT) & None & None & None & None & High \\
 Khanmigo (Khan Academy) & Khan-only content & Fixed (vendor) & Socratic-style & Internal only & Low \\
 NotebookLM (Google) & User uploads & Per-user, not instructor & None (info retrieval) & None & Medium \\
@@ -203,7 +205,7 @@ arr/.style={-{Latex[length=1.4mm]},semithick}]
 \label{fig:workflow}
 \end{figure}
 
-\section{Historical Evaluation}
+\section{Earlier Prototype Evaluation}
 \subsection{Controlled Behavioural Tests}
 Fifty cases were scored pass/fail by one human judge, with Standard mode and prompt configuration kept constant. Cases covered grounded answering, out-of-scope fallback, robustness and safety (Table~\ref{tab:controlled}). 
 Reported failures included unnecessary refusals, unsupported
@@ -252,7 +254,7 @@ Six closed-response items had 41 valid responses; other closed-response items ha
 
 \begin{table}[t]
 \centering
-\caption{CS3103 pre-use survey: selected self-reported habits and preferences. Denominators exclude missing answers.}
+\caption{CS3103 pre-study survey: count of selected self-reported habits and preferences.}
 \label{tab:cs3103baseline}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -261,13 +263,13 @@ Six closed-response items had 41 valid responses; other closed-response items ha
 Finding & Count & \% \\
 \midrule
 Uses AI often or always for studying & 35/42 & 83.3 \\
-Clarifying follow-up after unclear AI answer & 32/41 & 78.0 \\
+Ask clarifying follow-up questions & 32/41 & 78.0 \\
 At least four prompts per conversation & 38/41 & 92.7 \\
-Stops when able to explain concept\textsuperscript{a} & 36/41 & 87.8 \\
+Stops prompting when able to understand concept\textsuperscript{a} & 36/41 & 87.8 \\
 Most frequent query: checking understanding & 12/41 & 29.3 \\
 Most frequent query: critical analysis & 6/41 & 14.6 \\
 Wants instructor-verified answers\textsuperscript{a} & 33/41 & 80.5 \\
-Wants exact-slide citations\textsuperscript{a} & 31/41 & 75.6 \\
+Wants exact-slide/source citations\textsuperscript{a} & 31/41 & 75.6 \\
 Wants strict course grounding\textsuperscript{a} & 26/41 & 63.4 \\
 \bottomrule
 \end{tabular}
@@ -290,7 +292,7 @@ The evidence should link initial reasoning, feedback, and subsequent revision, w
 \subsection{Strict Grounding versus Generative Flexibility}
 The prototype findings suggest a tension between students' expectations of flexible explanation and instructors' need for course alignment and accountability. Over-conservative refusals and requests beyond slide content motivated closer attention to evidence coverage, which the implementation addresses through additional retrieval and synthesis of answers from available sources. Whether this improves usefulness without increasing unsupported claims remains to be evaluated.
 
-\subsection{Controlled Correctness versus Experienced Usefulness}
+\subsection{Interpreting Evaluation Evidence}
 Previous tests describe the earlier prototype's behaviour, while the CS3103 survey describes prior habits and preferences. Neither establishes current CRAG effectiveness, learning gains or superiority over general-purpose assistants. Future evaluation should assess whether citations identify the correct sources, whether cited passages support the associated claims, and whether claims requiring evidence are adequately cited. It should also examine instructor review workload and students' use of subsequent instructor clarifications.
 
 \section{Limitations and Future Work}
@@ -310,13 +312,13 @@ CRAG integrates course grounding, instructor review, pedagogical modes and analy
 \bibitem{b_delikoura} I.~Delikoura, Y.~R. Fung, and P.~Hui, ``From superficial outputs to superficial learning: Risks of large language models in education,'' arXiv:2509.21972, 2025.
 \bibitem{b_lewis} P.~Lewis \emph{et~al.}, ``Retrieval-augmented generation for knowledge-intensive NLP tasks,'' in \emph{Adv.\ Neural Information Processing Systems (NeurIPS)}, 2020.
 \bibitem{b_gao_citations} T.~Gao, H.~Yen, J.~Yu, and D.~Chen, ``Enabling large language models to generate text with citations,'' in \emph{Proc.\ Conf.\ on Empirical Methods in Natural Language Processing (EMNLP)}, 2023, pp.~6465--6488, doi: 10.18653/v1/2023.emnlp-main.398.
-\bibitem{b_autotutor} A.~C. Graesser, K.~Wiemer-Hastings, P.~Wiemer-Hastings, and R.~Kreuz, ``AutoTutor: A simulation of a human tutor,'' \emph{Cogn.\ Syst.\ Res.}, vol.~1, no.~1, pp.~35--51, 1999.
+\bibitem{b_xiong} M.~Xiong \emph{et~al.}, ``Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs,'' in \emph{Int.\ Conf.\ on Learning Representations (ICLR)}, 2024.
+\bibitem{b_jillwatson} A.~K. Goel and L.~Polepeddi, ``Jill Watson: A virtual teaching assistant for online education,'' in \emph{Learning Engineering for Online Education}, C.~Dede \emph{et~al.}, Eds.\ Routledge, 2018, pp.~120--143.
 \bibitem{b_chi} M.~T.~H. Chi, N.~de Leeuw, M.-H. Chiu, and C.~LaVancher, ``Eliciting self-explanations improves understanding,'' \emph{Cogn.\ Sci.}, vol.~18, no.~3, pp.~439--477, 1994.
 \bibitem{b_steps} T.~P. My, Z.~H. Dong, and B.~Anand, ``Experiential learning in computing education: A case study of replicable project showcase events,'' in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for Engineering (TALE)}, 2025, pp.~1--8, doi: 10.1109/TALE66047.2025.11346457.
 \bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.~Learn.~Anal.}, vol.~6, no.~3, pp.~25--30, 2019, doi: 10.18608/jla.2019.63.5.
 \bibitem{b_hcd1} B Anand, "The Holistic Cognitive Development Framework: Designing Human-Centred AI-Augmented Project-Based Learning," in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for Engineering (TALE)}, 2026.
 \bibitem{b_hcd2} B. Anand, ``Operationalising Human-Centred AI-Augmented Learning Through HCD: An Empirically Grounded Framework to Mitigate Cognitive Outsourcing,'' in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for Engineering (TALE)}, 2026.
-\bibitem{b_jillwatson} A.~K. Goel and L.~Polepeddi, ``Jill Watson: A virtual teaching assistant for online education,'' in \emph{Learning Engineering for Online Education}, C.~Dede \emph{et~al.}, Eds.\ Routledge, 2018, pp.~120--143.
 \end{thebibliography}
 
 \end{document}
