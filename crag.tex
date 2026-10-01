@@ -134,29 +134,39 @@ When retrieval signals suggest insufficient evidence, CRAG uses an automated rev
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
- every node/.style={font=\scriptsize,align=center},
- proc/.style={rectangle,rounded corners=2pt,draw,semithick,fill=blue!7,text width=4.15cm,inner sep=3pt},
- dec/.style={proc,dashed,fill=yellow!18},
- outbox/.style={rectangle,rounded corners=2pt,draw,semithick,fill=green!14,text width=2.0cm,inner sep=3pt},
- arr/.style={-{Latex[length=1.4mm]},semithick}]
-\node[proc] (q) {Question + resolved learning mode\\Explicit quiz requests routed separately};
-\node[dec,below=3mm of q] (v) {Verified Q\&A similarity $\geq 0.85$?};
-\node[outbox,right=8mm of v] (va) {Reviewed answer};
-\node[dec,below=3mm of v] (p) {Gemini relevance + search plan};
-\node[outbox,right=8mm of p,fill=red!10] (scope) {Course-scope\\response};
-\node[proc,below=3mm of p] (r) {Course-scoped searches\\Deduplicate + rank fusion};
-\node[proc,below=3mm of r] (c) {If evidence weak: coverage review\\At most one corrective retrieval round};
-\node[dec,below=3mm of c] (e) {Any evidence retrieved?};
-\node[outbox,right=8mm of e,fill=red!10] (empty) {Empty-retrieval\\fallback};
-\node[proc,below=3mm of e] (g) {Gemini synthesis with history + mode\\Answer, sources; unverified status};
+every node/.style={font=\scriptsize,align=center},
+proc/.style={rectangle,rounded corners=2pt,draw,semithick,fill=blue!7,text width=4.15cm,inner sep=3pt},
+dec/.style={proc,dashed,fill=yellow!18},
+outbox/.style={rectangle,rounded corners=2pt,draw,semithick,fill=green!14,text width=2.0cm,inner sep=3pt},
+arr/.style={-{Latex[length=1.4mm]},semithick}]
+\node[proc] (q) 
+{Resolve learning mode\\Route quiz requests separately};
+\node[dec,below=3mm of q] (v)
+{Verified Q\&A similarity $\geq 0.85$?};
+\node[outbox,right=9mm of v] (va)
+{Return reviewed\\answer};
+\node[dec,below=3mm of v] (p)
+{Check course relevance\\Plan searches};
+\node[outbox,right=9mm of p,fill=red!10] (scope)
+{Explain course\\scope};
+\node[proc,below=3mm of p] (r)
+{Search course materials\\Merge and rank results};
+\node[proc,below=3mm of r] (c)
+{Review weak evidence\\Search again if needed (once)};
+\node[dec,below=3mm of c] (e)
+{Evidence available?};
+\node[outbox,right=9mm of e,fill=red!10] (empty)
+{Empty-retrieval\\fallback};
+\node[proc,below=3mm of e] (g)
+{Generate answer with mode and history\\Cite sources; mark as unverified};
 \draw[arr] (q) -- (v);
-\draw[arr] (v) -- node[above,font=\tiny]{yes} (va);
+\draw[arr] (v) -- node[above,pos=0.45,font=\tiny]{yes} (va);
 \draw[arr] (v) -- node[right,font=\tiny]{no} (p);
-\draw[arr] (p) -- node[above,font=\tiny]{unrelated} (scope);
+\draw[arr] (p) -- node[above,pos=0.5,font=\tiny]{unrelated} (scope);
 \draw[arr] (p) -- (r);
 \draw[arr] (r) -- (c);
 \draw[arr] (c) -- (e);
-\draw[arr] (e) -- node[above,font=\tiny]{no} (empty);
+\draw[arr] (e) -- node[above,pos=0.45,font=\tiny]{no} (empty);
 \draw[arr] (e) -- node[right,font=\tiny]{yes} (g);
 \end{tikzpicture}
 \caption{CRAG query-handling workflow.}
