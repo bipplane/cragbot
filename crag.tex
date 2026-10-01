@@ -123,14 +123,15 @@ Instructors organise materials, review Q\&A and quizzes, and inspect cohort acti
 The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
 
 \subsection{Course-material ingestion}
-CRAG divides uploaded materials into searchable text passages and processes selected visual content such as diagrams. The retrieved content supports answers with cited sources for students to inspect.
+CRAG converts uploaded materials into Markdown to retain document structure, such as headings and lists, before dividing the text into searchable passages. Selected visual regions, such as diagrams or images, are interpreted to produce searchable descriptions. Retrieved content supports answers with source citations for students to inspect.
 
 \subsection{Query handling}
-Fig.~\ref{fig:workflow} shows the active ordinary-query path. The backend first resolves the learning mode and routes explicit quiz requests deterministically to the quiz-generation flow. Other questions are embedded with Jina and checked against instructor-verified Q\&A at a calibrated similarity of 0.85. A match returns the reviewed answer directly.
+Fig.~\ref{fig:workflow} shows the query flow. CRAG first identifies the selected learning mode and routes explicit
+quiz requests to quiz generation. Other questions are embedded and checked against instructor-verified Q\&A at a similarity threshold of 0.85. A match returns the reviewed answer directly.
 
-Otherwise, a Gemini planner judges course relevance and proposes complementary searches using recent conversation context. Clearly unrelated questions receive a course-scope response. The original question remains a search input, including when planning fails. Course-filtered searches run concurrently; results are deduplicated and combined using reciprocal-rank fusion, with a default final context of five evidence sources.
+Otherwise, a Gemini planner judges course relevance and proposes complementary searches using recent conversation context. Clearly unrelated questions receive a course-scope response. Results are deduplicated and combined using reciprocal-rank fusion, with a default final context of five evidence items.
 
-Coverage review is triggered when fewer than two evidence items remain, or when the best similarity is below 0.5 without support from multiple searches. The reviewer can propose up to three corrective searches for one additional retrieval round. Review failure preserves existing evidence. Empty retrieval returns a fallback; otherwise Gemini synthesises a mode-conditioned answer using evidence and history, retaining sources and unverified status. Prompts distinguish direct, synthesised and partial support.
+When retrieval signals suggest insufficient evidence, CRAG uses an automated review to identify missing information and may perform one additional search round. If no evidence is retrieved, it returns a fallback response; otherwise, it generates an answer using the selected learning mode, retrieved evidence and conversation history.
 
 \begin{figure}[t]
 \centering
@@ -138,17 +139,17 @@ Coverage review is triggered when fewer than two evidence items remain, or when 
  every node/.style={font=\scriptsize,align=center},
  proc/.style={rectangle,rounded corners=2pt,draw,semithick,fill=blue!7,text width=4.15cm,inner sep=3pt},
  dec/.style={proc,dashed,fill=yellow!18},
- out/.style={rectangle,rounded corners=2pt,draw,semithick,fill=green!14,text width=2.0cm,inner sep=3pt},
+ outbox/.style={rectangle,rounded corners=2pt,draw,semithick,fill=green!14,text width=2.0cm,inner sep=3pt},
  arr/.style={-{Latex[length=1.4mm]},semithick}]
 \node[proc] (q) {Question + resolved learning mode\\Explicit quiz requests routed separately};
 \node[dec,below=3mm of q] (v) {Jina embedding: verified Q\&A\\similarity $\geq 0.85$?};
-\node[out,right=5mm of v] (va) {Reviewed answer};
+\node[outbox,right=8mm of v] (va) {Reviewed answer};
 \node[dec,below=3mm of v] (p) {Gemini relevance + search plan};
-\node[out,right=5mm of p,fill=red!10] (scope) {Course-scope\\response};
+\node[outbox,right=8mm of p,fill=red!10] (scope) {Course-scope\\response};
 \node[proc,below=3mm of p] (r) {Course-scoped searches\\Deduplicate + rank fusion};
 \node[proc,below=3mm of r] (c) {If evidence weak: coverage review\\At most one corrective retrieval round};
 \node[dec,below=3mm of c] (e) {Any evidence retrieved?};
-\node[out,right=5mm of e,fill=red!10] (empty) {Empty-retrieval\\fallback};
+\node[outbox,right=8mm of e,fill=red!10] (empty) {Empty-retrieval\\fallback};
 \node[proc,below=3mm of e] (g) {Gemini synthesis with history + mode\\Answer, sources; unverified status};
 \draw[arr] (q) -- (v);
 \draw[arr] (v) -- node[above,font=\tiny]{yes} (va);
@@ -160,14 +161,12 @@ Coverage review is triggered when fewer than two evidence items remain, or when 
 \draw[arr] (e) -- node[above,font=\tiny]{no} (empty);
 \draw[arr] (e) -- node[right,font=\tiny]{yes} (g);
 \end{tikzpicture}
-\caption{Current query-handling workflow. Weak evidence triggers bounded coverage review rather than a confidence-based rejection. Planner failure retains the original search; coverage-review failure retains existing evidence. Historical evaluations below concern the earlier pipeline.}
+\caption{CRAG query-handling workflow.}
 \label{fig:workflow}
 \end{figure}
 
-The user study deployed CRAG to 30 students enrolled in CS3247 Game Development at the National University of Singapore. The course bot was indexed on Lectures 8 and 9 and accessed through Discord slash-commands over a two-week period; all three pedagogical modes were enabled. The study had three phases: a pre-study survey on prior AI use and study habits; a two-week interaction phase with logging of every query, mode, and response; and a post-study survey on perceived usefulness, trust, and learning impact, measured on 5-point Likert scales. The original account reports percentages rating 4--5 (agreement). Item-level post-study denominators are not established in this draft and must be checked against study records; the cohort size must not be assumed to be every item denominator.
-
 \section{Historical Controlled Behaviour Evaluation}
-
+The user study deployed CRAG to 30 students enrolled in CS3247 Game Development at the National University of Singapore. The course bot was indexed on Lectures 8 and 9 and accessed through Discord slash-commands over a two-week period; all three pedagogical modes were enabled. The study had three phases: a pre-study survey on prior AI use and study habits; a two-week interaction phase with logging of every query, mode, and response; and a post-study survey on perceived usefulness, trust, and learning impact, measured on 5-point Likert scales. The original account reports percentages rating 4--5 (agreement). Item-level post-study denominators are not established in this draft and must be checked against study records; the cohort size must not be assumed to be every item denominator.
 \subsection{Test suite and metrics}
 The test suite contained 50 fixed cases in four categories. \emph{In-scope} (10) tested grounded answering on questions explicitly answerable from course materials. \emph{Out-of-scope} (10) tested fallback behaviour on questions not covered. \emph{Usage patterns} (20) tested robustness on misconceptions, subjective queries, multi-turn interactions, and application questions. \emph{Safety} (10) tested resistance to adversarial prompts and academic-misuse requests. Each case was scored Pass/Fail by a human judge under Standard mode using the prototype prompt configuration. Per-category accuracy is the pass rate within that category; overall accuracy is the pass rate across all 50 cases.
 
