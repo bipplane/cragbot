@@ -117,15 +117,15 @@ Student interactions inform analytics for instructor review.}
 % Updated against docs/architecture/{01_high_level,04_upload_flow,10_query_processing,13_lms_answer_reviews}.md.
 % Describes current source, not confirmation that every feature is deployed.
 
-\subsection{Educational features and Instructor Governance}
+\subsection{Educational Features and Instructor Governance}
 Instructors organise materials, review Q\&A and quizzes, and inspect cohort activity. Supplementary material is allowed for retrieval, but excluded from quiz generation and selection. Students ask questions, customise learning modes, and practice with quizzes. Learning modes have automatic mode switching to fit to the sentiment of the question.
 
 The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and an explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
 
-\subsection{Course-material ingestion}
+\subsection{Course-material Ingestion}
 CRAG converts uploaded materials into Markdown to retain document structure, such as headings and lists. Selected visual regions, such as diagrams or images, are interpreted to produce searchable descriptions. The text is then divided and embedded into searchable passages. Answers are retrieved, generated, and supported with source citations for students to inspect.
 
-\subsection{Query handling}
+\subsection{Query Handling}
 Fig.~\ref{fig:workflow} shows the query flow. CRAG first identifies the selected learning mode and routes explicit
 quiz requests to quiz generation. Other questions are embedded and checked against instructor-verified Q\&A at a similarity threshold of 0.85. A match returns the reviewed answer directly.
 Otherwise, a Gemini planner judges course relevance and proposes complementary searches using recent conversation context. Clearly unrelated questions receive a course-scope response. Results are deduplicated and combined using reciprocal-rank fusion, with a default final context of five evidence items.
@@ -165,7 +165,7 @@ When retrieval signals suggest insufficient evidence, CRAG uses an automated rev
 \end{figure}
 
 \section{Historical Evaluation}
-\subsection{Controlled behavioural tests}
+\subsection{Controlled Behavioural Tests}
 50 cases were scored pass/fail by a human judge, with learning mode and prompt configuration kept constant. Cases covered grounded answering, out-of-scope fallback, robustness and safety (Table~\ref{tab:controlled}). 
 Reported failures included unnecessary refusals, unsupported
 out-of-scope answers, difficulty handling ambiguous queries,
@@ -193,7 +193,7 @@ Overall    & 39/50 & 0.78 \\
 \end{table}
 
 
-\subsection{Classroom pilot}
+\subsection{CS3247 Classroom Pilot}
 A prior two-week CS3247 Game Development pilot (n=30) motivates the present needs assessment. The study comprised three phases: a pre-study survey on prior AI use and study habits; an interaction phase that logged CRAG conversations; and a post-study survey measuring perceived usefulness and trust on 5-point Likert scales. The pre-study showed majority relied on AI tools, and social barriers prevented help-seeking. The post-study reported interactions were mainly concept questions in Standard mode, with limited use of other modes. Query logs also revealed mismatches between student expectations and retrieval scope, such as (``what slides do you have access to'') or (``when are midterms''). Post-study responses indicated perceived gains in understanding and citation-related trust, alongside mixed views of overall reliability and usefulness relative to general-purpose AI. These were perceptions, not measured learning gains, and the 30 pilot participants should not be treated as the denominator for every survey item.
 
 \section{CS3103 Baseline Needs Assessment}
@@ -233,10 +233,10 @@ Wants strict course grounding\textsuperscript{a} & 26/41 & 63.4 \\
 
 \section{Discussion}
 
-\subsection{Strict grounding versus generative flexibility}
+\subsection{Strict Grounding versus Generative Flexibility}
 The prototype findings suggest a tension between students' expectations of flexible explanation and instructors' need for course alignment and accountability. Over-conservative refusals and requests beyond literal slide content motivated closer attention to evidence coverage. The current implementation expands on weak coverage by generating a personalised answer using the pool of relevant sources found.
 
-\subsection{Controlled correctness versus experienced usefulness}
+\subsection{Controlled Correctness versus Experienced Usefulness}
 Controlled tests and user reports answer different questions. The historical suite measured behaviour on 50 selected cases; the pilot survey described perceived usefulness. Neither establishes learning gains, superiority over general-purpose assistants or current-system performance. Citation preferences do not show that cited passages support claims. Future evaluation should examine source location, claim support and citation coverage separately, alongside instructor review workload and student use of later clarifications.
 
 \section{Limitations and Future Work}
