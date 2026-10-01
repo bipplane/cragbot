@@ -41,7 +41,7 @@ AI in education, retrieval-augmented generation, course-grounded chatbot, large 
 
 \section{Introduction and Related Work}
 General-purpose large language models (LLMs) offer flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. Course assistance additionally requires alignment with course materials and opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
-Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}. Conversational tutors such as AutoTutor~\cite{b_autotutor} established dialogue as an educational interface. For contemporary assistants, self-explanation research~\cite{b_chi} motivates support for learners' reasoning alongside direct explanations. Learning analytics also raise concerns about consent, privacy and responsible interpretation~\cite{b_ferguson}.
+Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not ensure that every generated claim is supported~\cite{b_gao_citations}. Conversational tutors such as AutoTutor~\cite{b_autotutor} established dialogue as an educational interface. Self-explanation research~\cite{b_chi} motivates support for learners' reasoning alongside direct explanations. In computing project showcases, students also reported using feedback to reflect on and refine their work~\cite{b_steps}. Learning analytics also raise concerns about consent, privacy and responsible interpretation~\cite{b_ferguson}.
 
 Our pre-use survey in CS3103 Computer Networks at the National University of Singapore examines AI study habits, conversational practices and adoption preferences. We interpret these findings alongside CRAG's design and use Holistic Cognitive Development (HCD) \cite{b_hcd} to propose a follow-up evaluation of students' explanations, critique and revision. CRAG combines course grounding, instructor review, pedagogical modes and analytics. This study examines how that combination relates to students' reported needs.
 
@@ -247,8 +247,7 @@ Third, 34/42 respondents (81.0\%) preferred step-by-step explanations, while 19/
 
 \subsection{An Iterative HCD Study}
 These findings motivate the next stage of CRAG evaluation. Rather than treating interaction frequency or mode selection as evidence of learning, we propose using HCD~\cite{b_hcd} to examine whether and how students' reasoning develops through their interactions with CRAG. Students would explain their initial reasoning, create a solution or explanation, critique CRAG's feedback against course evidence, and reflect on and justify subsequent revisions.
-Students will still retain responsibility for accepting or rejecting AI suggestions.
-The CS3103 baseline makes this distinction concrete: respondents report multi-prompt conversations and understanding-oriented stopping criteria, but the survey does not test their explanations or revisions. A subsequent study must examine student-generated evidence rather than infer reflection from prompt counts.
+Students retain responsibility for accepting or rejecting AI suggestions. Reports of feedback-informed refinement~\cite{b_steps} motivate examining a related process in CRAG: whether students evaluate AI feedback and justify changes to their own work.The CS3103 baseline makes this distinction concrete: respondents report multi-prompt conversations and understanding-oriented stopping criteria, but the survey does not test their explanations or revisions. A subsequent study must examine student-generated evidence rather than infer reflection from prompt counts.
 The evidence should link initial reasoning, feedback, and subsequent revision, while analysis should follow participants across observations and avoid treating multiple messages from one student as independent participants. The study should also examine whether CRAG's analytics effectively help instructors identify reasoning gaps in students and better tailor feedback for them.
 
 \section{Discussion}
@@ -279,18 +278,9 @@ CRAG integrates course grounding, instructor review, pedagogical modes and analy
 \bibitem{b_autotutor} A.~C. Graesser, K.~Wiemer-Hastings, P.~Wiemer-Hastings, and R.~Kreuz, ``AutoTutor: A simulation of a human tutor,'' \emph{Cogn.\ Syst.\ Res.}, vol.~1, no.~1, pp.~35--51, 1999.
 \bibitem{b_chi} M.~T.~H. Chi, N.~de Leeuw, M.-H. Chiu, and C.~LaVancher, ``Eliciting self-explanations improves understanding,'' \emph{Cogn.\ Sci.}, vol.~18, no.~3, pp.~439--477, 1994.
 \bibitem{b_ferguson} R.~Ferguson, ``Ethical challenges for learning analytics,'' \emph{J.~Learn.~Anal.}, vol.~6, no.~3, pp.~25--30, 2019, doi: 10.18608/jla.2019.63.5.
-\bibitem{b_hcd1}
-B Anand,
-"The Holistic Cognitive Development Framework: Designing Human-Centred AI-Augmented Project-Based Learning,"
-in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for
-Engineering (TALE)}, 2026.
-\bibitem{b-hcd2}
-B. Anand,
-``Operationalising Human-Centred AI-Augmented Learning Through HCD:
-An Empirically Grounded Framework to Mitigate Cognitive
-Outsourcing,''
-in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for
-Engineering (TALE)}, 2026.
+\bibitem{b_hcd1} B Anand, "The Holistic Cognitive Development Framework: Designing Human-Centred AI-Augmented Project-Based Learning," in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for Engineering (TALE)}, 2026.
+\bibitem{b-hcd2} B. Anand, ``Operationalising Human-Centred AI-Augmented Learning Through HCD: An Empirically Grounded Framework to Mitigate Cognitive Outsourcing,'' in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for Engineering (TALE)}, 2026.
+\bibitem{b_steps} T.~P. My, Z.~H. Dong, and B.~Anand, ``Experiential learning in computing education: A case study of replicable project showcase events,'' in \emph{Proc. IEEE Int. Conf. Teaching, Assessment and Learning for Engineering (TALE)}, 2025, pp.~1--8, doi: 10.1109/TALE66047.2025.11346457.
 \bibitem{b_jillwatson} A.~K. Goel and L.~Polepeddi, ``Jill Watson: A virtual teaching assistant for online education,'' in \emph{Learning Engineering for Online Education}, C.~Dede \emph{et~al.}, Eds.\ Routledge, 2018, pp.~120--143.
 \end{thebibliography}
 
