@@ -32,6 +32,11 @@ lim.rik@u.nus.edu}
 \textit{National University of Singapore}\\
 Singapore \\
 dayn.ang@u.nus.edu}
+\and
+\IEEEauthorblockN{Bhojan Anand}
+\IEEEauthorblockA{\textit{School of Computing} \\
+\textit{National University of Singapore}\\
+dcsab@nus.edu.sg}
 }
 
 \maketitle
@@ -129,12 +134,10 @@ Figure~\ref{fig:framework} summarises CRAG's five design principles and instruct
 % Updated against docs/architecture/{01_high_level,04_upload_flow,10_query_processing,13_lms_answer_reviews}.md.
 % Describes current source, not confirmation that every feature is deployed.
 
-\subsection{Educational features}
-Instructors create course bots, organise topics, upload PDF materials, manage Q\&A, configure available learning modes, review practice quizzes and inspect conversational analytics. Document processing runs within requests; the dashboard waits for results rather than polling a durable ingestion worker. Supplementary material without a topic remains searchable in course chat but is excluded from quiz generation and selection. Topic-linked materials can also support source-labelled suggested questions in the student workspace.
+\subsection{Educational features and Instructor Governance}
+Instructors organise materials, review Q\&A and quizzes, and inspect cohort activity. Supplementary material is allowed for retrieval, but excluded from quiz generation and selection.Students ask questions, customise learning modes, and practise with quizzes. Learning modes have automatic mode switching to fit to the sentiment of the question.
 
-Students access the backend through web chat or a separate Discord bot. They ask questions, inspect source information, practise with quizzes and select available learning modes. Standard mode gives concise answers; Guided mode provides structured explanations; Socratic mode offers adaptive hints, feedback or questions, including direct explanations on request. Automatic mode switching respects instructor restrictions; the student web interface additionally provides an opt-out preference. Modes describe interaction styles, not measured cognitive development.
-
-The current LMS answer-review queue distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and explanation without declaring the original correct. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message. Original chat text and research captures remain unchanged. Discord retains its separate review workflow without these inbox updates. Source implementation does not establish live deployment of this feature.
+The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
 
 \subsection{Architecture and ingestion}
 React student and instructor interfaces communicate with a FastAPI backend organised into routes, services and processing components. PostgreSQL with pgvector holds relational data and searchable evidence; Jina v4 embeds passages, selected page images and queries. Gemini services handle retrieval planning, coverage review, answer generation and selective visual interpretation, with planning and answer models configured separately. 
@@ -222,6 +225,31 @@ Logs revealed that CRAG was used predominantly for direct, single-turn concept q
 
 \subsection{Post-study: perceived effectiveness and trust}
 Table~\ref{tab:userstudy} reports key findings. 66.7\% of students reported that CRAG improved their understanding of course concepts, and 66.7\% said citations increased their trust. However, only 44.4\% reported trusting CRAG's answers overall, and only 33.3\% rated CRAG better than general-purpose AI tools (44.4\% rated them comparable). One possible explanation for the mixed trust score is over-cautious framing: when slide content did not explicitly cover a concept, CRAG often prefaced responses with uncertainty disclaimers, which may have affected perceived confidence; this explanation was not tested causally. We frame the 66.7\% understanding figure explicitly as \emph{self-reported perception}, not measured learning gain---no pre/post knowledge test was administered.
+
+\begin{table}[t]
+\centering
+\caption{CS3103 pre-use survey: selected self-reported habits and preferences. Denominators exclude missing answers.}
+\label{tab:cs3103baseline}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}p{5.1cm}rr@{}}
+\toprule
+Finding & Count & \% \\
+\midrule
+Uses AI often or always for studying & 35/42 & 83.3 \\
+Clarifying follow-up after unclear AI answer & 32/41 & 78.0 \\
+At least four prompts per conversation & 38/41 & 92.7 \\
+Stops when able to explain concept\textsuperscript{a} & 36/41 & 87.8 \\
+Most frequent query: checking understanding & 12/41 & 29.3 \\
+Most frequent query: critical analysis & 6/41 & 14.6 \\
+Wants instructor-verified answers\textsuperscript{a} & 33/41 & 80.5 \\
+Wants exact-slide citations\textsuperscript{a} & 31/41 & 75.6 \\
+Wants strict course grounding\textsuperscript{a} & 26/41 & 63.4 \\
+\bottomrule
+\end{tabular}
+\par\smallskip
+\parbox{\columnwidth}{\footnotesize\textsuperscript{a}Multiple-selection item; selecting conceptual explainability does not demonstrate that understanding was achieved.}
+\end{table}
 
 \begin{table}[t]
 \centering
