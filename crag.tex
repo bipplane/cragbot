@@ -102,8 +102,7 @@ Figure~\ref{fig:framework} summarises CRAG's five design principles and instruct
   arr/.style={-{Latex[length=1.5mm]}, semithick}
 ]
 
-\node[ibox] (inst) {\textbf{Instructor}\\
-Provides materials, reviews answers, sets modes};
+\node[ibox] (inst) {\textbf{Instructor} --- uploads materials, verifies Q\&A,\\configures modes, reviews analytics};
 
 \node[pbox, below=6mm of inst] (plat)
 {\textbf{CRAG: Five Design Principles}\\[1pt]
@@ -113,8 +112,7 @@ Provides materials, reviews answers, sets modes};
 \textbf{P4.}~Question, topic and quiz analytics\\
 \textbf{P5.}~Web and Discord access};
 
-\node[sbox, below=6mm of plat] (stud) {\textbf{Student}\\
-Asks questions, attempts quizzes, reviews feedback};
+\node[sbox, below=6mm of plat] (stud) {\textbf{Student} --- selects learning mode, asks questions,\\attempts practice quizzes, reviews feedback};
 
 \draw[arr] (inst.south) --
 node[right=1mm, font=\scriptsize]{materials and oversight}
