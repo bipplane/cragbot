@@ -193,28 +193,6 @@ Coverage review is triggered when fewer than two evidence items remain, or when 
 \caption{Current query-handling workflow. Weak evidence triggers bounded coverage review rather than a confidence-based rejection. Planner failure retains the original search; coverage-review failure retains existing evidence. Historical evaluations below concern the earlier pipeline.}
 \label{fig:workflow}
 \end{figure}
-\section{Historical Evaluation Methodology}
-
-The earlier CS3247 prototype was evaluated with two complementary methods (Table~\ref{tab:evaldesign}). The \emph{controlled behaviour evaluation} tests whether the system meets its design principles under a fixed input distribution. The \emph{user-based evaluation} measures perceived effectiveness, trust, and use under realistic classroom conditions.
-
-\begin{table}[t]
-\centering
-\caption{Two complementary evaluations.}
-\label{tab:evaldesign}
-\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{1.4cm}p{2.7cm}p{3.0cm}@{}}
-\toprule
- & \textbf{Controlled} & \textbf{User-based} \\
-\midrule
-Goal & Verify behaviour vs.\ design principles & Assess use in practice \\
-Method & Fixed test suite, human-judged pass/fail & Pre/post Likert surveys + interaction logs \\
-Inputs & 50 cases (10 in-scope, 10 out-of-scope, 20 usage patterns, 10 safety) & 30 undergraduates over two weeks \\
-Setting & Standard mode, fixed prompt & All modes; Discord; CS3247 \\
-Answers & Does the system \emph{do} what it was designed to? & Is it \emph{useful} to students? \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 The user study deployed CRAG to 30 students enrolled in CS3247 Game Development at the National University of Singapore. The course bot was indexed on Lectures 8 and 9 and accessed through Discord slash-commands over a two-week period; all three pedagogical modes were enabled. The study had three phases: a pre-study survey on prior AI use and study habits; a two-week interaction phase with logging of every query, mode, and response; and a post-study survey on perceived usefulness, trust, and learning impact, measured on 5-point Likert scales. The original account reports percentages rating 4--5 (agreement). Item-level post-study denominators are not established in this draft and must be checked against study records; the cohort size must not be assumed to be every item denominator.
 
