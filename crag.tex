@@ -87,29 +87,61 @@ Figure~\ref{fig:framework} summarises CRAG's five design principles and instruct
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
-  ibox/.style={rectangle, rounded corners=2pt, draw, semithick,
-              fill=blue!8, align=center, text width=6.6cm, inner sep=3pt, font=\footnotesize},
-  pbox/.style={rectangle, rounded corners=2pt, draw, semithick,
-              fill=gray!12, align=left, text width=6.6cm, inner sep=4pt, font=\scriptsize},
-  sbox/.style={rectangle, rounded corners=2pt, draw, semithick,
-              fill=green!10, align=center, text width=6.6cm, inner sep=3pt, font=\footnotesize},
+  ibox/.style={
+    rectangle, rounded corners=2pt, draw, semithick,
+    fill=blue!8, align=center, text width=5.8cm,
+    inner sep=3pt, font=\footnotesize},
+  pbox/.style={
+    rectangle, rounded corners=2pt, draw, semithick,
+    fill=gray!12, align=left, text width=5.8cm,
+    inner sep=4pt, font=\scriptsize},
+  sbox/.style={
+    rectangle, rounded corners=2pt, draw, semithick,
+    fill=green!10, align=center, text width=5.8cm,
+    inner sep=3pt, font=\footnotesize},
   arr/.style={-{Latex[length=1.5mm]}, semithick}
 ]
-\node[ibox] (inst) {\textbf{Instructor} --- uploads materials, verifies Q\&A,\\configures modes, reviews analytics};
-\node[pbox, below=4mm of inst] (plat) {\textbf{CRAG Platform: Five Design Principles}\\[1pt]
-\textbf{P1.}~Course-grounded generation with citations\\
-\textbf{P2.}~Instructor governance (verify / edit / approve)\\
-\textbf{P3.}~Pedagogical modes: Standard / Guided / Socratic\\
-\textbf{P4.}~Conversational learning analytics\\
-\textbf{P5.}~Flexible deployment: Web / Discord};
-\node[sbox, below=4mm of plat] (stud) {\textbf{Student} --- selects learning mode, asks questions,\\attempts practice quizzes, reviews feedback};
-\draw[arr] (inst.south) -- node[right=0.5mm, font=\scriptsize]{governance, materials, Q\&A} (plat.north);
-\draw[arr] (plat.south) -- node[right=0.5mm, font=\scriptsize]{grounded, mode-aware responses} (stud.north);
-\draw[arr] (stud.west) -- ++(-0.35,0) coordinate(corner) |- (inst.west);
-\node[anchor=center, rotate=90, font=\scriptsize, left=2mm] at ([yshift=30mm]corner) {interaction analytics};
+
+\node[ibox] (inst) {\textbf{Instructor}\\
+Provides materials, reviews answers, sets modes};
+
+\node[pbox, below=6mm of inst] (plat)
+{\textbf{CRAG: Five Design Principles}\\[1pt]
+\textbf{P1.}~Course-grounded answers with citations\\
+\textbf{P2.}~Instructor review and verified Q\&A reuse\\
+\textbf{P3.}~Standard, Guided and Socratic modes\\
+\textbf{P4.}~Question, topic and quiz analytics\\
+\textbf{P5.}~Web and Discord access};
+
+\node[sbox, below=6mm of plat] (stud) {\textbf{Student}\\
+Asks questions, attempts quizzes, reviews feedback};
+
+\draw[arr] (inst.south) --
+node[right=1mm, font=\scriptsize]{materials and oversight}
+(plat.north);
+\draw[arr] (plat.south) --
+node[right=1mm, font=\scriptsize]{answers and practice}
+(stud.north);
+
+\coordinate (analyticsPort) at
+  ($(plat.north west)!0.2!(plat.south west)$);
+\coordinate (activityPort) at
+  ($(plat.north west)!0.8!(plat.south west)$);
+
+\draw[arr]
+  (stud.west) -- ++(-5mm,0)
+  |- node[pos=0.25,left=1mm,font=\scriptsize,align=right]
+  {questions\\and responses}
+  (activityPort);
+\draw[arr]
+  (analyticsPort) -- ++(-5mm,0)
+  |- node[pos=0.25,left=1mm,font=\scriptsize,align=right]
+  {interaction\\analytics}
+  (inst.west);
+
 \end{tikzpicture}
-\caption{CRAG's design principles and interaction workflow.
-Student interactions inform analytics for instructor review.}
+\caption{CRAG mediates instructor oversight and student interaction.
+Student activity is processed into analytics for instructor review.}
 \label{fig:framework}
 \end{figure}
 
