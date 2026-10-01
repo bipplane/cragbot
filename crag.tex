@@ -118,12 +118,12 @@ Student interactions inform analytics for instructor review.}
 % Describes current source, not confirmation that every feature is deployed.
 
 \subsection{Educational features and Instructor Governance}
-Instructors organise materials, review Q\&A and quizzes, and inspect cohort activity. Supplementary material is allowed for retrieval, but excluded from quiz generation and selection.Students ask questions, customise learning modes, and practise with quizzes. Learning modes have automatic mode switching to fit to the sentiment of the question.
+Instructors organise materials, review Q\&A and quizzes, and inspect cohort activity. Supplementary material is allowed for retrieval, but excluded from quiz generation and selection. Students ask questions, customise learning modes, and practice with quizzes. Learning modes have automatic mode switching to fit to the sentiment of the question.
 
-The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
+The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and an explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
 
 \subsection{Course-material ingestion}
-CRAG converts uploaded materials into Markdown to retain document structure, such as headings and lists, before dividing the text into searchable passages. Selected visual regions, such as diagrams or images, are interpreted to produce searchable descriptions. Retrieved content supports answers with source citations for students to inspect.
+CRAG converts uploaded materials into Markdown to retain document structure, such as headings and lists. Selected visual regions, such as diagrams or images, are interpreted to produce searchable descriptions. The text is then divided and embedded into searchable passages. Answers are retrieved, generated, and supported with source citations for students to inspect.
 
 \subsection{Query handling}
 Fig.~\ref{fig:workflow} shows the query flow. CRAG first identifies the selected learning mode and routes explicit
@@ -142,7 +142,7 @@ When retrieval signals suggest insufficient evidence, CRAG uses an automated rev
  outbox/.style={rectangle,rounded corners=2pt,draw,semithick,fill=green!14,text width=2.0cm,inner sep=3pt},
  arr/.style={-{Latex[length=1.4mm]},semithick}]
 \node[proc] (q) {Question + resolved learning mode\\Explicit quiz requests routed separately};
-\node[dec,below=3mm of q] (v) {Jina embedding: verified Q\&A\\similarity $\geq 0.85$?};
+\node[dec,below=3mm of q] (v) {Embedding similarity $\geq 0.85$?};
 \node[outbox,right=8mm of v] (va) {Reviewed answer};
 \node[dec,below=3mm of v] (p) {Gemini relevance + search plan};
 \node[outbox,right=8mm of p,fill=red!10] (scope) {Course-scope\\response};
