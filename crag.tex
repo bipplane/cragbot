@@ -15,28 +15,10 @@
 \title{CRAG: An Instructor-Governed Course-Grounded RAG Platform for AI Teaching Assistants in Higher Education}
 
 \author{
-\IEEEauthorblockN{Ryan Chen Rui Yang}
+\IEEEauthorblockN{Lim Rik, Ang Zi Jun Dayn, Ryan Chen Rui Yang, and Bhojan Anand}
 \IEEEauthorblockA{\textit{School of Computing} \\
-\textit{National University of Singapore}\\
-Singapore \\
-ryanchen@u.nus.edu}
-\and
-\IEEEauthorblockN{Lim Rik}
-\IEEEauthorblockA{\textit{School of Computing} \\
-\textit{National University of Singapore}\\
-Singapore \\
-lim.rik@u.nus.edu}
-\and
-\IEEEauthorblockN{Ang Zi Jun, Dayn}
-\IEEEauthorblockA{\textit{School of Computing} \\
-\textit{National University of Singapore}\\
-Singapore \\
-dayn.ang@u.nus.edu}
-\and
-\IEEEauthorblockN{Bhojan Anand}
-\IEEEauthorblockA{\textit{School of Computing} \\
-\textit{National University of Singapore}\\
-dcsab@nus.edu.sg}
+\textit{National University of Singapore}, Singapore \\
+lim.rik@u.nus.edu, dayn.ang@u.nus.edu, ryanchen@u.nus.edu, dcsab@nus.edu.sg}
 }
 
 \maketitle
@@ -124,9 +106,10 @@ Figure~\ref{fig:framework} summarises CRAG's five design principles and instruct
 \draw[arr] (inst.south) -- node[right=0.5mm, font=\scriptsize]{governance, materials, Q\&A} (plat.north);
 \draw[arr] (plat.south) -- node[right=0.5mm, font=\scriptsize]{grounded, mode-aware responses} (stud.north);
 \draw[arr] (stud.west) -- ++(-0.35,0) coordinate(corner) |- (inst.west);
-\node[anchor=center, rotate=90, font=\scriptsize, left=2mm] at ([yshift=26mm]corner) {feedback loop};
+\node[anchor=center, rotate=90, font=\scriptsize, left=2mm] at ([yshift=30mm]corner) {information analytics};
 \end{tikzpicture}
-\caption{Framework of Instructor-Governed Course-Grounded AI Teaching Assistants. Instructor authority (top) is realised through five design principles (centre) and delivered to students (bottom). Student interactions are fed back as conversational analytics for instructor review (P4), closing the loop.}
+\caption{CRAG's design principles and interaction workflow.
+Student interactions inform analytics for instructor review.}
 \label{fig:framework}
 \end{figure}
 
@@ -139,10 +122,8 @@ Instructors organise materials, review Q\&A and quizzes, and inspect cohort acti
 
 The instructor LMS answer-review tab distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the original answer; Clarify supplies a reviewed answer and explanation. Both create approved Q\&A and an in-app student inbox update. Dismiss records the review without creating approved Q\&A or an inbox message.
 
-\subsection{Architecture and ingestion}
-React student and instructor interfaces communicate with a FastAPI backend organised into routes, services and processing components. PostgreSQL with pgvector holds relational data and searchable evidence; Jina v4 embeds passages, selected page images and queries. Gemini services handle retrieval planning, coverage review, answer generation and selective visual interpretation, with planning and answer models configured separately. 
-
-Document ingestion extracts Markdown and chunks text, then selectively interprets meaningful visual regions and embeds descriptions and selected page images.
+\subsection{Course-material ingestion}
+CRAG divides uploaded materials into searchable text passages and processes selected visual content such as diagrams. The retrieved content supports answers with cited sources for students to inspect.
 
 \subsection{Query handling}
 Fig.~\ref{fig:workflow} shows the active ordinary-query path. The backend first resolves the learning mode and routes explicit quiz requests deterministically to the quiz-generation flow. Other questions are embedded with Jina and checked against instructor-verified Q\&A at a calibrated similarity of 0.85. A match returns the reviewed answer directly.
