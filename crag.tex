@@ -31,22 +31,18 @@ HCD provides a framework for examining students' reasoning, creation, critique a
 \end{abstract}
 
 \begin{IEEEkeywords}
-retrieval-augmented generation, course-grounded chatbot, instructor governance, large language models, Holistic Cognitive Development, reflective learning, AI in education
+AI in education, reflective learning, retrieval-augmented generation, course-grounded chatbot, large language models, instructor governance, Holistic Cognitive Development
 \end{IEEEkeywords}
 
 \section{Introduction and Related Work}
 General-purpose large language models (LLMs) offer flexible, open-ended dialogue. Prior work highlights the appeal of scalable, interactive support \cite{b_yayeh}, but fluent answers can obscure unsupported claims and questions of trustworthiness~\cite{b_bender,b_heersmink}. In course settings,
-assistance must align with teaching materials while giving opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
-Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not guarantee that every generated claim is supported~\cite{b_gao_citations}. Grounding therefore needs mechanisms for checking answers and correcting errors. LLM overconfidence~\cite{b_xiong} reinforces the need for human oversight, as exemplified by Jill Watson's confidence-gated educational responses~\cite{b_jillwatson}. 
+assistance must align with teaching materials while providing opportunities for students to evaluate their own reasoning~\cite{b_delikoura}.
+Retrieval-augmented generation (RAG) grounds generation in retrieved passages~\cite{b_lewis}, but retrieved evidence does not guarantee that every generated claim is supported~\cite{b_gao_citations}. Grounding therefore needs mechanisms for checking answers and correcting errors. LLM overconfidence~\cite{b_xiong} reinforces the need for human oversight, as exemplified by Jill Watson's confidence-gated educational responses~\cite{b_jillwatson}. Table~\ref{tab:litcompare} summarises selected platform capabilities.
 
 Reliable answers alone do not establish learning; self-explanation research motivates asking learners to articulate their reasoning, rather than rely on direct explanations~\cite{b_chi}. In computing project showcases, students also reported using feedback to reflect on and refine their work~\cite{b_steps}. These findings motivate examining whether CRAG users similarly evaluate feedback and justify revisions, rather than simply accept generated answers. Learning analytics can support this investigation, but their use raises concerns about consent, privacy and responsible interpretation~\cite{b_ferguson}.
 
 Our pre-study survey in CS3103 Computer Networks at the National University of Singapore examines AI study habits, conversational practices and adoption preferences. We interpret these findings alongside CRAG's design and use Holistic Cognitive Development (HCD)~\cite{b_hcd1,b_hcd2} to propose a follow-up evaluation of students' explanations, critique and revision. CRAG combines course grounding, instructor review, pedagogical modes and analytics. This study examines how that combination relates to students' reported needs.
-
-We contribute (1) CRAG's integrated platform design and implementation,
-(2) a CS3103 baseline needs assessment informing its evaluation,
-and (3) an HCD-informed study proposal linking CRAG interactions
-to students' reasoning, critique and revision.
+We contribute (1) CRAG's integrated platform design and implementation, (2) a CS3103 baseline needs assessment informing its evaluation, and (3) an HCD-informed study proposal linking CRAG interactions to students' reasoning, critique and revision.
 
 
 
@@ -56,18 +52,57 @@ to students' reasoning, critique and revision.
 
 \begin{table*}[t]
 \centering
-\caption{Representative educational AI assistants compared against CRAG's five design principles.}
+\caption{Selected capabilities of educational AI assistants.
+Commercial features depend on plan and configuration.}
 \label{tab:litcompare}
 \footnotesize
-\begin{tabular}{@{}p{3.6cm}p{2.5cm}p{2.7cm}p{2.6cm}p{2.4cm}p{2.4cm}@{}}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}
+p{2.3cm}
+p{3.1cm}
+p{3.5cm}
+p{3.0cm}
+p{3.2cm}
+@{}}
 \toprule
-\textbf{System / Class} & \textbf{Course Grounding} & \textbf{Instructor Governance} & \textbf{Pedagogical Modes} & \textbf{Learning Analytics} & \textbf{Extensibility} \\
+\textbf{System} &
+\textbf{Source Grounding} &
+\textbf{Instructor Governance} &
+\textbf{Pedagogical Modes} &
+\textbf{Learning Analytics} \\
 \midrule
-General LLMs (ChatGPT) & None & None & None & None & High \\
-Khanmigo (Khan Academy) & Khan-only content & Fixed (vendor) & Socratic-style & Internal only & Low \\
-NotebookLM (Google) & User uploads & Per-user, not instructor & None (info retrieval) & None & Medium \\
-Jill Watson 1.0 \cite{b_jillwatson} & Approved Q\&A bank & Confidence-gated & None & Limited & Low \\
-\textbf{CRAG} & \textbf{Materials + verified Q\&A} & \textbf{Configure / verify / edit / override} & \textbf{Standard / Guided / Socratic} & \textbf{FAQ / topic / quiz / per-student} & \textbf{Course-agnostic, modular} \\
+
+ChatGPT &
+Uploaded materials &
+Configurable instructions; sharing permissions &
+Study Mode; guided questioning &
+Workspace adoption and usage\textsuperscript{a} \\
+
+Khanmigo &
+Khan Academy content &
+Teacher monitoring &
+Guided tutoring &
+Student activity, chat reports\textsuperscript{a} \\
+
+NotebookLM &
+Sources with citations &
+Notebook sharing &
+Learning Guide; quizzes &
+Notebook usage\textsuperscript{a} \\
+
+Jill Watson 1.0~\cite{b_jillwatson} &
+Curated course Q\&A &
+Staff-supervised deployment &
+Forum question answering &
+Not characterised\textsuperscript{b} \\
+
+\textbf{CRAG} &
+\textbf{Course materials; verified Q\&A} &
+\textbf{Answer review, reuse and student updates} &
+\textbf{Standard, Guided, Socratic; quizzes} &
+\textbf{Question, topic, quiz and student activity} \\
+
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -78,7 +113,7 @@ Figure~\ref{fig:framework} summarises CRAG's five design principles and instruct
 
 \textbf{(P1) Course-grounded generation.} Answers visibly cite documents and pages in instructor-provided materials.
 
-\textbf{(P2) Instructor governance.} Educators configure scope, review AI-generated responses; subsequent retrieval of verified responses form a feedback-driven improvement loop.
+\textbf{(P2) Instructor governance.} Educators configure scope, review generated responses and approve Q\&A for reuse.
 
 \textbf{(P3) Pedagogical interaction modes.} Three modes match style to learning intent: Standard (concise), Guided (step-by-step), and Socratic (questions prompting self-explanation \cite{b_chi}).
 
@@ -235,12 +270,12 @@ Overall    & 39/50 & 0.78 \\
 
 
 \subsection{CS3247 Classroom Pilot}
-A prior two-week CS3247 Game Development pilot ($n=30$) motivates the present needs assessment. The study comprised three phases: a pre-study survey on prior AI use and study habits; an interaction phase that logged CRAG conversations; and a post-study survey measuring perceived usefulness and trust on 5-point Likert scales. Pre-study responses indicated that most respondents relied on AI tools, and social barriers prevented help-seeking. The earlier report described interactions as mainly concept questions in Standard mode, with limited use of other modes. Query logs also revealed mismatches between student expectations and retrieval scope, such as ``what slides do you have access to'' or ``when are midterms''. Post-study responses indicated perceived gains in understanding and citation-related trust, alongside mixed views of overall reliability and usefulness relative to general-purpose AI. These were perceptions, not measured learning gains, and the 30 denotes pilot participants rather than respondents to every survey item.
+A prior two-week CS3247 Game Development pilot ($n=30$) motivates the present needs assessment. The study comprised three phases: a pre-study survey on prior AI use and study habits; an interaction phase that logged CRAG conversations; and a post-study survey measuring perceived usefulness and trust on 5-point Likert scales. Pre-study responses indicated that most respondents relied on AI tools, and social barriers prevented help-seeking. The earlier report described interactions as mainly concept questions in Standard mode, with limited use of other modes. Query logs also revealed mismatches between student expectations and retrieval scope, such as ``what slides do you have access to'' or ``when are midterms''. Post-study responses indicated perceived gains in understanding and citation-related trust, alongside mixed views of overall reliability and usefulness relative to general-purpose AI. These were not measured learning gains, and 30 denotes pilot participants rather than respondents to every survey item.
 
 \section{CS3103 Assessment}
 \subsection{Participants and Baseline Analysis}
 All 110 eligible CS3103 students (AY2026/27 Semester 1) were invited to provide research consent and complete a pre-study survey. A total of 42 students responded and consented, yielding a response rate of 38.2\%, comprising 26 third-year (61.9\%) and 16 fourth-year (38.1\%) undergraduate students. Only survey respondents received CRAG access, and subsequent CRAG use among respondents has not been established.
-The survey investigated students' study habits, previous experiences with AI, and their preferences in educational AI assistants. Study-habit and expectation questions used a scale ranging from \textit{Strongly Disagree} to \textit{Strongly Agree}. Agreement combines Agree and Strongly Agree, while other items used categorical choices, multiple selections or optional open-text responses. Multiple-selection percentages use respondents as denominators and may sum above 100\%. 
+The survey analysed self-reported study habits, previous experiences with AI, and preferences for educational AI assistants. Study-habit and expectation questions used a 5-point Likert scale ranging from \textit{Strongly Disagree} to \textit{Strongly Agree}. Agreement combines Agree and Strongly Agree, while other items used categorical choices, multiple selections or optional open-text responses. Multiple-selection percentages use respondents as denominators and may sum above 100\%. 
 This analysis provides a baseline for investigating whether and how students' subsequent CRAG interactions exhibit HCD-related behaviours, including creation, critique and reflection, throughout the semester.
 
 
@@ -263,13 +298,13 @@ Six closed-response items had 41 valid responses; other closed-response items ha
 Finding & Count & \% \\
 \midrule
 Uses AI often or always for studying & 35/42 & 83.3 \\
-Ask clarifying follow-up questions & 32/41 & 78.0 \\
+Asks a clarifying follow-up after an unclear answer & 32/41 & 78.0 \\
 At least four prompts per conversation & 38/41 & 92.7 \\
 Stops prompting when able to understand concept\textsuperscript{a} & 36/41 & 87.8 \\
 Most frequent query: checking understanding & 12/41 & 29.3 \\
 Most frequent query: critical analysis & 6/41 & 14.6 \\
 Wants instructor-verified answers\textsuperscript{a} & 33/41 & 80.5 \\
-Wants exact-slide/source citations\textsuperscript{a} & 31/41 & 75.6 \\
+Wants exact-slide citations\textsuperscript{a} & 31/41 & 75.6 \\
 Wants strict course grounding\textsuperscript{a} & 26/41 & 63.4 \\
 \bottomrule
 \end{tabular}
@@ -284,23 +319,23 @@ Third, 34/42 respondents (81.0\%) preferred step-by-step explanations, while 19/
 
 \subsection{An Iterative HCD Study}
 These findings motivate the next stage of CRAG evaluation. Rather than treating interaction frequency or mode selection as evidence of learning, we propose using HCD~\cite{b_hcd1} to examine whether and how students' reasoning develops through their interactions with CRAG. Students would explain their initial reasoning, create a solution or explanation, critique CRAG's feedback against course evidence, and reflect on and justify subsequent revisions.
-Students retain responsibility for accepting or rejecting AI suggestions. Reports of feedback-informed refinement~\cite{b_steps} motivate examining a related process in CRAG: whether students evaluate AI feedback and justify changes to their own work.The CS3103 baseline makes this distinction concrete: respondents report multi-prompt conversations and understanding-oriented stopping criteria, but the survey does not test their explanations or revisions. A subsequent study must examine student-generated evidence rather than infer reflection from prompt counts.
+Students retain responsibility for accepting or rejecting AI suggestions. Reports of feedback-informed refinement~\cite{b_steps} motivate examining a related process in CRAG: whether students evaluate AI feedback and justify changes to their own work. The CS3103 baseline makes this distinction concrete: respondents report multi-prompt conversations and understanding-oriented stopping criteria, but the survey does not test their explanations or revisions. A subsequent study must examine student-generated evidence rather than infer reflection from prompt counts.
 The evidence should link initial reasoning, feedback, and subsequent revision, while analysis should follow participants across observations and avoid treating multiple messages from one student as independent participants. The study should also examine whether CRAG's analytics effectively help instructors identify reasoning gaps in students and better tailor feedback for them.
 
 \section{Discussion}
 
 \subsection{Strict Grounding versus Generative Flexibility}
-The prototype findings suggest a tension between students' expectations of flexible explanation and instructors' need for course alignment and accountability. Over-conservative refusals and requests beyond slide content motivated closer attention to evidence coverage, which the implementation addresses through additional retrieval and synthesis of answers from available sources. Whether this improves usefulness without increasing unsupported claims remains to be evaluated.
+The prototype findings suggest a tension between students' expectations of flexible explanation and instructors' need for course alignment and accountability. Over-conservative refusals and requests beyond the uploaded materials motivated closer attention to evidence coverage, which the implementation addresses through additional retrieval and synthesis of answers from available sources. Whether this improves usefulness without increasing unsupported claims remains to be evaluated.
 
 \subsection{Interpreting Evaluation Evidence}
 Previous tests describe the earlier prototype's behaviour, while the CS3103 survey describes prior habits and preferences. Neither establishes current CRAG effectiveness, learning gains or superiority over general-purpose assistants. Future evaluation should assess whether citations identify the correct sources, whether cited passages support the associated claims, and whether claims requiring evidence are adequately cited. It should also examine instructor review workload and students' use of subsequent instructor clarifications.
 
 \section{Limitations and Future Work}
 The previous pilot covered two weeks, two lectures and one course. Perceived learning benefits were self-reported without objective knowledge assessments, and Standard-mode dominance limited evaluation of other modes. 
-The CS3103 baseline comprises 42 of 110 invited students. Only survey respondents received CRAG access, so subsequent usage findings will concern this self-selected group rather than the full cohort. Access does not establish actual or sustained use, and sparse or intermittent participation may limit analysis of reasoning and revision over time. Future work should report uptake, usage frequency and attrition, examine barriers to continued use, and account for voluntary participation. Usage frequency alone does not establish learning gains.
+The CS3103 baseline comprises 42 of 110 invited students. Only survey respondents received CRAG access, so subsequent usage findings will concern this group rather than the full cohort. Access does not establish actual or sustained use, and sparse or intermittent participation may limit analysis of reasoning and revision over time. Future work should report uptake, usage frequency and attrition, examine barriers to continued use, and account for voluntary participation. Usage frequency alone does not establish learning gains.
 CRAG includes selective visual ingestion, adaptive modes, corrective retrieval and LMS answer reviews, but historical results do not validate these additions. Future evaluation should compare standard RAG, corrective retrieval, and a general-purpose assistant using identical course questions. Tests should assess answer support, appropriate refusals, prompt injection, and academic misuse, using explicit scoring criteria, category counts and independent judges.
 
-An HCD-informed longitudinal study should link initial reasoning, AI feedback and justified revisions with independent assessments of understanding or delayed retention. Dialogue coding requires validation, as conversation length and mode selection alone do not demonstrate cognitive development.
+An HCD-informed longitudinal study should include independent assessments of understanding or delayed retention. Moreover, dialogue coding requires validation, as conversation length and mode selection alone do not demonstrate cognitive development.
 
 \section{Conclusion}
 CRAG integrates course grounding, instructor review, pedagogical modes and analytics, with bounded corrective retrieval and LMS question updates. The CS3103 baseline survey identifies frequent self-reported AI use and preferences for instructor-verified answers. These findings motivate an HCD-oriented evaluation of reasoning, critique, and revision, but do not establish learning gains. Future work should examine sustained use, technical reliability, and educational outcomes.
