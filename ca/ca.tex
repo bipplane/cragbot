@@ -47,51 +47,70 @@
 % Survey figures cross-checked against local CSV aggregates; never attach raw identities.
 % Source comments and author notes are drafting aids, not submission instructions.
 
+% Opening layout adapted from Dethada/NUS-SoC-Report (David Zhu, 2024).
+% See template-LICENSE.txt. Academic year remains unconfirmed.
+\newcommand{\reportidentity}{%
+{\large CP4101 Continuous Assessment Report\par}
+\vfill
+{\LARGE\bfseries CRAG: An Instructor-Governed, \\Course-Grounded RAG Platform for AI\\Teaching Assistants in Higher Education\par}
+\vspace{3mm}
+\vspace{2cm}
+{\large By\par Ryan Chen Rui Yang\par}
+\vfill
+{\normalsize Department of Computer Science\par
+School of Computing\par
+National University of Singapore\par}
+\vspace{1cm}
+{\normalsize 2026/2027\par}}
+
 \begin{document}
 \hypersetup{pageanchor=false}
+\newgeometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
 \begin{titlepage}
-\thispagestyle{empty}
-\vspace*{12mm}
-{\large National University of Singapore\\School of Computing\par}
-\vspace{14mm}
-{\huge\bfseries Continuous Assessment Report\par}
-\vspace{7mm}
-{\LARGE\bfseries CRAG: Instructor-Governed,\\Course-Grounded AI Tutoring and\\Research Infrastructure\par}
-\vspace{3mm}
-{\small Working title\par}
-\vspace{13mm}
-\begin{tabular}{@{}P{0.30\textwidth}P{0.63\textwidth}@{}}
-Student & Ryan Chen Rui Yang\\[8pt]
-Student number & \blankfield\\[8pt]
-Registered project title & \blankfield\\[8pt]
-Project/module code & \blankfield\\[8pt]
-Supervisor & \blankfield\\[8pt]
-Main evaluator & \blankfield\\[8pt]
-Reporting period & May--October 2026\\[8pt]
-Planned next semester & January--May 2027\\[8pt]
-Draft date & 29 October 2026
-\end{tabular}
-\vfill
-{\small First iteration for discussion. Administrative details and individual contribution boundaries require author confirmation.}
+\centering
+\reportidentity
 \end{titlepage}
+\begin{titlepage}
+{\centering\reportidentity\par}
+\vspace{1cm}
+\begin{tabular}{@{}P{0.30\textwidth}P{0.63\textwidth}@{}}
+Student number & A0272246E\\[6pt]
+Project ID & H1352890\\[6pt]
+Supervisor & Anand Bhojan\\[6pt]
+Main Evaluator & Yap Hock Chuan, Roland\\[6pt]
+Planned next semester & January--May 2027\\[6pt]
+\end{tabular}
+\end{titlepage}
+\restoregeometry
+\pagenumbering{roman}
 \hypersetup{pageanchor=true}
+\pagestyle{plain}
 
-\section*{Initial project statement}
-\addcontentsline{toc}{section}{Initial project statement}
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
 This project develops CRAG, an instructor-governed, course-grounded AI tutoring platform, towards more dependable educational assistance and a defensible basis for studying student reasoning. It extends an existing student-built system rather than starting from a new chatbot. The inherited platform already connected course materials, student chat, instructor management, learning modes, quizzes and Discord. Work undertaken during May--October 2026 has focused on strengthening evidence handling, conversational support, instructor feedback, operational recovery and consent-aware research infrastructure.
 
 The central problem is that a fluent, source-linked answer does not by itself establish factual support, appropriate instructional help or learning. CRAG therefore combines course-scoped retrieval with bounded corrective search, answer attribution review and explicit instructor approval. It also provides practice and follow-up activities through which students can explain, question and revise their understanding. The research direction uses Holistic Cognitive Development (HCD) to examine these processes while keeping operational activity distinct from validated educational outcomes.
 
 Progress comprises an extended integrated platform, a baseline needs assessment reported in the IEEE TALE paper, and infrastructure for subsequent technical and educational evaluation. The next semester, provisionally January--May 2027, will prioritise reproducible answer-quality comparisons, source freshness and failure recovery, validated dialogue coding, and a feasible consented study of reasoning and revision. Historical prototype results and baseline preferences inform this work; they do not establish the effectiveness of the present implementation.
 
+\clearpage
 \begingroup
 \small
 \setlength{\parskip}{0pt}
 \tableofcontents
 \endgroup
 \clearpage
+\listoffigures
+\addcontentsline{toc}{section}{\listfigurename}
+\clearpage
+\listoftables
+\addcontentsline{toc}{section}{\listtablename}
+\clearpage
+\pagenumbering{arabic}
+\pagestyle{fancy}
 
-\section{Project motivation, objectives and scope}
+\section{Introduction}
 \subsection{Problem and intended contribution}
 Students need explanations that fit their course, remain traceable to teaching materials and help them work through uncertainty. General-purpose assistants provide flexible dialogue, but their answers can omit course assumptions or present plausible claims without adequate evidence. A course assistant also needs an accountable correction process: instructors must be able to identify a problematic answer, supply a reviewed response and communicate that update to the student.
 
