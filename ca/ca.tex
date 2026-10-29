@@ -91,7 +91,7 @@ This project develops CRAG, an instructor-governed, course-grounded AI tutoring 
 
 The core problem when it comes to generative AI outputs is that a fluent answer is unable to show establishment of factual support, or allow instructor intervention when the answer lacks correctness. CRAG, therefore, combines course-scoped retrieval with bounded corrective search, answer attribution review and explicit answer verification by human instructors.
 
-Progress made so far comprises an extended integrated platform, integration of in-line citations into responses, a custom document embedding flow, consented external search, corrective search when coverage is weak, learning mode refactoring and auto-switching, student notes auditing, dedicated student inboxes containing instructor feedback, and a successful publication of a final camera-ready manuscript for IEEE TALE as a short paper.
+Progress made so far comprises an extended integrated platform, integration of inline citations into responses, a custom document embedding flow, consented external search, corrective search when coverage is weak, learning mode refactoring and auto-switching, student notes auditing, dedicated student inboxes containing instructor feedback, and a successful publication of a final camera-ready manuscript for IEEE TALE as a short paper.
 
 For the next semester, from January--May 2027, research and development will draw 9on post-use feedback from students participating in the current semester's pilot test. Planned development includes prioritising reproducible answer-quality comparisons, assessing of source freshness and failure recovery, validation of dialogue coding with reference to HCD, and a feasible consented study of reasoning and revision to further examine how students explain ideas, critique responses, and justify reasoning.
 
@@ -115,7 +115,9 @@ For the next semester, from January--May 2027, research and development will dra
 \subsection{Problem and intended contribution}
 Students need explanations that fit their course, remain traceable to teaching materials and help them work through uncertainty. General-purpose assistants provide flexible dialogue, but their answers can omit course assumptions or present plausible claims without adequate evidence. A course assistant also needs an accountable correction process: instructors must be able to identify a problematic answer, supply a reviewed response and communicate that update to the student.
 
-CRAG addresses these needs as an integrated workflow. Instructors organise a course knowledge base and review answers; students ask questions, inspect sources and undertake practice; researchers examine eligible interactions with recorded context and provenance. The contribution lies in developing and investigating the relationships between these capabilities. Combining familiar components does not establish algorithmic novelty or educational superiority. The relevant questions concern whether the resulting system provides dependable support, workable instructor oversight and interpretable evidence about student reasoning.
+This project extends CRAG, an existing platform built by an earlier cohort of NUS School of Computing (SoC) students. The inherited system already combined course retrieval, student and instructor dashboards, learning modes, quizzes and Discord support. The present work develops this foundation into a more coherent study environment: students should be able to follow an explanation back to course evidence, continue a conversation, practise a topic and receive an instructor's correction within the same workflow.
+
+The development direction responds to the convenience students expect from established AI study tools. Competitiveness is a usability and integration goal, rather than a demonstrated advantage over a commercial product. Course grounding and instructor intervention remain central. Alongside platform development, the project prepares an HCD-informed investigation of how students explain ideas, critique responses and justify revisions.
 
 The supplied IEEE TALE paper describes this platform and reports a CS3103 pre-use needs assessment alongside earlier prototype evidence~\cite{cragpaper}. This report extends that account with implementation progress through October 2026 and a proposed next-semester investigation.
 
@@ -124,14 +126,14 @@ The supplied IEEE TALE paper describes this platform and reports a CS3103 pre-us
 \item \textbf{Improve course-grounded assistance.} Preserve course scope, retrieve evidence relevant to the question and expose supported citations. Evaluate correctness, requested-detail coverage, citation support and appropriate abstention separately.
 \item \textbf{Make instructor governance effective.} Support answer review, correction, controlled reuse and student updates. Evaluate review effort, decision consistency and whether corrections reach the intended recipients.
 \item \textbf{Support purposeful student interaction.} Connect Standard, Guided and Socratic modes with quizzes, follow-up discussion and revision tools. Investigate how students use these affordances rather than treating their availability as evidence of learning.
-\item \textbf{Provide reliable operational and research foundations.} Preserve access control, recoverable workflows, ordered conversation records, consent eligibility and response provenance. Check these contracts through regression and synthetic integration tests.
-\item \textbf{Develop and conduct a defensible evaluation.} Establish frozen technical comparisons and a feasible HCD-informed study, with independent judgements, participant accounting and explicit limits on causal interpretation.
+\item \textbf{Consolidate and communicate project progress.} Integrate the revised tutoring and study workflows, document the inherited contribution and report the platform through the final camera-ready IEEE TALE short paper.
+\item \textbf{Use pilot feedback to guide evaluation.} Review post-use feedback from the current semester's pilot, prioritise improvements and establish reproducible answer-quality comparisons and a feasible HCD-informed study of reasoning and revision.
 \end{enumerate}
 
 \subsection{Scope and research questions}
 The implementation covers the FastAPI backend, student web application, instructor dashboard and optional Discord client, sharing Supabase data and external model services. Course material remains the default evidence source. Supplementary material may support chat while remaining outside quiz generation and selection.
 
-Three questions guide the next phase. \textbf{RQ1:} How do corrective retrieval and answer review affect support, completeness, abstention, latency and cost relative to a fixed single-query RAG baseline? \textbf{RQ2:} How usable and effective is instructor review as a correction workflow? \textbf{RQ3:} What evidence of explanation, critique and justified revision appears in student interactions, and how does it relate to independently assessed understanding? These questions separate technical quality, workflow quality and educational outcomes.
+Three questions guide the next phase. \textbf{RQ1:} How do corrective retrieval and attribution review affect answer support and completeness relative to a fixed single-query RAG baseline, at what latency and cost? \textbf{RQ2:} What difficulties do pilot students report when using conversation, sources, study tools and instructor feedback, and which improvements should take priority? \textbf{RQ3:} What evidence of explanation, critique and justified revision appears in eligible student interactions, and how can it be coded reliably with reference to HCD? These questions separate technical quality, workflow quality and educational outcomes.
 
 \section{Literature review}
 \subsection{Scope and organising argument}
@@ -166,7 +168,7 @@ Greshake et al.\ show how instructions embedded in retrieved data can redirect L
 Ferguson identifies ethical challenges in learning analytics spanning consent, responsibility and the purposes of measurement~\cite{ferguson}. These concerns matter when a tutoring record becomes research evidence. A student's course access, platform activity and identity linkage do not establish research consent. CRAG separates operational records from consent-eligible canonical research capture and restricts coding by study role. The research protocol must additionally specify withdrawal, retention and justified interpretation of derived labels.
 
 \subsection{Research gap and design implications}
-The reviewed work supports retrieval, citation evaluation, self-explanation and reflective learning, but leaves their combined operation in this setting to be investigated. CRAG's next phase should test three links: whether additional evidence processing improves answers; whether instructor review produces usable correction; and whether supported interaction elicits meaningful reasoning and revision. The platform provides an environment for these investigations; its technical and educational benefits remain to be measured.
+The reviewed work motivates three connected priorities: traceable course-grounded answers, an integrated study workflow informed by student feedback, and observable opportunities for explanation, critique and revision. Instructor correction supports these priorities by providing a route for addressing unreliable answers. The next phase will examine whether additional evidence processing improves answers, whether instructor review produces usable correction, and whether CRAG responses elicits meaningful reasoning and revision in follow-up student interactions.
 
 \section{Inherited work before May 2026}
 \subsection{Student-built foundation}
@@ -215,8 +217,8 @@ October & Access and evidence contracts; external clarification; exact approved-
 
 These milestones describe repository development through October. They establish implementation progress rather than production rollout, participant uptake or learning outcomes. The principal deliverables are explained below against the inherited baseline.
 
-\subsection{Course ingestion and recoverable setup}
-Document ingestion was revised to retain more of the structure needed for retrieval. PDF-to-Markdown processing preserves headings, lists and tables more usefully than an undifferentiated text stream. Selected diagrams and visual regions can receive searchable descriptions. This remains selective PDF processing, with quality dependent on the source and extraction path; it does not establish comprehensive understanding of arbitrary images or video.
+\subsection{Custom document processing and embedding flow}
+Document ingestion was revised into a custom processing and embedding flow around the existing Jina integration. PDF-to-Markdown processing retains headings, lists and tables for structure-aware chunking and course retrieval. Selected diagrams and visual regions can receive searchable descriptions. This processing and integration of course content aims to improve retrieval quality and preserve document structure as compared to undifferentiated text extraction.
 
 Course setup also required more dependable failure handling. Onboarding completion uses database claims and atomic document commits, preserving staged retry inputs and preventing a failed completion from being recorded as successful. Provider calls have deadlines and bounded blocking concurrency. These changes address practical failure conditions such as long-running extraction, repeated completion requests and interrupted processing.
 
@@ -254,17 +256,20 @@ October work added a notes-audit tool and private flashcards. The audit separate
 
 Flashcards use topic-assigned course evidence, source snapshots and freshness checks. Their scheduled review uses an FSRS adapter, and changed or deleted evidence can pause affected cards. Flashcard ratings remain separate from quiz marks and mastery estimates. Both additions support further investigation of study behaviour; neither has established an effect on retention or independent understanding.
 
-\subsection{Course access and account ownership}
+\subsection{Supporting access and reliability work}
 API access now checks authenticated identity, course membership and resource ownership across the student web app, instructor dashboard and Discord integration. Staff/course grants remain separate from research and consent-administration permissions. This strengthens the shared service boundary as the platform supports more workflows and records. The contribution is the implemented policy and aligned clients; deployed role checks still require staging and live verification. Temporary development access must be retired before a named-account release.
 
-\subsection{Research capture, coding and engineering reproducibility}
+\subsection{Foundations for an HCD-informed study}
 Research infrastructure now distinguishes operational tutoring records from canonical research records. Eligible capture requires identity linkage, an active study and applicable consent. LMS operational inserts enqueue ID-only delivery intents for consent-gated, idempotent capture; Discord uses a separate transport path with reply lineage. Response provenance records conditions such as mode, evidence path and terminal status. These records support tracing what occurred, while hashes alone cannot reconstruct missing historical documents.
 
 The instructor/research workspace supports operational L1--L6 labelling and separate canonical study coding. Canonical annotations use study grants, versioned codebooks and append-only revisions. Adjudication requires two independent current labels; changing an underlying label invalidates the effective adjudication. This makes disagreement reviewable, but does not itself establish coding reliability or validate the category scheme.
 
 Reproducibility work includes generated hashed Python dependency locks, committed frontend locks and a root verification command covering dependency consistency, backend tests, shared frontend regression tests, frontend linting and builds. Disposable-database checks cover specified recovery behaviour. These are engineering checks, distinct from live provider quality, browser usability, complete migration execution or educational evaluation. No new application-test results are claimed from preparing this report.
 
-\section{Design alternatives and reasons for change}
+\subsection{IEEE TALE short-paper output}
+The final camera-ready IEEE TALE short paper is a completed dissemination output of the project~\cite{cragpaper}. It brings together the platform design, the CS3103 pre-use needs assessment and evidence from the earlier prototype. This mainly communicates the project's educational motivation and system contribution. Evidence of current CRAG was still limited due to the ongoing study, so the paper presents the earlier prototype results and a baseline survey rather than a full evaluation of the current system.
+
+\section{Design choices supporting the study workflow}
 \subsection{Reliable evidence versus flexible answer delivery}
 The project has moved towards explicit evidence and approval boundaries while retaining generative flexibility for explanation. Table~\ref{tab:decisions} summarises the main decisions and their costs. These are design choices to test, rather than conclusions that the selected alternative is universally best.
 
@@ -319,7 +324,7 @@ arr/.style={-{Latex[length=2mm]},semithick}
 \label{fig:architecture}
 \end{figure}
 
-\section{Preliminary evidence and present limitations}
+\section{Pilot context, preliminary evidence and limitations}
 \subsection{Historical prototype evaluation}
 The TALE paper reports 50 cases judged pass/fail by one person for an earlier prototype~\cite{cragpaper}. Table~\ref{tab:historical} separates categories to expose weaker safety performance.
 
@@ -367,7 +372,12 @@ Wants strict grounding in NUS lecture materials & 26/41 & 63.4\%\\
 
 These findings support prioritising follow-up context, inspectable sources and instructor review. They do not demonstrate that students can correctly evaluate an answer or explain a concept. The prompting categories do not provide an exact mean conversation length. Multiple-selection items may sum above 100\%. The invitation denominator and consent account are taken from the paper; a response CSV alone does not establish the current canonical consent state.
 
-The paper states that access was provided to respondents. Actual uptake, sustained use, attrition and later outcomes remain to be established. The findings describe a self-selected group, so they cannot represent the entire cohort without qualification.
+The paper states that access was provided to respondents. The current semester's pilot provides the next opportunity to examine how students experience the revised platform. Actual uptake, sustained use, attrition and later outcomes remain to be established. The findings represent a self-selected group that consented to the study, so they do not represent the entire cohort without qualification.
+
+\subsection{Role of current-semester post-use feedback}
+Post-use feedback will guide the next development cycle. Analysis will examine whether students can continue conversations naturally, inspect cited course material, use quizzes and flashcards, interpret notes-audit findings and locate instructor feedback. Reported difficulties and desired changes will be grouped by workflow, with available usage evidence used to contextualise responses where consent permits. The resulting priorities will distinguish usability problems, evidence-quality failures and requests for additional functionality.
+
+No completed post-use results will be reported here.
 
 \subsection{What progress establishes}
 The present evidence supports a system-development contribution and a motivated evaluation programme. Current source shows extended retrieval, review, practice and research workflows. The historical tests describe earlier behaviour, while the baseline survey describes prior habits and preferences. There is no completed current-system comparison or independent learning-outcome study in this report.
@@ -375,8 +385,10 @@ The present evidence supports a system-development contribution and a motivated 
 Important remaining risks include stale approved answers or generated questions after material changes, incomplete cross-channel research capture, model-review errors and operational failures spanning storage and database updates. Dashboard mastery and cognitive-category summaries require calibration and careful interpretation. Source-level checks cannot establish deployed access, complete consent operations or real browser and provider behaviour.
 
 \section{Research plan for January--May 2027}
-\subsection{Phase 1: Freeze scope and establish a reproducible baseline}
-January will establish the study's technical and administrative baseline. The system version, provider models, course corpus, approved-answer state and configuration will be recorded. The priority is to resolve release-blocking ownership, freshness and recovery defects, then exercise representative student, instructor and Discord workflows in staging. This includes permitted and denied accounts, document changes, interrupted submissions and answer updates.
+\subsection{Phase 1: Review pilot feedback and establish a baseline}
+January will begin with available post-use feedback from the current semester's pilot. Responses will be analysed alongside the pre-use needs assessment to identify which expectations were met and points of friction when using CRAG. The platform will still occasionally be benchmarked with general-purpose study-tools, but it does not aim to claim a competitive advantage without common evaluation.
+
+The system version, provider models, course corpus, approved-answer state and configuration will then be recorded. Work will prioritise feedback-led improvements and source-freshness or failure-recovery defects that would compromise evaluation. Representative checks will cover conversation continuity, document changes, interrupted practice and delivery of instructor updates.
 
 The output will be a versioned system manifest, traceable contribution inventory, failure register and frozen evaluation protocol. The supervisor will review study scope, recruitment feasibility, instruments, data handling and the relevant approval requirements before participant work begins. Sample size and inferential ambitions will depend on realistic recruitment and analysis capacity, not the number of stored messages.
 
@@ -387,10 +399,10 @@ Three conditions are proposed: single-query RAG, the same pipeline with bounded 
 
 Independent judges will score correctness, requested-detail coverage, citation support and completeness, and appropriate abstention. Rejections will be reviewed as well as accepted answers. Latency distributions, provider failures, calls and observed token/API costs will be reported. Repeated questions or runs will be analysed as related observations. A frozen result table and error taxonomy will identify whether extra processing produces a worthwhile benefit.
 
-\subsection{Phase 3: Pilot coding and instructor correction}
-March will address RQ2 and prepare RQ3. Instructors will review a bounded set of answers using Confirm, Clarify and Dismiss. Measures will include review time, required edits, disagreement, recipient delivery and usefulness of the resulting student update. This will test whether oversight is workable rather than assume that adding a queue reduces staff effort.
+\subsection{Phase 3: Validate dialogue coding and feedback workflows}
+March will address the workflow issues identified in RQ2 and prepare RQ3. A bounded walkthrough will check whether students can inspect evidence and find an instructor's correction, and whether instructors can use Confirm, Clarify and Dismiss to provide that feedback.
 
-A separate coding pilot will establish units of analysis, inclusion rules, examples and category boundaries. At least two coders will independently label a shared sample before adjudication. Agreement and disagreements will be reported using a method appropriate to the final codebook; an ordinal measure is suitable only if the category ordering is justified. Codebook revisions must be followed by a fresh independent reliability sample. Canonical annotation tooling supports this procedure but cannot replace it.
+A coding pilot will establish units of analysis, inclusion rules, examples and category boundaries with reference to HCD. Research observations will look into a student's explanation, critique of AI responses, and use of citations.
 
 \subsection{Phase 4: Investigate reasoning and revision}
 March--April will provisionally host a consented study if approvals, recruitment and the coding pilot permit it. Activities will link an initial explanation or attempted solution, CRAG feedback, evidence inspection and a subsequent explanation of any revision. Structured tasks can elicit observable reasoning, while optional everyday use can show whether similar behaviour occurs without explicit prompting. These conditions will be reported separately.
@@ -407,9 +419,9 @@ April--May will focus on analysis, limitations, final implementation fixes and t
 \toprule
 Period & Reviewable deliverable & Fallback if constrained\\
 \midrule
-January & Baseline manifest; staged workflow checks; approved protocol and instruments & Narrow study scope before recruitment\\
+January & Pilot-feedback priorities; baseline manifest; workflow checks; protocol and instruments & Use available feedback descriptively; narrow study before recruitment\\
 February & Frozen technical comparison; human judgements; latency/cost and failure analysis & Reduce conditions while preserving common questions and independent scoring\\
-March & Instructor-workflow pilot; codebook; independent coding reliability results & Revise coding and repeat pilot before longitudinal claims\\
+March & Feedback-workflow checks; HCD mapping; codebook and independent reliability results & Revise coding and repeat pilot before longitudinal claims\\
 March--April & Eligible interaction dataset; initial reasoning, feedback and revision; independent assessment & Use smaller structured exploratory study; report sparse uptake explicitly\\
 April--May & Reproducible analysis; limitations; final report and demonstration & Prioritise technical and methodological contribution if participant evidence is insufficient\\
 \bottomrule
@@ -419,14 +431,14 @@ April--May & Reproducible analysis; limitations; final report and demonstration 
 \subsection{Risks and success criteria}
 Study execution depends on consent and approval, recruitment, course access, instructor availability and reliable capture. Those dependencies will be checked before data collection. Missing context, withdrawal and ineligible records must remain visible in the analysis accounting. Independent outcome tasks and blinded answer review, where feasible, reduce dependence on the same model both producing and judging results.
 
-Technical work will prioritise source revision handling, safe document deletion/recovery, provider deadlines and representative end-to-end checks. Flashcards, notes audits and further adaptive features are secondary to a stable evaluation baseline. If participation is insufficient for longitudinal inference, the project will report technical comparisons and a transparent feasibility study rather than infer development from sparse logs.
+Technical work will prioritise feedback-led usability fixes, source revision handling, and representative end-to-end checks. Depending on user inputs, further feature expansion of flashcards and notes audits will depend on pilot needs and available evaluation capacity. If participation is insufficient for longitudinal inference, the project will report technical comparisons and a transparent feasibility study rather than infer development from sparse logs.
 
 Success by May means delivering a reproducible platform and evaluation, an explicit account of where answer correction helps or fails, and appropriately qualified evidence about instructor and student workflows. A positive learning effect is a result to test, not a completion requirement that can be guaranteed in advance.
 
 \section{Conclusion}
-The project extends a substantial student-built CRAG foundation towards dependable evidence handling, instructor correction and research-ready interaction records. May--October progress is represented by dated implementation milestones from August onwards, including corrective retrieval, attribution review, controlled answer reuse, contextual practice and consent-aware coding infrastructure. The CS3103 baseline supplies a clear motivation for multi-turn support and instructor-verified sources.
+The project extends an inherited student-built CRAG platform into a more integrated course-grounded study environment. Progress includes a custom document processing and embedding flow, conversation-aware corrective retrieval, inline citations, consented external clarification, learning-mode refinements, notes auditing and flashcard service tools, student inboxes for instructor feedback, and a successful camera-ready short paper for IEEE TALE.
 
-The next stage will evaluate the quality and costs of these design choices and investigate student explanation, critique and revision with independent evidence. This creates a feasible continuation from implemented platform capability to measured technical performance and a defensible educational study.
+The next stage will use current-semester post-use feedback to prioritise improvements, compare answer quality reproducibly and assess source freshness and failure recovery. Dialogue-coding validation will support a feasible consented HCD-informed study of how students explain ideas, critique responses and justify revisions. This keeps the next phase focused on the platform's intended educational use and the evidence needed to assess it.
 
 \clearpage
 \begin{thebibliography}{99}
