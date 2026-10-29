@@ -30,8 +30,6 @@
 \titlespacing*{\subsection}{0pt}{8pt}{3pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small CRAG continuous assessment report}
-\fancyhead[R]{\small Draft 1}
 \fancyfoot[C]{\thepage}
 \setlength{\headheight}{14pt}
 \newcommand{\blankfield}{\rule{0.49\textwidth}{0.35pt}}
@@ -88,11 +86,13 @@ Planned next semester & January--May 2027\\[6pt]
 
 \section*{Abstract}
 \addcontentsline{toc}{section}{Abstract}
-This project develops CRAG, an instructor-governed, course-grounded AI tutoring platform, towards more dependable educational assistance and a defensible basis for studying student reasoning. It extends an existing student-built system rather than starting from a new chatbot. The inherited platform already connected course materials, student chat, instructor management, learning modes, quizzes and Discord. Work undertaken during May--October 2026 has focused on strengthening evidence handling, conversational support, instructor feedback, operational recovery and consent-aware research infrastructure.
+This project develops CRAG, an instructor-governed, course-grounded AI tutoring platform, towards more dependable educational assistance, while studying student reasoning using the Holistic Cognitive Development (HCD) Framework. It extends an existing student-built system built by a previous batch of NUS SoC students. The baseline platform already had a process for retrieving course materials, student dashboard, instructor management portal, pedagogical learning modes, quiz generation, and Discord extensions. After the project was handed over, the development focused more on increasing the intuitiveness of the overall platform to compete with existing AI study tools such as Gemini Notebook. This included strengthening evidence handling of course materials, integration of citations into responses, conversational support, instructor feedback, and study methods that were based on the existing document database, such as flashcards and quiz generation services.
 
-The central problem is that a fluent, source-linked answer does not by itself establish factual support, appropriate instructional help or learning. CRAG therefore combines course-scoped retrieval with bounded corrective search, answer attribution review and explicit instructor approval. It also provides practice and follow-up activities through which students can explain, question and revise their understanding. The research direction uses Holistic Cognitive Development (HCD) to examine these processes while keeping operational activity distinct from validated educational outcomes.
+The core problem when it comes to generative AI outputs is that a fluent answer is unable to show establishment of factual support, or allow instructor intervention when the answer lacks correctness. CRAG, therefore, combines course-scoped retrieval with bounded corrective search, answer attribution review and explicit answer verification by human instructors.
 
-Progress comprises an extended integrated platform, a baseline needs assessment reported in the IEEE TALE paper, and infrastructure for subsequent technical and educational evaluation. The next semester, provisionally January--May 2027, will prioritise reproducible answer-quality comparisons, source freshness and failure recovery, validated dialogue coding, and a feasible consented study of reasoning and revision. Historical prototype results and baseline preferences inform this work; they do not establish the effectiveness of the present implementation.
+Progress made so far comprises an extended integrated platform, a custom document embedding flow, consented external search, corrective search when coverage is weak, learning mode refactoring and auto-switching, student notes auditing, and a successful publication of a final camera-ready manuscript for IEEE TALE as a short paper.
+
+For the next semester, from January--May 2027, research and development will include feedback from the current semester's post-use survey on students involved in the pilot test, prioritise reproducible answer-quality comparisons, source freshness and failure recovery, validated dialogue coding, and a feasible consented study of reasoning and revision. Historical prototype results and baseline preferences inform this work; they do not establish the effectiveness of the present implementation.
 
 \clearpage
 \begingroup
