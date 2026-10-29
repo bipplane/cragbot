@@ -1,0 +1,77 @@
+CRAG CA REPORT - FIRST ITERATION
+Prepared 29 October 2026. Reporting period May-October 2026.
+Next semester January-May 2027 (provisional, user supplied).
+
+OUTPUT
+main.tex is self-contained: standard LaTeX packages, one TikZ diagram,
+and embedded bibliography. Original Downloads/main.tex was preserved.
+Main text includes initial statement, objectives, thematic literature review,
+inherited work, progress, design alternatives, preliminary evidence and plan.
+
+AUTHOR CONFIRMATIONS
+- Complete registered title, student number, project/module code, supervisor,
+  main evaluator. Paper coauthorship does not establish administrative roles.
+- Confirm personal ownership of post-May deliverables; chronology is supported
+  by commits, but commits do not establish complete intellectual authorship.
+- No personal pre-May work claimed, following author's instruction.
+- Add May-July records if available. No commits found for these months on
+  inspected HEAD ancestry. This does not establish that no work occurred.
+- Confirm historical CS3247 pilot dates, raw cases, rubric and survey records.
+- Complete TALE proceedings metadata/DOI/page numbers from published record.
+- Agree next-semester protocol, recruitment, independent measures and approvals.
+- Review generated assistance under applicable NUS/course disclosure rules.
+
+EVIDENCE MAP
+Current checkout: 35e2a0e7832654864076a2729cd434b6330dd136.
+Inherited comparison: 69727bb, 4 April 2026, latest pre-May ancestor.
+Some other refs have later April commits; they were not treated as this
+branch's inherited state. Neither snapshot establishes complete team history.
+
+Main paper: C:/Users/ryanc/Downloads/main.tex
+SHA256: 89387e89948ff54d867796e5b1a6ef4cc66f81d0b4d81a11573fe9fbc16c5f20
+Historical pilot, controlled tests, invitation count, consent account and
+publication account follow supplied paper/user; not a live research audit.
+
+Survey: local CRAG Pre-Study Survey response export in Downloads.
+Aggregate checks: 42 rows; Year 3=26, Year 4=16; AI often/always=35/42;
+clarifying follow-up=32/41; >=4 prompts=38/41; conceptual explainability
+stopping criterion=36/41; instructor verification=33/41; slide citations=31/41;
+strict course grounding=26/41. No raw participant identities copied here.
+CSV aggregates do not establish current consent/capture eligibility.
+
+Repository sources (relative to getCRAG-ed):
+README.md; docs/architecture/README.md; backend/database/README.md;
+docs/architecture/10_query_processing.md; docs/architecture/11_research_hcd.md;
+backend/services/query_service.py; backend/services/retrieval_planner.py;
+backend/services/note_audit.py; backend/services/flashcard_service.py;
+backend/services/flashcard_scheduler.py;
+backend/services/onboarding_session_service.py; dated Git history.
+Historical handover/roadmap treated as planning context, reconciled with source.
+No code, dependencies, database or deployed services changed for this report.
+
+IMPORTANT RECONCILIATIONS
+- Jina, learning modes, quizzes, dashboard and Discord predate personal work.
+- Paper's 0.85 semantic approval reuse differs from October's exact-question
+  or explicitly approved alternative policy. Report explains scope/safety cost.
+- Earlier prototype's 39/50 is not current-system validation.
+- CS3103 needs assessment is not observed uptake or learning-gain evidence.
+- HCD learning cycle and local L1-L6 coding scheme remain distinct.
+- Verified HCD arXiv metadata used instead of unconfirmed TALE HCD references.
+- Ingestion remains request-based; onboarding's atomic recovery does not give
+  ordinary uploads atomic replacement/idempotency.
+
+GUIDANCE READ
+https://advice.writing.utoronto.ca/types-of-writing/literature-review/
+https://www.comp.nus.edu.sg/cug/plagiarism/
+Report paraphrases and attributes prior/coauthored work rather than pasting
+paper sections as new individual results. Literature is thematic and critical.
+User-provided deadline is Wednesday Week 12; exact calendar date unconfirmed.
+No submission or external messaging performed.
+
+FINAL VALIDATION
+15 pages including title and references; local bundled Tectonic compilation
+succeeded. No LaTeX warnings, overfull/underfull boxes or undefined references.
+All 11 bibliography entries cited; environments and labels checked.
+Original paper SHA256 unchanged. Built-in compile timed out; local compiler
+completed after initial dependency downloads. No repository application checks
+run because this task changes only separate report artifacts.
