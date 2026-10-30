@@ -172,36 +172,35 @@ doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
 \usepackage{tikz}
 \usetikzlibrary{tikzmark, arrows.meta}
 
-\newcommand{\compactchapterheading}[1]{%
+% Shared typography for top-level headings; spacing for lower levels is below.
+\newcommand{\toplevelheading}[1]{%
   \par
-  {\centering\LARGE\bfseries #1\par}
-  \nobreak\vspace{18pt}
+  \begin{center}
+    \large\bfseries #1\vspace{-.5em}\vspace{0pt}
+  \end{center}
+  \nobreak\vspace{12pt}
 }
 \makeatletter
 \renewcommand{\@makechapterhead}[1]{%
-  \compactchapterheading{%
+  \toplevelheading{%
     \ifnum\c@secnumdepth>\m@ne
       \thechapter\quad
     \fi
     #1}%
 }
-\renewcommand{\@makeschapterhead}[1]{\compactchapterheading{#1}}
-\newcommand{\centerstylechapterheading}[1]{%
-  \par
-  \begin{center}
-    \large\bfseries #1\vspace{-.5em}\vspace{0pt}
-  \end{center}
-  \nobreak
-}
-\newcommand{\usecenterstylechapterheading}{%
-  \let\@makeschapterhead\centerstylechapterheading
-}
+\renewcommand{\@makeschapterhead}[1]{\toplevelheading{#1}}
+\renewcommand\section{\@startsection{section}{1}{\z@}%
+  {-3.5ex \@plus -1ex \@minus -.2ex}%
+  {2.3ex \@plus .2ex}{\normalfont\normalsize\bfseries}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+  {-3.25ex \@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}{\normalfont\normalsize\bfseries}}
 \makeatother
 \renewcommand{\contentsname}{Table of Contents}
 
 \renewenvironment{abstract}
  {\small
-  \centerstylechapterheading{\abstractname}
+  \toplevelheading{\abstractname}
   \addcontentsline{toc}{chapter}{\abstractname} % Add to ToC
   \list{}{%
     \setlength{\leftmargin}{0pt}
@@ -212,9 +211,7 @@ doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
 
 \newenvironment{acknowledgements}
  {\small
-  \begin{center}
-  \bfseries Acknowledgements\vspace{-.5em}\vspace{0pt}
-  \end{center}
+  \toplevelheading{Acknowledgements}
   \addcontentsline{toc}{chapter}{Acknowledgements} % Add to ToC
   \list{}{%
     \setlength{\leftmargin}{0pt}
@@ -306,10 +303,7 @@ For the next semester, from January--May 2027, research and development will dra
 \pagebreak
 
 \setcounter{tocdepth}{1}
-\begingroup
-\usecenterstylechapterheading
 \tableofcontents
-\endgroup
 \clearpage
 
 \pagenumbering{arabic}
@@ -651,10 +645,7 @@ The next stage will use current-semester post-use feedback to prioritise improve
 
 
 \clearpage
-\begingroup
-\usecenterstylechapterheading
 \printbibliography[heading=bibintoc, title={References}]
-\endgroup
 
 % CRAG CA REPORT - FIRST ITERATION
 % Prepared 29 October 2026. Reporting period May-October 2026.
