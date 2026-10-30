@@ -1,7 +1,7 @@
 % References are maintained here; LaTeX generates the bibliography data at build time.
 \begin{filecontents*}[overwrite]{\jobname-references.bib}
 @misc{cragpaper,
- author = {{Ryan Chen Rui Yang} and {Lim Rik} and {Ang Zi Jun Dayn} and {Bhojan Anand}},
+ author = {Chen, Ryan Rui Yang and Lim, Rik and Ang, Zi Jun Dayn and Anand, Bhojan},
  title = {{CRAG: An Instructor-Governed Course-Grounded RAG Platform for AI Teaching Assistants in Higher Education}},
  year = {2026},
  note = {IEEE International Conference on Teaching, Assessment and Learning for Engineering (TALE), 2026.
@@ -102,9 +102,27 @@ doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
 % https://tex.stackexchange.com/questions/51434/biblatex-citation-order
 \usepackage[
     backend=biber,
-    style=apa,
-    sorting=nyt
+    bibstyle=apa,
+    citestyle=authoryear,
+    sorting=nyt,
+    citetracker=true,
+    maxcitenames=5,
+    mincitenames=1,
+    uniquelist=false,
+    uniquename=false
 ]{biblatex}
+% Three to five authors: all surnames on first citation, first + et al. later.
+% Six or more authors: first surname + et al. from the first citation.
+\AtEveryCitekey{%
+  \ifciteseen
+    {\defcounter{maxnames}{2}\defcounter{minnames}{1}}
+    {\defcounter{maxnames}{5}\defcounter{minnames}{1}}%
+}
+\DeclareDelimFormat{nameyeardelim}{\addcomma\space}
+\DeclareDelimFormat{finalnamedelim}{\addspace and\space}
+\DeclareDelimFormat{multinamedelim}{\addcomma\space}
+% Use round brackets consistently for every existing \cite call.
+\let\cite\parencite
 \addbibresource{\jobname-references.bib}
 \usepackage[parfill]{parskip}
 \hypersetup{
@@ -302,7 +320,7 @@ The development direction takes feedback from a pre-study survey, where it align
 
 Additionally, drawing on the Holistic Cognitive Development (HCD) framework, we would like to simultaneously find out if structuring human-AI interactions around iterative rounds of thinking, criticising, and reflecting, by manipulating AI-augmented feedback instructions, can deepen the feedback quality and reflective depth to better support learner autonomy.
 
-The supplied IEEE TALE paper describes this platform and reports a CS3103 pre-use needs assessment alongside earlier prototype evidence~\cite{cragpaper}. This report extends that account with further implementation progress and a proposed investigation for the next semester.
+The supplied IEEE TALE paper describes this platform and reports a CS3103 pre-use needs assessment alongside earlier prototype evidence~\parencite{cragpaper}. This report extends that account with further implementation progress and a proposed investigation for the next semester.
 
 \section{Objectives and completion criteria}
 \begin{enumerate}[label=\textbf{O\arabic*.}]
@@ -323,39 +341,39 @@ Three questions guide the next phase. \textbf{RQ1:} How do corrective retrieval 
 This focused review examines retrieval and attribution, educational dialogue, instructor oversight and ethical learning analytics. It draws on primary research and the theoretical sources underlying the TALE paper, with additional work on corrective retrieval and contemporary educational assistants. It is a thematic review rather than an exhaustive systematic review: no complete database search or screening protocol is claimed. Its organising argument is that reliable educational assistance requires both inspectable evidence and opportunities for learners to exercise judgement.
 
 \section{Retrieval improves access to knowledge but leaves support unresolved}
-Lewis et al.\ combine parametric generation with retrieved non-parametric knowledge, demonstrating the value of retrieval for knowledge-intensive tasks~\cite{lewis}. This provides a foundation for using course materials as an explicit evidence collection. However, improvements on open-domain benchmarks do not determine whether a particular lecture passage supports a course-specific explanation. In CRAG, the instructional context, document structure and question assumptions must still be preserved.
+Lewis et al.\ combine parametric generation with retrieved non-parametric knowledge, demonstrating the value of retrieval for knowledge-intensive tasks~\parencite{lewis}. This provides a foundation for using course materials as an explicit evidence collection. However, improvements on open-domain benchmarks do not determine whether a particular lecture passage supports a course-specific explanation. In CRAG, the instructional context, document structure and question assumptions must still be preserved.
 
-Corrective Retrieval Augmented Generation explicitly responds to unreliable retrieval through an evaluator and additional retrieval actions~\cite{yan}. Its contribution is to make retrieval quality part of the generation process rather than assume the initial result set is adequate. The published approach includes web search and document refinement. CRAG adapts the broader corrective principle to an instructor-governed setting: course evidence is searched first, correction is bounded and external clarification requires student permission. This is an application-specific design rather than a replication of the published algorithm. Whether extra searches improve coverage enough to justify their latency and cost remains an empirical question.
+Corrective Retrieval Augmented Generation explicitly responds to unreliable retrieval through an evaluator and additional retrieval actions~\parencite{yan}. Its contribution is to make retrieval quality part of the generation process rather than assume the initial result set is adequate. The published approach includes web search and document refinement. CRAG adapts the broader corrective principle to an instructor-governed setting: course evidence is searched first, correction is bounded and external clarification requires student permission. This is an application-specific design rather than a replication of the published algorithm. Whether extra searches improve coverage enough to justify their latency and cost remains an empirical question.
 
-These approaches leave an important distinction between retrieving a relevant passage and generating a supported claim. Gao et al.'s ALCE benchmark evaluates fluency, correctness and citation quality separately, demonstrating remaining weaknesses in citation support~\cite{gao}. CRAG's design consequently distinguishes cited evidence from additional retrieved context. A source link improves inspectability only when the associated claim is supported. Automated review may help enforce this contract, but its judgements still need independent assessment.
+These approaches leave an important distinction between retrieving a relevant passage and generating a supported claim. The ALCE benchmark evaluates fluency, correctness and citation quality separately, demonstrating remaining weaknesses in citation support~\parencite{gao}. CRAG's design consequently distinguishes cited evidence from additional retrieved context. A source link improves inspectability only when the associated claim is supported. Automated review may help enforce this contract, but its judgements still need independent assessment.
 
 \section{Educational assistants and the limits of capability comparisons}
-Educational conversational systems already combine document access with course support. The ChatGPT-based Jill Watson uses a modular architecture and multiple documents, with classroom examples and comparative evaluation~\cite{taneja}. This makes it a closer comparison for present-day course assistants than a description restricted to the original FAQ system. It also weakens any broad claim that course-grounded dialogue alone differentiates CRAG.
+Educational conversational systems already combine document access with course support. The ChatGPT-based Jill Watson uses a modular architecture and multiple documents, with classroom examples and comparative evaluation~\parencite{taneja}. This makes it a closer comparison for present-day course assistants than a description restricted to the original FAQ system. It also weakens any broad claim that course-grounded dialogue alone differentiates CRAG.
 
 The useful comparison concerns responsibilities and evaluation. CRAG places instructor answer correction, approved-answer reuse, student updates, practice and research provenance within a shared course workflow. These design choices can be examined for their operational value, but a feature inventory cannot demonstrate better tutoring. Published results for another system also cannot predict CRAG's performance across different materials, models and learners. A defensible comparison therefore needs common questions, evidence and scoring criteria, with deployment configuration recorded.
 
 \section{Self-explanation, practice and learner agency}
-Chi et al.\ found that prompting self-explanation supported deeper understanding of an expository text~\cite{chi}. Their study provides a rationale for asking students to articulate reasoning instead of only presenting explanations. Its setting and intervention differ from voluntary university chatbot use, so it motivates a hypothesis for CRAG rather than establishes an effect of Socratic mode. A sequence of chatbot questions can still encourage superficial responses or frustrate a learner who needs direct clarification.
+A self-explanation study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. Their study provides a rationale for asking students to articulate reasoning instead of only presenting explanations. Its setting and intervention differ from voluntary university chatbot use, so it motivates a hypothesis for CRAG rather than establishes an effect of Socratic mode. A sequence of chatbot questions can still encourage superficial responses or frustrate a learner who needs direct clarification.
 
-Retrieval-practice research provides a complementary basis for quizzes and scheduled review. Roediger and Karpicke show that taking memory tests can improve delayed retention~\cite{roediger}. The instructional benefit depends on what learners retrieve and how outcomes are assessed. Generated quiz marks, self-rated flashcard recall and an internal scheduling estimate cannot substitute for an independent retention measure. CRAG's practice tools should therefore be evaluated for content validity before their educational effects are investigated.
+Retrieval-practice research provides a complementary basis for quizzes and scheduled review. Roediger and Karpicke show that taking memory tests can improve delayed retention~\parencite{roediger}. The instructional benefit depends on what learners retrieve and how outcomes are assessed. Generated quiz marks, self-rated flashcard recall and an internal scheduling estimate cannot substitute for an independent retention measure. CRAG's practice tools should therefore be evaluated for content validity before their educational effects are investigated.
 
-The HCD framework organises learning around Thinking, Creating, Criticizing and Reflecting, supported by autonomy, ownership and scaffolding~\cite{hcd}. It offers a process-oriented lens for examining how a student develops and revises an explanation. Its creative-computing context differs from course-question dialogue, requiring an explicit account of what each activity looks like in a transcript. In this project, the HCD cycle provides theoretical direction; the repository's L1--L6 cognitive-agency categories are a separate operational coding scheme requiring validation. Conversation length or an apparent increase in category cannot alone demonstrate cognitive development.
+The HCD framework organises learning around Thinking, Creating, Criticizing and Reflecting, supported by autonomy, ownership and scaffolding~\parencite{hcd}. It offers a process-oriented lens for examining how a student develops and revises an explanation. Its creative-computing context differs from course-question dialogue, requiring an explicit account of what each activity looks like in a transcript. In this project, the HCD cycle provides theoretical direction; the repository's L1--L6 cognitive-agency categories are a separate operational coding scheme requiring validation. Conversation length or an apparent increase in category cannot alone demonstrate cognitive development.
 
 Taken together, these sources support a design in which learners can request explanation, attempt an answer, compare feedback with evidence and justify revisions. They also expose a tension: convenient answer delivery may reduce the effort that a learning activity is intended to elicit. Offering several modes preserves flexibility, while evaluation must examine the reasoning actually produced.
 
 \section{Governance, security and responsible analytics}
 Instructor approval introduces an accountable source of correction, but its scope must remain explicit. Approval of one answer does not automatically cover a similar question with a changed assumption, quantity or negation. CRAG's later exact-question and approved-alternative policy follows this reasoning: similarity can help retrieval, whereas transferring human approval requires a stricter decision.
 
-Greshake et al.\ show how instructions embedded in retrieved data can redirect LLM-integrated applications~\cite{greshake}. This challenges the assumption that selecting course documents makes their content safe to follow as instructions. CRAG therefore treats document excerpts and student attachments as data and enforces access and source identifiers outside generated prose. These boundaries reduce particular risks; adversarial testing remains necessary, including course-scope violations and academic misuse.
+Greshake et al.\ show how instructions embedded in retrieved data can redirect LLM-integrated applications~\parencite{greshake}. This challenges the assumption that selecting course documents makes their content safe to follow as instructions. CRAG therefore treats document excerpts and student attachments as data and enforces access and source identifiers outside generated prose. These boundaries reduce particular risks; adversarial testing remains necessary, including course-scope violations and academic misuse.
 
-Ferguson identifies ethical challenges in learning analytics spanning consent, responsibility and the purposes of measurement~\cite{ferguson}. These concerns matter when a tutoring record becomes research evidence. A student's course access, platform activity and identity linkage do not establish research consent. CRAG separates operational records from consent-eligible canonical research capture and restricts coding by study role. The research protocol must additionally specify withdrawal, retention and justified interpretation of derived labels.
+Ferguson identifies ethical challenges in learning analytics spanning consent, responsibility and the purposes of measurement~\parencite{ferguson}. These concerns matter when a tutoring record becomes research evidence. A student's course access, platform activity and identity linkage do not establish research consent. CRAG separates operational records from consent-eligible canonical research capture and restricts coding by study role. The research protocol must additionally specify withdrawal, retention and justified interpretation of derived labels.
 
 \section{Research gap and design implications}
 The reviewed work motivates three connected priorities: traceable course-grounded answers, an integrated study workflow informed by student feedback, and observable opportunities for explanation, critique and revision. Instructor correction supports these priorities by providing a route for addressing unreliable answers. The next phase will examine whether additional evidence processing improves answers, whether instructor review produces usable correction, and whether CRAG responses elicits meaningful reasoning and revision in follow-up student interactions.
 
 \chapter{Inherited work before May 2026}
 \section{Student-built foundation}
-The project inherited substantial work by the preceding student developers, including Lim Rik and Ang Zi Jun Dayn. Repository history before May 2026 records course setup, document uploads, Q\&A management, learning modes, quizzes, analytics and Discord integration~\cite{repo}. The latest pre-May commit on the inspected branch ancestry is \texttt{69727bb}, dated 4 April 2026. This snapshot is a practical comparison point; it is not evidence of every activity undertaken by the earlier team.
+The project inherited substantial work by the preceding student developers, including Lim Rik and Ang Zi Jun Dayn. Repository history before May 2026 records course setup, document uploads, Q\&A management, learning modes, quizzes, analytics and Discord integration~\parencite{repo}. The latest pre-May commit on the inspected branch ancestry is \texttt{69727bb}, dated 4 April 2026. This snapshot is a practical comparison point; it is not evidence of every activity undertaken by the earlier team.
 
 \begin{table}[htbp]
 \centering\small
@@ -376,7 +394,7 @@ Discord & Registration, course access, chat and interactive quizzes & Cross-chan
 The inherited query implementation included an intent classifier, a follow-up rephrasing service, retrieval and answer generation. Jina embedding integration also predates this reporting period. Neither the basic RAG platform nor the existence of learning modes, quizzes, Discord or Jina should therefore be presented as a new individual contribution.
 
 \section{Earlier evidence and unresolved limitations}
-The TALE paper reports a prior CS3247 Game Development pilot involving 30 participants over two weeks, and a separate controlled evaluation of an earlier prototype~\cite{cragpaper}. Reported issues included mismatches between students' requests and retrieval scope, uneven perceived reliability and limited use of modes beyond Standard. These observations motivated later investigation, but the precise pilot dates and each earlier student's responsibilities should be confirmed before assigning this evidence to a detailed pre-May timeline.
+The TALE paper reports a prior CS3247 Game Development pilot involving 30 participants over two weeks, and a separate controlled evaluation of an earlier prototype~\parencite{cragpaper}. Reported issues included mismatches between students' requests and retrieval scope, uneven perceived reliability and limited use of modes beyond Standard. These observations motivated later investigation, but the precise pilot dates and each earlier student's responsibilities should be confirmed before assigning this evidence to a detailed pre-May timeline.
 
 For this report, no personal contribution is claimed before May 2026. Subsequent work is described as extension, revision and integration of the inherited system. Commit history supports chronology, while final individual attribution also requires the author's confirmation because commits, collaboration and tool-assisted development do not provide a complete allocation of intellectual work.
 
@@ -450,7 +468,7 @@ The instructor/research workspace supports operational L1--L6 labelling and sepa
 Reproducibility work includes generated hashed Python dependency locks, committed frontend locks and a root verification command covering dependency consistency, backend tests, shared frontend regression tests, frontend linting and builds. Disposable-database checks cover specified recovery behaviour. These are engineering checks, distinct from live provider quality, browser usability, complete migration execution or educational evaluation. No new application-test results are claimed from preparing this report.
 
 \section{IEEE TALE short-paper output}
-The final camera-ready IEEE TALE short paper is a completed dissemination output of the project~\cite{cragpaper}. It brings together the platform design, the CS3103 pre-use needs assessment and evidence from the earlier prototype. This mainly communicates the project's educational motivation and system contribution. Evidence of current CRAG was still limited due to the ongoing study, so the paper presents the earlier prototype results and a baseline survey rather than a full evaluation of the current system.
+The final camera-ready IEEE TALE short paper is a completed dissemination output of the project~\parencite{cragpaper}. It brings together the platform design, the CS3103 pre-use needs assessment and evidence from the earlier prototype. This mainly communicates the project's educational motivation and system contribution. Evidence of current CRAG was still limited due to the ongoing study, so the paper presents the earlier prototype results and a baseline survey rather than a full evaluation of the current system.
 
 \chapter{Design choices supporting the study workflow}
 \section{Reliable evidence versus flexible answer delivery}
@@ -509,7 +527,7 @@ arr/.style={-{Latex[length=2mm]},semithick}
 
 \chapter{Pilot context, preliminary evidence and limitations}
 \section{Historical prototype evaluation}
-The TALE paper reports 50 cases judged pass/fail by one person for an earlier prototype~\cite{cragpaper}. Table~\ref{tab:historical} separates categories to expose weaker safety performance.
+The TALE paper reports 50 cases judged pass/fail by one person for an earlier prototype~\parencite{cragpaper}. Table~\ref{tab:historical} separates categories to expose weaker safety performance.
 
 \begin{table}[htbp]
 \centering\small
@@ -532,7 +550,7 @@ Overall & 39/50 & 78\%\\
 Reported failures included unnecessary refusals, unsupported out-of-scope answers, ambiguity handling and adversarial or academic-misuse compliance. Small categories, a single judge and unavailable case-level replication materials limit interpretation. These results motivate new tests; they do not validate later corrective retrieval, attribution or access-control changes.
 
 \section{CS3103 baseline needs assessment}
-The paper reports that 110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, a 38.2\% response rate~\cite{cragpaper}. The local survey export contains 42 responses, comprising 26 Year 3 and 16 Year 4 students. Six closed-response items contain 41 valid answers. Table~\ref{tab:baseline} uses each item's denominator and preserves the distinction between reported habits and observed behaviour.
+The paper reports that 110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, a 38.2\% response rate~\parencite{cragpaper}. The local survey export contains 42 responses, comprising 26 Year 3 and 16 Year 4 students. Six closed-response items contain 41 valid answers. Table~\ref{tab:baseline} uses each item's denominator and preserves the distinction between reported habits and observed behaviour.
 
 \begin{table}[htbp]
 \centering\small
