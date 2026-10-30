@@ -415,36 +415,38 @@ Course setup also required more dependable failure handling. Onboarding completi
 A durable ingestion worker was considered, but current document processing remains request-based. Keeping this architecture avoids introducing queue and worker operations before measured failures justify them. Ordinary uploads still lack an atomic replacement or general idempotency guarantee. The completed onboarding safeguards should therefore not be generalised to every document mutation.
 
 \section{Conversational and corrective retrieval}
-The query path now preserves original student wording and uses a bounded planner to propose complementary course searches. Results are deduplicated and combined by reciprocal-rank fusion. Coverage review considers the question and can trigger one additional search round for identified gaps. The current default evidence budget is five items, with bounded expansion when weak coverage identifies missing concepts.
+The query path now preserves original student wording and uses a bounded planner to propose complementary course searches. Results are deduplicated and combined by reciprocal-rank fusion. Coverage review considers the question and can trigger one additional search round for identified gaps. Retrieved evidence allows bounded expansion when weak coverage identifies missing concepts.
 
-This replaces reliance on a serial classifier/rephraser path with a more direct connection between student intent, conversation context and evidence coverage. Short supplied conversations retain complete user and assistant turns for planning and generation, helping interpret follow-ups that depend on an earlier distinction or constraint. Longer histories remain bounded. Explicit quiz requests take a typed tool path instead of being treated as ordinary retrieval questions.
+This replaces reliance on a serial classifier/rephraser path with a more direct connection between student intent, conversation context and evidence coverage. Short supplied conversations retain complete user and assistant turns for planning and generation, helping interpret follow-ups that depend on an earlier distinction or constraint. Longer histories remain bounded.
 
-The design aims to reduce unsupported refusals and incomplete answers while controlling model calls. Neither retrieval similarity nor the existence of an automated coverage judgement is treated as calibrated answer confidence. A coverage-review failure remains unknown evidence quality rather than permission to invent missing information.
+This design aims to reduce unsupported refusals and incomplete answers while controlling model calls for a better user experience. Coverage-review failure will return an evidence limitation, rather than return an unsupported answer.
 
 \section{Answer attribution and controlled external clarification}
-Generated answers now undergo a separate whole-answer attribution review against original evidence passages. The backend validates selected source identifiers and constructs citations, distinguishing validated cited material from other retrieved context. Bounded repair and regeneration paths handle malformed review output and rejected support; exhausted attempts return an evidence limitation instead of an unchecked answer.
+Generated answers now undergo a separate whole-answer attribution review against original evidence passages. The backend validates the source identifiers from a planned response and constructs citations, distinguishing validated cited material from other retrieved context. If validation fails, a bounded repair and regeneration paths will handle malformed review output and rejected support. If the answer still fails validation, CRAG returns an evidence limitation due to the lack of confidence in the planned answer.
 
-This goes beyond displaying whatever passages retrieval returned. It aims to make the relationship between a claim and its evidence inspectable. The model reviewer remains fallible, and this implementation must be evaluated for both incorrect acceptance and unnecessary rejection.
+This goes beyond displaying whatever passages retrieval returned by making the relationship between a claim and its evidence inspectable.
 
-External clarification adds a controlled response to recognised course-evidence gaps. Student permission is stored within an owned conversation and can be revoked. External findings remain distinguishable from course material; conflicting sources require explicit handling rather than silently overriding the course account. A clearly unrelated or retrieval-empty request does not automatically trigger unrestricted web search. This preserves course alignment while allowing students to request broader explanation where eligible.
+External clarification adds a controlled response to recognised course-evidence gaps. This helps to preserve course alignment while allowing students to request broader explanation of a question, which improves the user experience of the platform without outright rejecting the question due to insufficient course coverage. Their question would need to first be related to the overall course topic.
 
 \section{Instructor correction and safer reuse}
-The web-answer review workflow distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the existing answer; Clarify supplies a reviewed answer and explanation. The first two create approved Q\&A and an in-app update for the affected student. Dismiss records the review without sending an inbox update. This extends instructor oversight into a visible correction loop rather than only maintaining a question bank.
+The web-answer review workflow distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the existing answer; Clarify supplies a reviewed answer and explanation. The first two create approved Q\&A and an in-app update for the student.This extends instructor oversight into a visible correction loop, rather than only maintaining a question bank.
 
-Approved-answer reuse changed materially after the TALE implementation snapshot. The paper describes a similarity threshold of 0.85. Current code instead performs a course-scoped lookup for the exact approved question or an explicitly approved alternative wording before embedding. A changed premise, negation or constraint must not inherit approval merely because its vector is close to an approved question.
+Approved-answer reuse previously used a similarity threshold of 0.85 to return verified answers. Current code now performs a course-scoped lookup for the exact approved question or an explicitly approved alternative wording before embedding, to avoid false reuse when questions are similar but not equivalent (e.g., ``What is a game engine?'' versus ``What is a game engine used for?'').
 
-Eligible Standard-mode matches reuse the reviewed answer. Guided and Socratic modes generate reviewed adaptations from the approved pair, without labelling newly generated wording as verbatim human approval. Follow-ups and attached discussion contexts use their conversation-aware paths. Instructors can review alternative wordings manually; automatic draft-alternative generation is not implemented. These changes prioritise a defensible approval boundary, at the cost of fewer automatic reuse hits.
+Eligible Standard-mode matches reuse the reviewed answer. Guided and Socratic modes generate reviewed adaptations from the approved pair, without labelling newly generated wording as verbatim human approval. These changes prioritise a defensible approval boundary, at the cost of fewer automatic reuse hits.
 
 \section{Practice, follow-up and student study tools}
-The inherited quizzes and learning modes were extended rather than newly introduced. Mode resolution now considers explicit or strongly implied learning requests while retaining instructor restrictions and a student automatic-switching preference. Quizzes gained further question support, persistent results and recovery from interrupted or duplicate submissions. Question attachments allow a student to open a contextual \emph{Ask CRAG} discussion without automatically sending a message.
+The inherited quizzes and learning modes were extended in the current implementation. Mode resolution now considers explicit or strongly implied learning requests to switch modes. Quizzes now have enhanced conversational support, and each question contains a contextual \emph{Ask CRAG} button to direct the student to ask CRAG about the explanation. This method also allows the student to input their thoughts and reasoning as to why they chose a particular answer.
 
-Topic-mastery updates now use Bayesian Knowledge Tracing with an evidence cap, rather than equating aggregate accuracy with understanding. Correct and incorrect attempts update an operational estimate; limited evidence constrains its displayed value. This makes feedback more responsive while leaving parameter calibration and the relationship to independently assessed knowledge unresolved.
-
-The supplementary-material rule is maintained throughout: topic-less uploads can inform chat, but quiz generation and selection exclude them. This supports broader explanation without silently expanding the practice curriculum.
-
-October work added a notes-audit tool and private flashcards. The audit separates pasted notes into claims, expands terse terminology into retrieval queries and checks each finding against course evidence. Its outcomes distinguish support, conflict, missing qualification and evidence that is not established; insufficient retrieval does not mean a student claim is false.
+A new notes-audit tool and private flashcards now form part of the student study tools, alongside the quiz generation. The audit tool specifically separates pasted notes into claims and checks each finding against course evidence. Its outcomes distinguish support, conflict, missing qualification and evidence that is not established. This allows students to identify gaps in their notes and revise them accordingly.
 
 Flashcards use topic-assigned course evidence, source snapshots and freshness checks. Their scheduled review uses an FSRS adapter, and changed or deleted evidence can pause affected cards. Flashcard ratings remain separate from quiz marks and mastery estimates. Both additions support further investigation of study behaviour; neither has established an effect on retention or independent understanding.
+
+Topic-mastery updates now use Bayesian Knowledge Tracing with an evidence cap, rather than equating aggregate accuracy with understanding. This helps with smoothening the mastery curve to make learning progress feel more representative of the student's understanding.
+
+
+
+A supplementary-material rule specially allows for the inclusion of additional resources that are not part of the core curriculum. This allows for CRAG to reference these documents and provide responses, while excluding them from topic-mastery calculations and quiz generation.
 
 \section{Supporting access and reliability work}
 API access now checks authenticated identity, course membership and resource ownership across the student web app, instructor dashboard and Discord integration. Staff/course grants remain separate from research and consent-administration permissions. This strengthens the shared service boundary as the platform supports more workflows and records. The contribution is the implemented policy and aligned clients; deployed role checks still require staging and live verification. Temporary development access must be retired before a named-account release.
@@ -482,9 +484,9 @@ Operational metrics versus canonical research & Independent consent and lineage 
 \end{table}
 
 \section{Provider and pedagogical choices}
-The implementation moved generation from OpenAI to Gemini during August, while retaining Jina-based embedding integration. The engineering result is a revised provider integration, structured output handling and bounded failure behaviour. A commit or successful integration does not establish that one provider is more accurate or cost-effective. Future comparisons must record model versions, configurations and observed usage costs.
+The implementation moved generation from OpenAI to Gemini, while retaining Jina-based embedding integration. This decision was made to streamline providers and keep costs low, with future implementations aiming to use Gemini embedding models to replace Jina. Tavily is also used in CRAG for external clarification and further retrieval.
 
-Similarly, direct, guided and Socratic interaction serve different immediate needs. Forcing every exchange into questioning could obstruct clarification; always supplying a solution could reduce opportunities for independent reasoning. Configurable modes and optional contextual discussions allow students to choose their activity. The proposed investigation will distinguish a feature's intended pedagogical role from what students actually do with it.
+Similarly, direct, guided and Socratic learning modes serve different immediate needs. Refinements were made towards improving the overall learning experience and response quality, to avoid always supplying a solution and reduce opportunities for independent reasoning. Moreover, the implemented autoswitching of modes (which can be toggled off by students) allows for flexibility in learning, where students can choose to receive more guidance or be challenged to think critically. Each mode will then be further evaluated for its quality and effectiveness in supporting student learning.
 
 \section{Preliminary architecture}
 Figure~\ref{fig:architecture} shows the shared responsibilities. All clients reach the same course and evidence policies. Research capture is downstream of operational interaction and its independent eligibility checks.
@@ -517,7 +519,7 @@ arr/.style={-{Latex[length=2mm]},semithick}
 \chapter{Pilot context, preliminary evidence and limitations}
 
 \section{CS3103 baseline needs assessment}
-The paper reports that 110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, a 38.2\% response rate~\parencite{cragpaper}. The local survey export contains 42 responses, comprising 26 Year 3 and 16 Year 4 students. Six closed-response items contain 41 valid answers.
+Out of the 110 eligible CS3103 Computer Networks students invited, 42 responded and consented, which is a 38.2\% response rate~\parencite{cragpaper}. Those that consented comprised of 26 Year 3 and 16 Year 4 students. Note that 6 closed-response items contain 41 valid answers.
 
 \begin{table}[htbp]
 \centering\small
