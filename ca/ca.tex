@@ -172,14 +172,10 @@ doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
 \usepackage{tikz}
 \usetikzlibrary{tikzmark, arrows.meta}
 
-% Compact chapter headings, matching the small centred Abstract heading.
-% Applies to numbered chapters and unnumbered front matter/references.
 \newcommand{\compactchapterheading}[1]{%
   \par
-  \begin{center}
-    \small\bfseries #1\vspace{-.5em}\vspace{0pt}
-  \end{center}
-  \nobreak
+  {\centering\LARGE\bfseries #1\par}
+  \nobreak\vspace{18pt}
 }
 \makeatletter
 \renewcommand{\@makechapterhead}[1]{%
@@ -190,14 +186,22 @@ doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
     #1}%
 }
 \renewcommand{\@makeschapterhead}[1]{\compactchapterheading{#1}}
+\newcommand{\centerstylechapterheading}[1]{%
+  \par
+  \begin{center}
+    \large\bfseries #1\vspace{-.5em}\vspace{0pt}
+  \end{center}
+  \nobreak
+}
+\newcommand{\usecenterstylechapterheading}{%
+  \let\@makeschapterhead\centerstylechapterheading
+}
 \makeatother
 \renewcommand{\contentsname}{Table of Contents}
 
 \renewenvironment{abstract}
  {\small
-  \begin{center}
-  \bfseries \abstractname\vspace{-.5em}\vspace{0pt}
-  \end{center}
+  \centerstylechapterheading{\abstractname}
   \addcontentsline{toc}{chapter}{\abstractname} % Add to ToC
   \list{}{%
     \setlength{\leftmargin}{0pt}
@@ -302,7 +306,10 @@ For the next semester, from January--May 2027, research and development will dra
 \pagebreak
 
 \setcounter{tocdepth}{1}
+\begingroup
+\usecenterstylechapterheading
 \tableofcontents
+\endgroup
 \clearpage
 
 \pagenumbering{arabic}
@@ -644,7 +651,10 @@ The next stage will use current-semester post-use feedback to prioritise improve
 
 
 \clearpage
+\begingroup
+\usecenterstylechapterheading
 \printbibliography[heading=bibintoc, title={References}]
+\endgroup
 
 % CRAG CA REPORT - FIRST ITERATION
 % Prepared 29 October 2026. Reporting period May-October 2026.
