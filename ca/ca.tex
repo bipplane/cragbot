@@ -154,6 +154,27 @@ doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
 \usepackage{tikz}
 \usetikzlibrary{tikzmark, arrows.meta}
 
+% Compact chapter headings, matching the small centred Abstract heading.
+% Applies to numbered chapters and unnumbered front matter/references.
+\newcommand{\compactchapterheading}[1]{%
+  \par
+  \begin{center}
+    \small\bfseries #1\vspace{-.5em}\vspace{0pt}
+  \end{center}
+  \nobreak
+}
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  \compactchapterheading{%
+    \ifnum\c@secnumdepth>\m@ne
+      \thechapter\quad
+    \fi
+    #1}%
+}
+\renewcommand{\@makeschapterhead}[1]{\compactchapterheading{#1}}
+\makeatother
+\renewcommand{\contentsname}{Table of Contents}
+
 \renewenvironment{abstract}
  {\small
   \begin{center}
