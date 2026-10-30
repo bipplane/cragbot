@@ -582,59 +582,20 @@ The present evidence supports a system-development contribution and a motivated 
 
 Important remaining risks include stale approved answers or generated questions after material changes, incomplete cross-channel research capture, model-review errors and operational failures spanning storage and database updates. Dashboard mastery and cognitive-category summaries require calibration and careful interpretation. Source-level checks cannot establish deployed access, complete consent operations or real browser and provider behaviour.
 
-\chapter{Research plan for January--May 2027}
+\chapter{Research plan for the upcoming semester}
 
-Three questions guide the next phase. \textbf{RQ1:} How do corrective retrieval and attribution review affect answer support and completeness relative to a fixed single-query RAG baseline, at what latency and cost? \textbf{RQ2:} What difficulties do pilot students report when using conversation, sources, study tools and instructor feedback, and which improvements should take priority? \textbf{RQ3:} What evidence of explanation, critique and justified revision appears in eligible student interactions, and how can it be coded reliably with reference to HCD? These questions separate technical quality, workflow quality and educational outcomes.
+The next phase will use pilot feedback to guide improvements, evaluate the quality of CRAG's answers, and investigate student reasoning with reference to HCD. The research questions introduced earlier guide this work.
 
-\section{Phase 1: Review pilot feedback and establish a baseline}
-January will begin with available post-use feedback from the current semester's pilot. Responses will be analysed alongside the pre-use needs assessment to identify which expectations were met and points of friction when using CRAG. The platform will still occasionally be benchmarked with general-purpose study-tools, but it does not aim to claim a competitive advantage without common evaluation.
+\section{Pilot feedback and platform improvements}
+First, post-use feedback from the current semester's pilot will be reviewed alongside the earlier needs assessment. The findings will guide improvements to usability, source freshness, failure recovery, and instructor feedback workflows. The system configuration and course materials will be recorded to provide a consistent basis for evaluation.
 
-The system version, provider models, course corpus, approved-answer state and configuration will then be recorded. Work will prioritise feedback-led improvements and source-freshness or failure-recovery defects that would compromise evaluation. Representative checks will cover conversation continuity, document changes, interrupted practice and delivery of instructor updates.
+\section{Technical evaluation}
+Next, a set of course questions will be used to compare single-query retrieval with corrective retrieval and answer attribution review. Answers will be assessed for correctness, coverage, and citation support, with latency, cost, and failure cases recorded. The comparison will use consistent course materials and settings where applicable.
 
-The output will be a versioned system manifest, traceable contribution inventory, failure register and frozen evaluation protocol. The supervisor will review study scope, recruitment feasibility, instruments, data handling and the relevant approval requirements before participant work begins. Sample size and inferential ambitions will depend on realistic recruitment and analysis capacity, not the number of stored messages.
+\section{Student interaction and final reporting}
+A coding pilot will then prepare an HCD-informed examination of how students explain ideas, critique responses, and revise their reasoning. Subject to approval, consent, and recruitment, a small study will examine student explanations and revisions alongside their interactions with CRAG. The scope will depend on course feasibility and available participants.
 
-\section{Phase 2: Compare technical quality under controlled conditions}
-February will evaluate RQ1 using a held-out course-question set reviewed by a subject expert. Coverage should include definitions, mechanisms, comparisons, multi-turn references, insufficient evidence, conflicting evidence and adversarial requests. Development questions and threshold tuning will remain separate from the held-out set.
-
-Three conditions are proposed: single-query RAG, the same pipeline with bounded corrective retrieval, and the full pipeline with answer attribution review. Models, corpus, modes and generation settings will be matched where applicable. Exact approved-answer reuse will be tested in a separate challenge set containing equivalent wording and changed premises; it will not obscure the comparison of generated answers. A general-purpose assistant comparison can be added if budget permits a fair and documented condition.
-
-Independent judges will score correctness, requested-detail coverage, citation support and completeness, and appropriate abstention. Rejections will be reviewed as well as accepted answers. Latency distributions, provider failures, calls and observed token/API costs will be reported. Repeated questions or runs will be analysed as related observations. A frozen result table and error taxonomy will identify whether extra processing produces a worthwhile benefit.
-
-\section{Phase 3: Validate dialogue coding and feedback workflows}
-March will address the workflow issues identified in RQ2 and prepare RQ3. A bounded walkthrough will check whether students can inspect evidence and find an instructor's correction, and whether instructors can use Confirm, Clarify and Dismiss to provide that feedback.
-
-A coding pilot will establish units of analysis, inclusion rules, examples and category boundaries with reference to HCD. Research observations will look into a student's explanation, critique of AI responses, and use of citations.
-
-\section{Phase 4: Investigate reasoning and revision}
-March--April will provisionally host a consented study if approvals, recruitment and the coding pilot permit it. Activities will link an initial explanation or attempted solution, CRAG feedback, evidence inspection and a subsequent explanation of any revision. Structured tasks can elicit observable reasoning, while optional everyday use can show whether similar behaviour occurs without explicit prompting. These conditions will be reported separately.
-
-The primary evidence will be student-produced explanations and revisions, supported by complete interaction context. A pre-task assessment and an independent post-task or delayed transfer/retention task are proposed, subject to course feasibility. Self-reported usefulness and interaction counts will supplement these measures. Participant-level or repeated-measures analysis will account for observations from the same student; message counts will not be treated as independent participants. Unless a suitable comparison design is feasible, findings will remain exploratory associations rather than causal learning claims.
-
-\section{Phase 5: Synthesis and final reporting}
-April--May will focus on analysis, limitations, final implementation fixes and the final report. The final evidence package will include the system manifest, technical results, error cases, codebook and reliability record, participant flow and approved de-identified analysis outputs. Reports will distinguish invited, consenting, eligible, active and retained participants. Source data will be retained or removed according to the agreed protocol.
-
-\begin{table}[htbp]
-\centering\small
-\caption{Provisional next-semester milestones and fallback paths.}
-\begin{tabularx}{\textwidth}{@{}P{0.16\textwidth}YY@{}}
-\toprule
-Period & Reviewable deliverable & Fallback if constrained\\
-\midrule
-January & Pilot-feedback priorities; baseline manifest; workflow checks; protocol and instruments & Use available feedback descriptively; narrow study before recruitment\\
-February & Frozen technical comparison; human judgements; latency/cost and failure analysis & Reduce conditions while preserving common questions and independent scoring\\
-March & Feedback-workflow checks; HCD mapping; codebook and independent reliability results & Revise coding and repeat pilot before longitudinal claims\\
-March--April & Eligible interaction dataset; initial reasoning, feedback and revision; independent assessment & Use smaller structured exploratory study; report sparse uptake explicitly\\
-April--May & Reproducible analysis; limitations; final report and demonstration & Prioritise technical and methodological contribution if participant evidence is insufficient\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\section{Risks and success criteria}
-Study execution depends on consent and approval, recruitment, course access, instructor availability and reliable capture. Those dependencies will be checked before data collection. Missing context, withdrawal and ineligible records must remain visible in the analysis accounting. Independent outcome tasks and blinded answer review, where feasible, reduce dependence on the same model both producing and judging results.
-
-Technical work will prioritise feedback-led usability fixes, source revision handling, and representative end-to-end checks. Depending on user inputs, further feature expansion of flashcards and notes audits will depend on pilot needs and available evaluation capacity. If participation is insufficient for longitudinal inference, the project will report technical comparisons and a transparent feasibility study rather than infer development from sparse logs.
-
-Success by May means delivering a reproducible platform and evaluation, an explicit account of where answer correction helps or fails, and appropriately qualified evidence about instructor and student workflows. A positive learning effect is a result to test, not a completion requirement that can be guaranteed in advance.
+Finally, the project will bring together the technical results, pilot feedback, and any student-study findings in the final report. If participation is limited, the study will be reported as exploratory, with its limitations made clear.
 
 \chapter{Conclusion}
 The project extends an inherited student-built CRAG platform into a more integrated course-grounded study environment. Progress includes a custom document processing and embedding flow, conversation-aware corrective retrieval, inline citations, consented external clarification, learning-mode refinements, notes auditing and flashcard service tools, student inboxes for instructor feedback, and a successful camera-ready short paper for IEEE TALE.
