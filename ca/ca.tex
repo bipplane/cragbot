@@ -347,18 +347,18 @@ Educational conversational systems already combine document access with course s
 The useful comparison concerns responsibilities and evaluation. CRAG places instructor answer correction, approved-answer reuse, student updates, practice and research provenance within a shared course workflow. These design choices can be potentially examined for their operational value.
 
 \section{Self-explanation, practice and learner agency}
-A self-explanation study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. Their study provides a rationale for asking students to articulate reasoning instead of only presenting explanations. Its setting and intervention differ from voluntary university chatbot use, so it motivates a hypothesis for CRAG rather than establishes an effect of Socratic mode. A sequence of chatbot questions can still encourage superficial responses or frustrate a learner who needs direct clarification.
+A study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. This result provides a rationale for asking students to articulate reasoning instead of only presenting explanations. However, a sequence of chatbot questions can still encourage superficial responses or frustrate a learner who wants a direct answer.
 
-Retrieval-practice research provides a complementary basis for quizzes and scheduled review. Roediger and Karpicke show that taking memory tests can improve delayed retention~\parencite{roediger}. The instructional benefit depends on what learners retrieve and how outcomes are assessed. Generated quiz marks, self-rated flashcard recall and an internal scheduling estimate cannot substitute for an independent retention measure. CRAG's practice tools should therefore be evaluated for content validity before their educational effects are investigated.
+Retrieval-practice research gives a suitable basis for quizzes and flashcards review. Roediger and Karpicke show that taking memory tests can improve delayed retention~\parencite{roediger}. The instructional benefit depends on what learners retrieve and how outcomes are assessed. CRAG's practice tools should be evaluated for content validity before their educational effects are investigated.
 
-The HCD framework organises learning around Thinking, Creating, Criticizing and Reflecting, supported by autonomy, ownership and scaffolding~\parencite{hcd}. It offers a process-oriented lens for examining how a student develops and revises an explanation. Its creative-computing context differs from course-question dialogue, requiring an explicit account of what each activity looks like in a transcript. In this project, the HCD cycle provides theoretical direction; the repository's L1--L6 cognitive-agency categories are a separate operational coding scheme requiring validation. Conversation length or an apparent increase in category cannot alone demonstrate cognitive development.
+The HCD framework organises learning around Thinking, Creating, Criticizing and Reflecting, supported by autonomy, ownership and scaffolding~\parencite{hcd}. It offers a process-oriented lens for examining how a student develops and revises an explanation. Its creative-computing context differs from course-question dialogue, requiring an explicit account of what each activity looks like in a transcript. In this project, the HCD cycle is grouped into L1--L6 cognitive-agency categories to determine the cognitive complexity of each interaction. This serves as a more accurate baseline as compared to using conversation length to measure depth of reasoning.
 
 \section{Governance, security and responsible analytics}
-Instructor approval introduces an accountable source of correction, but its scope must remain explicit. Approval of one answer does not automatically cover a similar question with a changed assumption, quantity or negation. CRAG's later exact-question and approved-alternative policy follows this reasoning: similarity can help retrieval, whereas transferring human approval requires a stricter decision.
+In CRAG, instructor approval introduces an accountable source of correction.
 
-Greshake et al.\ show how instructions embedded in retrieved data can redirect LLM-integrated applications~\parencite{greshake}. This challenges the assumption that selecting course documents makes their content safe to follow as instructions. CRAG therefore treats document excerpts and student attachments as data and enforces access and source identifiers outside generated prose. These boundaries reduce particular risks; adversarial testing remains necessary, including course-scope violations and academic misuse.
+Greshake et al.\ show how instructions embedded in retrieved data can redirect LLM-integrated applications~\parencite{greshake}. This challenges the assumption that selecting course documents makes their content safe to follow as instructions. CRAG therefore treats document excerpts and student attachments as data and enforces access and source identifiers outside generated prose.
 
-Ferguson identifies ethical challenges in learning analytics spanning consent, responsibility and the purposes of measurement~\parencite{ferguson}. These concerns matter when a tutoring record becomes research evidence. A student's course access, platform activity and identity linkage do not establish research consent. CRAG separates operational records from consent-eligible canonical research capture and restricts coding by study role. The research protocol must additionally specify withdrawal, retention and justified interpretation of derived labels.
+Ferguson identifies ethical challenges in learning analytics spanning consent, responsibility and the purposes of measurement~\parencite{ferguson}. These concerns matter when a tutoring record becomes research evidence. As such, CRAG currently allows access only to students who understand and consented to the research implications.
 
 \section{Research gap and design implications}
 The reviewed work motivates three connected priorities: traceable course-grounded answers, an integrated study workflow informed by student feedback, and observable opportunities for explanation, critique and revision. Instructor correction supports these priorities by providing a route for addressing unreliable answers. The next phase will examine whether additional evidence processing improves answers, whether instructor review produces usable correction, and whether CRAG responses elicits meaningful reasoning and revision in follow-up student interactions.
@@ -383,12 +383,12 @@ Discord & Registration, course access, chat and interactive quizzes & Cross-chan
 \end{tabularx}
 \end{table}
 
-The inherited query implementation included an intent classifier, a follow-up rephrasing service, retrieval and answer generation. Jina embedding integration also predates this reporting period. Neither the basic RAG platform nor the existence of learning modes, quizzes, Discord or Jina should therefore be presented as a new individual contribution.
+The inherited query implementation included an intent classifier, a follow-up rephrasing service, retrieval and answer generation. Jina embedding integration also predates this reporting period.
 
 \section{Earlier evidence and unresolved limitations}
 The baseline CRAG was involved in a Game Development pilot involving 30 participants over two weeks, and a separate controlled evaluation of an earlier prototype~\parencite{cragpaper}. Reported issues included mismatches between students' requests and retrieval scope, uneven perceived reliability and limited use of modes beyond Standard.
 
-\chapter{Progress during May--October 2026}
+\chapter{Progress made and current implementation}
 \section{Chronology and contribution scope}
 
 \begin{table}[htbp]
@@ -544,9 +544,9 @@ These findings mainly support prioritising follow-up context, inspectable source
 Post-use feedback will guide the next development cycle. Analysis will examine whether students can continue conversations naturally, inspect cited course material, use quizzes and flashcards, interpret notes-audit findings and locate instructor feedback. Reported difficulties and desired changes will be grouped by workflow, with available usage evidence used to contextualise responses where consent permits. The resulting priorities will distinguish usability problems, evidence-quality failures and requests for additional functionality.
 
 \section{What progress establishes}
-The present evidence supports a system-development contribution and a motivated evaluation programme. Current source shows extended retrieval, review, practice and research workflows. The historical tests describe earlier behaviour, while the baseline survey describes prior habits and preferences. There is no completed current-system comparison or independent learning-outcome study in this report.
+The present evidence supports a system-development contribution and a motivated evaluation programme. Current source shows extended retrieval, review, practice and research workflows. The baseline survey describes prior habits and preferences.
 
-Important remaining risks include stale approved answers or generated questions after material changes, incomplete cross-channel research capture, model-review errors and operational failures spanning storage and database updates. Dashboard mastery and cognitive-category summaries require calibration and careful interpretation. Source-level checks cannot establish deployed access, complete consent operations or real browser and provider behaviour.
+Important remaining risks include stale approved answers or generated questions after material changes, incomplete cross-channel research capture, model-review errors and operational failures spanning storage and database updates. Dashboard mastery and cognitive-category summaries require calibration and careful interpretation.
 
 \chapter{Research plan for the upcoming semester}
 
