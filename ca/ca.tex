@@ -515,31 +515,9 @@ arr/.style={-{Latex[length=2mm]},semithick}
 \end{figure}
 
 \chapter{Pilot context, preliminary evidence and limitations}
-\section{Historical prototype evaluation}
-The TALE paper reports 50 cases judged pass/fail by one person for an earlier prototype~\parencite{cragpaper}. Table~\ref{tab:historical} separates categories to expose weaker safety performance.
-
-\begin{table}[htbp]
-\centering\small
-\caption{Reported results for the earlier prototype; not a benchmark of October's system.}
-\label{tab:historical}
-\begin{tabular}{@{}lrr@{}}
-\toprule
-Category & Passed/tested & Pass rate\\
-\midrule
-Grounding & 8/10 & 80\%\\
-Fallback & 9/10 & 90\%\\
-Robustness & 16/20 & 80\%\\
-Safety & 6/10 & 60\%\\
-\midrule
-Overall & 39/50 & 78\%\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Reported failures included unnecessary refusals, unsupported out-of-scope answers, ambiguity handling and adversarial or academic-misuse compliance. Small categories, a single judge and unavailable case-level replication materials limit interpretation. These results motivate new tests; they do not validate later corrective retrieval, attribution or access-control changes.
 
 \section{CS3103 baseline needs assessment}
-The paper reports that 110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, a 38.2\% response rate~\parencite{cragpaper}. The local survey export contains 42 responses, comprising 26 Year 3 and 16 Year 4 students. Six closed-response items contain 41 valid answers. Table~\ref{tab:baseline} uses each item's denominator and preserves the distinction between reported habits and observed behaviour.
+The paper reports that 110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, a 38.2\% response rate~\parencite{cragpaper}. The local survey export contains 42 responses, comprising 26 Year 3 and 16 Year 4 students. Six closed-response items contain 41 valid answers.
 
 \begin{table}[htbp]
 \centering\small
@@ -560,14 +538,10 @@ Wants strict grounding in NUS lecture materials & 26/41 & 63.4\%\\
 \end{tabularx}
 \end{table}
 
-These findings support prioritising follow-up context, inspectable sources and instructor review. They do not demonstrate that students can correctly evaluate an answer or explain a concept. The prompting categories do not provide an exact mean conversation length. Multiple-selection items may sum above 100\%. The invitation denominator and consent account are taken from the paper; a response CSV alone does not establish the current canonical consent state.
-
-The paper states that access was provided to respondents. The current semester's pilot provides the next opportunity to examine how students experience the revised platform. Actual uptake, sustained use, attrition and later outcomes remain to be established. The findings represent a self-selected group that consented to the study, so they do not represent the entire cohort without qualification.
+These findings mainly support prioritising follow-up context, inspectable sources and instructor review.
 
 \section{Role of current-semester post-use feedback}
 Post-use feedback will guide the next development cycle. Analysis will examine whether students can continue conversations naturally, inspect cited course material, use quizzes and flashcards, interpret notes-audit findings and locate instructor feedback. Reported difficulties and desired changes will be grouped by workflow, with available usage evidence used to contextualise responses where consent permits. The resulting priorities will distinguish usability problems, evidence-quality failures and requests for additional functionality.
-
-No completed post-use results will be reported here.
 
 \section{What progress establishes}
 The present evidence supports a system-development contribution and a motivated evaluation programme. Current source shows extended retrieval, review, practice and research workflows. The historical tests describe earlier behaviour, while the baseline survey describes prior habits and preferences. There is no completed current-system comparison or independent learning-outcome study in this report.
