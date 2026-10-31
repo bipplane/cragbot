@@ -49,20 +49,23 @@ doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emn
 \url{https://arxiv.org/abs/2405.11070}.}
 }
 
+@article{kestin2025,
+ author = {Kestin, Greg and Miller, Kelly and Klales, Anna and Milbourne, Timothy and Ponti, Gregorio},
+ title = {{AI tutoring outperforms in-class active learning: an RCT introducing a novel research-based design in an authentic educational setting}},
+ journaltitle = {Scientific Reports},
+ year = {2025},
+ volume = {15},
+ number = {1},
+ eid = {17458},
+ doi = {10.1038/s41598-025-97652-6}
+}
+
 @misc{chi,
  author = {M. T. H. Chi and N. de Leeuw and M.-H. Chiu and C. LaVancher},
  title = {{Eliciting Self-Explanations Improves Understanding}},
  year = {1994},
  note = {\emph{Cognitive Science}, vol.~18, no.~3, pp.~439--477, 1994.
 \url{https://education.asu.edu/sites/g/files/litvpz656/files/lcl/chideleeuwchiulavancher_3.pdf}.}
-}
-
-@misc{roediger,
- author = {Roediger, III, H. L. and J. D. Karpicke},
- title = {{Test-Enhanced Learning: Taking Memory Tests Improves Long-Term Retention}},
- year = {2006},
- note = {\emph{Psychological Science}, vol.~17, no.~3, pp.~249--255, 2006.
-doi: \href{https://doi.org/10.1111/j.1467-9280.2006.01693.x}{10.1111/j.1467-9280.2006.01693.x}.}
 }
 
 @misc{hcd,
@@ -356,18 +359,18 @@ Corrective Retrieval Augmented Generation addresses this potential inaccuracy  b
 
 These approaches highlight an important distinction between retrieving a relevant passage and generating a supported claim. For instance, the ALCE benchmark evaluates fluency, correctness and citation quality separately, demonstrating weaknesses in citation support across language models~\parencite{gao}. CRAG's design consequently distinguishes cited evidence from supplementary context. It should be noted that while source links enhance inspectability, they only provide value if the associated claim is genuinely supported.
 
-\section{Educational assistants and the limits of capability comparisons}
-\section{Educational assistants and the limits of capability comparisons}
+\section{Educational assistants and evidence for structured AI tutoring}
 Some existing educational chatbots already ground their responses in course-specific documents. For example, the ChatGPT-based Jill Watson uses a modular architecture along with classroom materials to outperform traditional models in classroom trials~\parencite{taneja}. This makes it a closer comparison for modern-day educational assistants.
+
+Evidence for educational benefit also depends on the instructional design being evaluated. Kestin et al.\ reported a randomised crossover trial involving 194 students in a Harvard introductory physics course~\parencite{kestin2025}. Across two lessons, a custom AI tutor produced higher immediate post-test scores than in-class active learning, with twice-as-large reported median gains. This custom tutor combined self-paced interaction, targeted feedback, platform-controlled problem sequencing and prompts containing worked solutions. For CRAG, this study motivates evaluating how course evidence and learning modes support students' reasoning, alongside the quality of generated answers.
 
 To effectively compare these systems, the focus should shift to system responsibilities and workflows. CRAG currently has instructor intervention via answer corrections, reuse of verified answers, and real-time student Q&A updates, all within a unified course workflow. These design choices thus allow us to examine each component for their effectiveness.
 
 \section{Self-explanation, practice and learner agency}
-A study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. This result provides a rationale for asking students to articulate reasoning instead of only presenting explanations. However, a sequence of chatbot questions can still encourage superficial responses or frustrate a learner who wants a direct answer.
+A study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. This gives a valid rationale for students to articulate their own  reasoning process, rather than merely show explanations. However, this may not be well-received by students who are accustomed to receiving direct answers from language models, and could also lead to less thoughful articulations.
 
-Retrieval-practice research gives a suitable basis for quizzes and flashcards review. Roediger and Karpicke show that taking memory tests can improve delayed retention~\parencite{roediger}. The instructional benefit depends on what learners retrieve and how outcomes are assessed. CRAG's practice tools should be evaluated for content validity before their educational effects are investigated.
 
-The HCD framework organises learning around Thinking, Creating, Criticizing and Reflecting, supported by autonomy, ownership and scaffolding~\parencite{hcd}. It offers a process-oriented lens for examining how a student develops and revises an explanation. Its creative-computing context differs from course-question dialogue, requiring an explicit account of what each activity looks like in a transcript. In this project, the HCD cycle is grouped into L1--L6 cognitive-agency categories to determine the cognitive complexity of each interaction. This serves as a more accurate baseline as compared to using conversation length to measure depth of reasoning.
+The HCD framework categorises learning around Thinking, Creating, Criticising and Reflecting.~\parencite{hcd}. It offers a structure for examining how students develop and revise their own explanations. CRAG opens a research pathway to this by providing L1--L6 cognitive-agency categories: delegation, explanation, application, verification, critique and metacognitive use. These determine the intended forms of student cognitive agency, with L6 being the most advanced state of reflection. It also serves as a more accurate baseline as compared to using conversation length to measure depth of reasoning.
 
 \section{Governance, security and responsible analytics}
 In CRAG, instructor approval introduces an accountable source of correction.
