@@ -60,6 +60,28 @@ doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emn
  doi = {10.1038/s41598-025-97652-6}
 }
 
+@article{deslauriers2019,
+ author = {Deslauriers, Louis and McCarty, Logan S. and Miller, Kelly and Callaghan, Kristina and Kestin, Greg},
+ title = {{Measuring actual learning versus feeling of learning in response to being actively engaged in the classroom}},
+ journaltitle = {Proceedings of the National Academy of Sciences},
+ year = {2019},
+ volume = {116},
+ number = {39},
+ pages = {19251--19257},
+ doi = {10.1073/pnas.1821936116}
+}
+
+@article{bastani2025,
+ author = {Bastani, Hamsa and Bastani, Osbert and Sungu, Alp and Ge, Haosen and Kabakc{\i}, {\"O}zge and Mariman, Rei},
+ title = {{Generative AI without guardrails can harm learning: Evidence from high school mathematics}},
+ journaltitle = {Proceedings of the National Academy of Sciences},
+ year = {2025},
+ volume = {122},
+ number = {26},
+ eid = {e2422633122},
+ doi = {10.1073/pnas.2422633122}
+}
+
 @misc{chi,
  author = {M. T. H. Chi and N. de Leeuw and M.-H. Chiu and C. LaVancher},
  title = {{Eliciting Self-Explanations Improves Understanding}},
@@ -352,6 +374,11 @@ The supplied IEEE TALE paper describes this platform and reports a CS3103 pre-us
 
 
 \chapter{Literature review}
+\section{Actual learning versus perceived learning}
+Deslauriers et al.\ identified a clear mismatch between actual learning and the 'feeling of learning'~\parencite{deslauriers2019}. In a randomised physics course using identical material, students in active-learning classes felt they had learnt less than students in passive classes, but still ended up performing better on tests. This study showed increased cognitive effort contributed to this mismatch, due to the higher mental strain of active learning that gets wrongly interpreted as poor understsanding. It thus highlights why perceived ease and perceived learning require separate interpretation from assessed understanding.
+
+For CRAG, this suggests retaining post-use feedback as evidence about usability, perceived support and acceptance, while assessing understanding separately. A future evaluation could possibly aim to distinguish perceived learning and confidence, performance while CRAG is available, and performance on matched questions completed without AI assistance.
+
 \section{Retrieval improves access to knowledge but leaves support unresolved}
 Lewis et al.\ showed that language models, when integrating internal knowledge with external databases, work better on knowledge-intensive tasks. This demonstrates the value of retrieval for tasks involving large amounts of content~\parencite{lewis}, and thus provides a foundation for using course materials as external sources. However, this does not guarantee a particular passage accurately supports an explanation, as the retrieval and response generation process still functions like a black box.
 
@@ -360,13 +387,15 @@ Corrective Retrieval Augmented Generation addresses this potential inaccuracy  b
 These approaches highlight an important distinction between retrieving a relevant passage and generating a supported claim. For instance, the ALCE benchmark evaluates fluency, correctness and citation quality separately, demonstrating weaknesses in citation support across language models~\parencite{gao}. CRAG's design consequently distinguishes cited evidence from supplementary context. It should be noted that while source links enhance inspectability, they only provide value if the associated claim is genuinely supported.
 
 \section{Educational assistants and evidence for structured AI tutoring}
-Some existing educational chatbots already ground their responses in course-specific documents. For example, the ChatGPT-based Jill Watson uses a modular architecture along with classroom materials to outperform traditional models in classroom trials~\parencite{taneja}. This makes it a closer comparison for modern-day educational assistants.
+Some existing educational chatbots already ground their responses in course-specific documents. For example, the ChatGPT-based Jill Watson uses a modular architecture along with classroom materials to outperform traditional models in classroom trials~\parencite{taneja}. This approach makes it a closer comparison for modern-day educational assistants.
 
-Evidence for educational benefit also depends on the instructional design being evaluated. Kestin et al.\ reported a randomised crossover trial involving 194 students in a Harvard introductory physics course~\parencite{kestin2025}. Across two lessons, a custom AI tutor produced higher immediate post-test scores than in-class active learning, with twice-as-large reported median gains. This custom tutor combined self-paced interaction, targeted feedback, platform-controlled problem sequencing and prompts containing worked solutions. For CRAG, this study motivates evaluating how course evidence and learning modes support students' reasoning, alongside the quality of generated answers.
+However, evidence for educational benefit greatly depends on the instructional design being evaluated. Kestin et al.\ reported a randomised crossover trial involving 194 students in a Harvard introductory physics course~\parencite{kestin2025}. Across two lessons, a custom AI tutor produced higher immediate post-test scores than in-class active learning. This custom tutor achieved these gains by combining self-paced interaction, targeted feedback, and prompts containing worked solutions. This suggests that highly scaffolded AI instructions can greatly support student reasoning, and potentially improve quality of generated answers.
 
-To effectively compare these systems, the focus should shift to system responsibilities and workflows. CRAG currently has instructor intervention via answer corrections, reuse of verified answers, and real-time student Q&A updates, all within a unified course workflow. These design choices thus allow us to examine each component for their effectiveness.
+Crucially, the long-term impact changes when this scaffolding is removed. Bastani et al.\ conducted a randomised mathematics experiment involving nearly 1,000 high-school students~\parencite{bastani2025}, and found that GPT Base and GPT Tutor increased assisted practice scores by 48\% and 127\%, respectively, relative to the control group. However, once AI access was removed, GPT Base students scored 17\% lower, while GPT Tutor students scored statistically similarly to the control. This study's contrast with Kestin et al.\ supports a need to investigate tutor design and assessment conditions, rather than simply treating AI tutoring as a positive outcome.
 
-\section{Self-explanation, practice and learner agency}
+To effectively compare these design choices, the focus has to shift to specific system responsibilities and workflows. CRAG addresses this by integrating instructor intervention via answer corrections, reuse of verified answers, and real-time student Q&A updates, all within a unified course workflow. This structure thus allows us to properly examine each component, and how they affect learning effectiveness.
+
+\section{Self-explanation and learner agency via HCD}
 A study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. This gives a valid rationale for students to articulate their own  reasoning process, rather than merely show explanations. However, this may not be well-received by students who are accustomed to receiving direct answers from language models, and could also lead to less thoughful articulations.
 
 
