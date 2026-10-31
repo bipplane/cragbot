@@ -106,14 +106,6 @@ doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emn
 \url{https://arxiv.org/abs/2302.12173}.}
 }
 
-@misc{ferguson,
- author = {R. Ferguson},
- title = {{Ethical Challenges for Learning Analytics}},
- year = {2019},
- note = {\emph{Journal of Learning Analytics}, vol.~6, no.~3, pp.~25--30, 2019.
-doi: \href{https://doi.org/10.18608/jla.2019.63.5}{10.18608/jla.2019.63.5}.}
-}
-
 @misc{googlenotebook,
  author = {{Google}},
  title = {{NotebookLM is now Gemini Notebook}},
@@ -401,15 +393,13 @@ A study found that prompting self-explanation supported deeper understanding of 
 
 The HCD framework categorises learning around Thinking, Creating, Criticising and Reflecting.~\parencite{hcd}. It offers a structure for examining how students develop and revise their own explanations. CRAG opens a research pathway to this by providing L1--L6 cognitive-agency categories: delegation, explanation, application, verification, critique and metacognitive use. These determine the intended forms of student cognitive agency, with L6 being the most advanced state of reflection. It also serves as a more accurate baseline as compared to using conversation length to measure depth of reasoning.
 
-\section{Governance, security and responsible analytics}
+\section{Governance and security}
 In CRAG, instructor approval introduces an accountable source of correction.
 
-Greshake et al.\ show how instructions embedded in retrieved data can redirect LLM-integrated applications~\parencite{greshake}. This challenges the assumption that selecting course documents makes their content safe to follow as instructions. CRAG therefore treats document excerpts and student attachments as data and enforces access and source identifiers outside generated prose.
-
-Ferguson identifies ethical challenges in learning analytics spanning consent, responsibility and the purposes of measurement~\parencite{ferguson}. These concerns matter when a tutoring record becomes research evidence. As such, CRAG currently allows access only to students who understand and consented to the research implications.
+Greshake et al.\ showed how malicious instructions embedded in retrieved data can hijack LLM-integrated applications~\parencite{greshake}. To defend against this, CRAG's prompts label excerpts, conversation history and attachments as untrusted data rather than instructions. However, dedicated tests involving the system's actual resistance to prompt injection are left to future work.
 
 \section{Research gap and design implications}
-The reviewed work motivates three connected priorities: traceable course-grounded answers, an integrated study workflow informed by student feedback, and observable opportunities for explanation, critique and revision. Instructor correction supports these priorities by providing a route for addressing unreliable answers. The next phase will examine whether additional evidence processing improves answers, whether instructor review produces usable correction, and whether CRAG responses elicits meaningful reasoning and revision in follow-up student interactions.
+The reviewed literature establishes that effective educational AI requires a careful balance between answer reliability, learner autonomy, and course-specific content. CRAG addresses these priorities by combining instructor-verified course grounding with pedagogical learning modes, providing a structured platform to investigate how CRAG's design and individual features impact student learning.
 
 \chapter{Inherited work and prior evidence}
 \section{Student-built foundation}
