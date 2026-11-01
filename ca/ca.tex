@@ -460,7 +460,7 @@ The design aims to reduce unsupported refusals and incomplete answers while boun
 \section{Answer attribution and external clarification design}
 After an answer is generated, it undergoes a validation review against the supplied passages. If validation fails due to unsupported claims, the answer goes through a repair and regeneration to fix the issues. If it fails yet again, an evidence limitation response is returned.
 
-This validation review aims to make the relationship between an answer and its evidence inspectable. However, it should be noted that these checks may still suffer from incorrectness, as it is dependent on the chunks retrieved and the correctness of the course material that gets embedded.
+This validation review aims to make the relationship between an answer and its evidence inspectable. However, these checks may still suffer from incorrectness, as it is dependent on the chunks retrieved and the correctness of the course material that gets embedded.
 
 External clarification via Tavily search aims to address missing course evidence after a validated answer. This helps to preserve course alignment while allowing students to request broader explanation of a question, which improves the user experience of the platform without outright rejecting the question due to insufficient course coverage. The external search will produce candidates for passage and attribution review, and the follow-up findings are explicitly disclosed as coming from outside course materials.
 
