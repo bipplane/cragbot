@@ -420,8 +420,6 @@ Discord & Registration, course access, chat and interactive quizzes & Cross-chan
 \end{tabularx}
 \end{table}
 
-The inherited query implementation included an intent classifier, a follow-up rephrasing service, retrieval and answer generation, and a dropdown panel for sources used.
-
 \section{Earlier testing and reported limitations}
 The inherited CRAG project was involved in a two-week CS3247 Game Development pilot with 30 participants and a separate controlled evaluation with 39 correct answers out of 50~\parencite{cragpaper}. Report issues included mismatches between what students queried versus what CRAG could actually retrieve and answer, mixed perceived reliability and limited use of other learning modes besides Standard mode.
 
@@ -451,7 +449,9 @@ Figure~\ref{fig:ingestion} summarises the upload and evidence-processing design.
 \end{figure}
 
 \section{Conversation context and corrective retrieval design}
-The query path now preserves original student wording and uses a bounded planner to propose complementary course searches. Results are deduplicated and combined by reciprocal-rank fusion. Coverage review considers the question and can trigger one additional search round for identified gaps. Retrieved evidence allows bounded expansion when weak coverage identifies missing concepts.
+The inherited query path included an intent classifier, a follow-up rephrasing service, retrieval and answer generation, and a display panel showing the sources used.
+
+This query path has since been modified. It now preserves original student wording and uses a bounded planner to propose complementary course searches. Results are deduplicated and combined by reciprocal-rank fusion. Coverage review considers the question and can trigger one additional search round for identified gaps. Retrieved evidence allows bounded expansion when weak coverage identifies missing concepts.
 
 For course questions, this replaces the inherited serial classifier/rephraser workflow with context-aware planning and generation. Conversations now retain complete user and assistant message sequencing for better planning and generation, helping interpret follow-ups that depend on an earlier distinction or constraint.
 
