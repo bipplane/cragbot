@@ -339,7 +339,7 @@ In higher education, course content varies significantly across academic institu
 
 As such, university students require course-specific assistance via a platform that grounds explanations in teaching materials and supports course instructor clarification whenever answers remain uncertain. The platform should also allow students to receive notifications when instructors review or correct answers, helping them revisit explanations that have been verified. Evaluating this workflow would require the effort and consistency of instructor reviews.
 
-This project extends an earlier CRAG implementation built by NUS School of Computing (SoC) students. That foundation already included course retrieval, student chat, an instructor dashboard, pedagogical learning modes, quizzes and Discord integration. The present work aims to further develop this existing foundation into a more coherent study environment, where students are able to trace the claims and citations of an AI-generated explanation all the way down to the retrieved course evidence. To stay within the standards of similar educational AI tools, CRAG further develops its capabilities through stronger conversation handling, evidence review, practice discussions and student-facing instructor updates. Reproducible comparisons of retrieval relevance, answer coverage, and citation support will help assess whether the current system meets these aims.
+This project extends an earlier CRAG implementation built by NUS School of Computing (SoC) students. That foundation already included course retrieval, a student Learning Management System (LMS), an instructor dashboard, pedagogical learning modes, quizzes and Discord integration. The present work aims to further develop this existing foundation into a more coherent study environment, where students are able to trace the claims and citations of an AI-generated explanation all the way down to the retrieved course evidence. To stay within the standards of similar educational AI tools, CRAG further develops its capabilities through stronger conversation handling, evidence review, practice discussions and student-facing instructor updates. Reproducible comparisons of retrieval relevance, answer coverage, and citation support will help assess whether the current system meets these aims.
 
 The development direction takes feedback from a CS3103 pre-use survey, which motivates attention to follow-up questions, source inspection and instructor verification. Established tools such as Gemini Notebook, formerly NotebookLM~\parencite{googlenotebook}, provide useful usability references, but this report presents no formal competitor benchmark or evidence of feature uniqueness. CRAG's intended contribution is the integration of course access, instructor correction, practice and research workflows. Available post-use feedback will help prioritise improvements.
 
@@ -419,28 +419,12 @@ The inherited query implementation included an intent classifier, a follow-up re
 The inherited CRAG project was involved in a two-week CS3247 Game Development pilot with 30 participants and a separate controlled evaluation with 39 correct answers out of 50~\parencite{cragpaper}. Report issues included mismatches between what students queried versus what CRAG could actually retrieve and answer, mixed perceived reliability and limited use of other learning modes besides Standard mode.
 
 \chapter{Progress made and current implementation}
-\section{Chronology and contribution scope}
-
-\begin{table}[htbp]
-\centering\small
-\caption{Development milestones.}
-\begin{tabularx}{\textwidth}{@{}P{0.20\textwidth}Y@{}}
-\toprule
-Period & Recorded development\\
-\midrule
-August & Gemini migration; Markdown ingestion/chunking; conversation and cross-channel research foundations; corrective multi-query retrieval\\
-September & Recovery and provenance; visual extraction; learning-mode control; quiz discussions and submission recovery; consent import, canonical coding and answer inbox\\
-October & Access and evidence contracts; external clarification; exact approved-answer reuse and aliases; notes audit; flashcards; reproducible checks and UI refinement\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-These milestones describe the implementation progress of CRAG from the inherited period till October.
+This section describes the implementation progress of CRAG from the inherited period till October.
 
 \section{Custom document processing and embedding flow (change this to diagram)}
 The previous document ingestion method was further developed and revised into a custom processing pipeline around existing Jina embedding services. A PDF-to-Markdown extraction and structure-aware chunking is now used to retain headings, lists, tables and page provenance. Selected diagrams and page regions also receive searchable descriptions. This processing and integration of course content aims to improve retrieval quality and preserve document structure as compared to undifferentiated text extraction.
 
-Course setup also required more dependable failure handling. Onboarding completion uses database claims and atomic document commits, preserving staged retry inputs and preventing a failed completion from being recorded as successful. Provider calls have deadlines and bounded blocking concurrency. These changes address practical failure conditions such as long-running extraction, repeated completion requests and interrupted processing.
+Course setup also required more dependable failure handling. New changes address the practical failure conditions such as long-running extraction, repeated completion requests and interrupted processing.
 
 A supplementary-material rule specially allows for the inclusion of additional resources that are not part of the core curriculum. This allows for CRAG to reference these documents and provide responses, while excluding them from topic-mastery calculations and quiz generation.
 
@@ -482,7 +466,7 @@ The instructor/research workspace supports operational L1--L6 labelling and sepa
 
 \chapter{Design choices supporting the study workflow}
 \section{Reliable evidence versus flexible answer delivery}
-The project has moved towards explicit evidence and approval boundaries while retaining generative flexibility for explanation. Table~\ref{tab:decisions} summarises the main decisions and their costs. These are design choices to test, rather than conclusions that the selected alternative is universally best.
+CRAG development has moved towards explicit evidence and approval boundaries while retaining generative flexibility for explanation. Table~\ref{tab:decisions} summarises the main decisions and their evaluated costs.
 
 \begin{table}[htbp]
 \centering\small
@@ -502,13 +486,11 @@ Operational metrics versus canonical research & Independent consent and lineage 
 \end{tabularx}
 \end{table}
 
-\section{Provider and pedagogical choices}
-The implementation moved generation from OpenAI to Gemini, while retaining Jina-based embedding integration. This decision was made to streamline providers and keep costs low, with future implementations aiming to use Gemini embedding models to replace Jina. Tavily is also used in CRAG for external clarification and further retrieval.
-
-Similarly, direct, guided and Socratic learning modes serve different immediate needs. Refinements were made towards improving the overall learning experience and response quality, to avoid always supplying a solution and reduce opportunities for independent reasoning. Moreover, the implemented autoswitching of modes (which can be toggled off by students) allows for flexibility in learning, where students can choose to receive more guidance or be challenged to think critically. Each mode will then be further evaluated for its quality and effectiveness in supporting student learning.
+\section{Pedagogical choices}
+Standard, Guided and Socratic learning modes each serve different needs. Guided and Socratic prompts aim to leave opportunities for independent critique and reasoning, while Standard supports direct explanations. Moreover, the implemented autoswitching of modes (which can be toggled off) allows for flexibility in learning, where students can choose to receive more guidance or be challenged to think critically. Each mode will then be further evaluated for its quality and effectiveness in supporting student learning.
 
 \section{Preliminary architecture}
-Figure~\ref{fig:architecture} shows the shared responsibilities. All clients reach the same course and evidence policies. Research capture is downstream of operational interaction and its independent eligibility checks.
+Figure~\ref{fig:architecture} shows a brief overview of each component's responsibilities in the main CRAG service.
 
 \begin{figure}[htbp]
 \centering
@@ -517,21 +499,19 @@ box/.style={draw,rounded corners=2pt,align=center,font=\small,inner sep=5pt,text
 wide/.style={box,text width=126mm},
 arr/.style={-{Latex[length=2mm]},semithick}
 ]
-\node[box] (student) {Student web\\chat and practice};
-\node[box,right=5mm of student] (staff) {Instructor dashboard\\content and review};
-\node[box,right=5mm of staff] (discord) {Optional Discord\\chat and quizzes};
+\node[box] (student) {Student LMS};
+\node[box,right=5mm of student] (staff) {Instructor dashboard};
+\node[box,right=5mm of staff] (discord) {Discord chat};
 \node[wide,below=10mm of staff] (api) {Shared FastAPI services\\course access, retrieval, attribution, review and recovery};
-\node[box,below=10mm of api,xshift=-44mm] (data) {Supabase\\records, vectors, files};
-\node[box,below=10mm of api] (provider) {Model services\\Gemini, Jina; Tavily};
-\node[box,below=10mm of api,xshift=44mm] (research) {Consent eligibility\\canonical research};
+\node[box,below=10mm of api,xshift=-24mm] (data) {Supabase\\user records, vectors, files};
+\node[box,below=10mm of api,xshift=24mm] (provider) {Model services\\Gemini, Jina, Tavily};
 \draw[arr] (student.south) -- (api.north -| student.south);
 \draw[arr] (staff.south) -- (api.north);
 \draw[arr] (discord.south) -- (api.north -| discord.south);
 \draw[arr] (api.south -| data.north) -- (data.north);
-\draw[arr] (api.south) -- (provider.north);
-\draw[arr] (api.south -| research.north) -- (research.north);
+\draw[arr] (api.south -| provider.north) -- (provider.north);
 \end{tikzpicture}
-\caption{Current component responsibilities. Research capture requires separate consent and study eligibility.}
+\caption{Current component responsibilities in the CRAG service.}
 \label{fig:architecture}
 \end{figure}
 
