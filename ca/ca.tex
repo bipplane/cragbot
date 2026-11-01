@@ -486,30 +486,6 @@ For the HCD research, user identities are pseudonymised with unique IDs to prote
 The instructor/research workspace supports operational L1--L6 labelling and separate canonical study coding. Canonical annotations use study grants, versioned codebooks and append-only revisions. Adjudication requires two independent current labels. Changing an underlying label invalidates the effective adjudication. This makes disagreement reviewable, but does not itself establish coding reliability or validate the category scheme.
 
 \chapter{CRAG's system design choices}
-\section{Technical choices and trade-offs}
-CRAG development has moved towards explicit evidence and approval boundaries while retaining generative flexibility for explanation. Table~\ref{tab:decisions} summarises the main decisions and their evaluated costs.
-
-\begin{table}[htbp]
-\centering\small
-\caption{Investigated alternatives, current decisions and evaluation needs.}
-\label{tab:decisions}
-\begin{tabularx}{\textwidth}{@{}P{0.22\textwidth}YY@{}}
-\toprule
-Decision & Rationale for current choice & Cost or unresolved question\\
-\midrule
-Single retrieval versus bounded correction & Multiple searches and one correction round can address different parts of a question & Extra latency and calls; measure marginal coverage and unsupported claims\\
-Similarity reuse versus exact/approved wording & Explicit equivalence preserves the scope of instructor approval & Lower reuse rate and manual alias effort; measure false reuse and missed opportunities\\
-Retrieved links versus reviewed attribution & Separate review checks support before backend citation rendering & Reviewer errors and additional calls; measure false acceptance and abstention\\
-Course-only versus optional external evidence & Course-first retrieval preserves curriculum context; permission allows eligible clarification & Source conflicts and trust burden; evaluate separately from course-only answers\\
-Request processing versus durable worker & Retain existing recovery with fewer operating components & Request lifetime limits persist; revisit using measured failure/concurrency data\\
-Operational metrics versus canonical research & Independent consent and lineage improve research accountability & More administration and missing-data handling; audit capture completeness\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\section{Learning mode choices}
-Standard, Guided and Socratic learning modes each serve different needs. Guided and Socratic prompts aim to leave opportunities for independent critique and reasoning, while Standard supports direct explanations. Moreover, the implemented autoswitching of modes (which can be toggled off) allows for flexibility in learning, where students can choose to receive more guidance or be challenged to think critically. Each mode will then be further evaluated for its quality and effectiveness in supporting student learning.
-
 \section{System overview}
 Figure~\ref{fig:architecture} shows a brief overview of each component's responsibilities in the main CRAG service.
 
@@ -536,6 +512,26 @@ arr/.style={-{Latex[length=2mm]},semithick}
 \label{fig:architecture}
 \end{figure}
 
+\section{Technical choices and trade-offs}
+CRAG's design combines course-grounded assistance with explicit evidence checks and instructor approval. The following technical choices (TC1--TC6) explain the rationale for this design, its costs and the questions that remain for evaluation.
+
+\begin{enumerate}[label=\textbf{TC\arabic*.}]
+\item \textbf{Bounded corrective retrieval:} Rather than relying on a single retrieval query, CRAG uses complementary searches and permits one additional correction round when coverage is weak. This can address different parts of a student's question, but adds latency and model calls. Evaluation will examine whether the extra searches improve coverage and reduce unsupported claims enough to justify their cost.
+
+\item \textbf{Reuse within instructor-approved scope:} Approved answers are reused for exact questions or explicitly approved alternative wording, replacing similarity-based reuse. This keeps reuse within the scope of instructor approval, but may miss valid matches and requires manual approval of alternatives. Evaluation will consider both false reuse and missed opportunities.
+
+\item \textbf{Attribution review before citation rendering:} Retrieved links alone do not establish that an answer is supported. A separate attribution review checks the answer against supplied evidence before the backend renders citations. This adds model calls and remains vulnerable to reviewer errors. Evaluation will measure false acceptance of unsupported claims and whether the system abstains appropriately.
+
+\item \textbf{Course-first answers with optional external clarification:} Course retrieval provides the initial evidence base, while student permission enables eligible external clarification. This preserves curriculum context while allowing broader explanations. External sources may conflict with course materials and place an additional burden on students to assess their relevance and reliability. Answers using external evidence will therefore be evaluated separately from course-only answers.
+
+\item \textbf{Request processing and recovery:} The current design retains request-based processing and existing recovery mechanisms instead of introducing a durable worker. This limits the number of operating components, but request lifetime limits remain. Measured failures and concurrency demands will inform whether a durable worker is needed.
+
+\item \textbf{Operational records and research coding:} Operational metrics and canonical research coding serve separate purposes. Independent consent controls and annotation lineage support research accountability, while adding administration and missing-data handling. Capture completeness will need auditing before these records can support study conclusions.
+\end{enumerate}
+
+\section{Learning mode choices}
+Standard, Guided and Socratic learning modes each serve different needs. Guided and Socratic prompts aim to leave opportunities for independent critique and reasoning, while Standard supports direct explanations. Moreover, the implemented autoswitching of modes (which can be toggled off) allows for flexibility in learning, where students can choose to receive more guidance or be challenged to think critically. Each mode will then be further evaluated for its quality and effectiveness in supporting student learning.
+
 \chapter{Student feedback and current limitations}
 
 \section{CS3103 pre-use survey}
@@ -543,7 +539,7 @@ arr/.style={-{Latex[length=2mm]},semithick}
 
 \begin{table}[htbp]
 \centering\small
-\caption{Selected baseline findings, cross-checked against local survey aggregates.}
+\caption{Selected baseline findings from survey responses.}
 \label{tab:baseline}
 \begin{tabularx}{\textwidth}{@{}Yrr@{}}
 \toprule
@@ -563,7 +559,7 @@ Wants strict grounding in NUS lecture materials & 26/41 & 63.4\%\\
 These findings strongly justify developing CRAG to prioritise follow-up context, source and citation transparency, and instructor-verified answers.
 
 \section{Planned post-use survey}
-A post-use feedback survey for CRAG will be conducted at the end of the semester's teaching weeks. This will guide the next development cycle. Questions will assess perceived response quality, conversational continuity, learning-mode preferences, search efficiency and confidence in evaluating AI-generated answers. Items adapted from the pre-use survey will examine reported responses to incomplete answers, conversation length and common question types. A retrospective comparison will ask whether students continued discussions, identified specific uncertainties, included their own reasoning, requested justifications and explored different assumptions more or less often when using CRAG than when previously using AI study assistants for this course. Questions will also examine reasons for continuing conversations and the frequency of testing one's own understanding. Open-ended feedback will identify helpful features and areas for improvement. Comparisons with pre-use findings will account for differences in question wording, response options and whether questions concern general AI tools or CRAG specifically.
+A post-use feedback survey for CRAG at the end of the semester's teaching weeks will guide the next development cycle. Questions will assess perceived response quality, conversational continuity, learning-mode preferences, search efficiency and confidence in evaluating AI-generated answers. Retrospective comparisons will ask whether students continued discussions, identified answer uncertainties, requested justifications, and if they explored different assumptions when using CRAG versus other AI study assistants. Questions will also examine reasons for continuing conversations, the frequency of testing one's own understanding. and what CRAG features students found helpful or could be improved in the form of open-ended feedback. Comparisons with pre-use findings will account for differences in question wording, response options, and whether the questions focus on CRAG or AI tools in general.
 
 \section{Current progress, what it establishes, and remaining risks}
 The present evidence supports a system-development contribution and a motivated evaluation programme. Current progress shows and establishes extended retrieval, review, and practice workflows.
