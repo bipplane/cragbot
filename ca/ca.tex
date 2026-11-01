@@ -518,7 +518,7 @@ arr/.style={-{Latex[length=2mm]},semithick}
 \chapter{Pilot context, preliminary evidence and limitations}
 
 \section{CS3103 baseline needs assessment}
-Out of the 110 eligible CS3103 Computer Networks students invited, 42 responded and consented, which is a 38.2\% response rate~\parencite{cragpaper}. Those that consented comprised of 26 Year 3 and 16 Year 4 students. Note that 6 closed-response items contain 41 valid answers.
+110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, yielding a 38.2\% response rate~\parencite{cragpaper}. The respondents comprised of 26 Year 3 and 16 Year 4 students, with six response items having 41 valid answers.
 
 \begin{table}[htbp]
 \centering\small
@@ -539,117 +539,53 @@ Wants strict grounding in NUS lecture materials & 26/41 & 63.4\%\\
 \end{tabularx}
 \end{table}
 
-These findings mainly support prioritising follow-up context, inspectable sources and instructor review.
+These findings strongly justify developing CRAG to prioritise follow-up context, source and citation transparency, and instructor-verified answers.
 
 \section{Role of current-semester post-use feedback}
-Post-use feedback will guide the next development cycle. Analysis will examine whether students can continue conversations naturally, inspect cited course material, use quizzes and flashcards, interpret notes-audit findings and locate instructor feedback. Reported difficulties and desired changes will be grouped by workflow, with available usage evidence used to contextualise responses where consent permits. The resulting priorities will distinguish usability problems, evidence-quality failures and requests for additional functionality.
+A post-use feedback survey for CRAG will be conducted at the end of the semester's teaching weeks. This will guide the next development cycle. Questions will assess perceived response quality, conversational continuity, learning-mode preferences, search efficiency and confidence in evaluating AI-generated answers. Items adapted from the pre-use survey will examine reported responses to incomplete answers, conversation length and common question types. A retrospective comparison will ask whether students continued discussions, identified specific uncertainties, included their own reasoning, requested justifications and explored different assumptions more or less often when using CRAG than when previously using AI study assistants for this course. Questions will also examine reasons for continuing conversations and the frequency of testing one's own understanding. Open-ended feedback will identify helpful features and areas for improvement. Comparisons with pre-use findings will account for differences in question wording, response options and whether questions concern general AI tools or CRAG specifically.
 
-\section{What progress establishes}
-The present evidence supports a system-development contribution and a motivated evaluation programme. Current source shows extended retrieval, review, practice and research workflows. The baseline survey describes prior habits and preferences.
+\section{What current progress establishes}
+The present evidence supports a system-development contribution and a motivated evaluation programme. Current progress shows extended retrieval, review, and practice workflows.
 
-Important remaining risks include stale approved answers or generated questions after material changes, incomplete cross-channel research capture, model-review errors and operational failures spanning storage and database updates. Dashboard mastery and cognitive-category summaries require calibration and careful interpretation.
+Important remaining risks include stale approved answers or generated questions after material changes, model-review errors and operational failures spanning storage and database updates.
 
 \chapter{Research plan for the upcoming semester}
-
-The next phase will use pilot feedback to guide improvements, evaluate the quality of CRAG's answers, and investigate student reasoning with reference to HCD. The research questions introduced earlier guide this work.
+The next phase will use pilot feedback to guide improvements, evaluate how corrective retrieval and attribution affect correctness, coverage and citation support, and investigate student reasoning with reference to HCD---the research questions introduced earlier will guide this work.
 
 \section{Pilot feedback and platform improvements}
-First, post-use feedback from the current semester's pilot will be reviewed alongside the earlier needs assessment. The findings will guide improvements to usability, source freshness, failure recovery, and instructor feedback workflows. The system configuration and course materials will be recorded to provide a consistent basis for evaluation.
+First, available post-use feedback will be reviewed alongside the needs assessment and a record of actual feature exposure. Findings will guide improvements to usability, source freshness, failure recovery and instructor updates. The evaluated build, course materials and configuration will be recorded to provide a consistent basis for evaluation.
 
 \section{Technical evaluation}
-Next, a set of course questions will be used to compare single-query retrieval with corrective retrieval and answer attribution review. Answers will be assessed for correctness, coverage, and citation support, with latency, cost, and failure cases recorded. The comparison will use consistent course materials and settings where applicable.
+A set of course questions will compare single-query retrieval and corrective retrieval, with attribution review varied separately so that the effects of the two retrievals can be properly distinguished. The comparison will use consistent course materials, prompts, model settings where applicable. Independent judgements will assess correctness, coverage, citation support and appropriate abstention.
 
 \section{Student interaction and final reporting}
-A coding pilot will then prepare an HCD-informed examination of how students explain ideas, critique responses, and revise their reasoning. Subject to approval, consent, and recruitment, a small study will examine student explanations and revisions alongside their interactions with CRAG. The scope will depend on course feasibility and available participants.
-
-Finally, the project will bring together the technical results, pilot feedback, and any student-study findings in the final report. If participation is limited, the study will be reported as exploratory, with its limitations made clear.
-
+A new practice run will be conducted to establish observable indicators of student explanation, creation, critique and reflection, and document how the local L1--L6 categories relate to these indicators. Subject to approval, consent and recruitment, a small study will examine students' initial explanations, feedback interactions and justified revisions. If a sufficient number of participants can be recruited, the study could potentially split users into two groups: one with CRAG access and one with normal chatbot access, to compare the quality of their explanations and revisions across the semester, and identify if the HCD-informed workflow has any measurable effect on student reasoning.
 \chapter{Conclusion}
-The project extends an inherited student-built CRAG platform into a more integrated course-grounded study environment. Progress includes a custom document processing and embedding flow, conversation-aware corrective retrieval, inline citations, consented external clarification, learning-mode refinements, notes auditing and flashcard service tools, student inboxes for instructor feedback, and a successful camera-ready short paper for IEEE TALE.
+This continual assessment presents the extensive development of CRAG, an instructor-grounded AI-assisted course platform with structure-aware document processing, corrective retrieval using conversation context, reviewed citations, optional external clarification, learning-mode refinements, notes auditing, flashcards, and student inbox updates from instructor reviews.
 
-The next stage will use current-semester post-use feedback to prioritise improvements, compare answer quality reproducibly and assess source freshness and failure recovery. Dialogue-coding validation will support a feasible consented HCD-informed study of how students explain ideas, critique responses and justify revisions. This keeps the next phase focused on the platform's intended educational use and the evidence needed to assess it.
+The next stage will use available post-use feedback to prioritise improvements, compare answer quality reproducibly and assess source freshness and failure recovery. Dialogue-coding validation will support a feasible consented HCD-informed study of how students develop explanations, critique responses and justify revisions. The scope and derived conclusions will follow the participant evidence and approvals actually available.
 
 
 
 \clearpage
 \printbibliography[heading=bibintoc, title={References}]
 
-% CRAG CA REPORT - FIRST ITERATION
-% Prepared 29 October 2026. Reporting period May-October 2026.
-% Next semester January-May 2027 (provisional, user supplied).
-% 
-% OUTPUT
-% main.tex is self-contained: standard LaTeX packages, one TikZ diagram,
-% and embedded bibliography. Original Downloads/main.tex was preserved.
-% Main text includes initial statement, objectives, thematic literature review,
-% inherited work, progress, design alternatives, preliminary evidence and plan.
-% 
-% AUTHOR CONFIRMATIONS
-% - Complete registered title, student number, project/module code, supervisor,
-%   main evaluator. Paper coauthorship does not establish administrative roles.
-% - Confirm personal ownership of post-May deliverables; chronology is supported
-%   by commits, but commits do not establish complete intellectual authorship.
-% - No personal pre-May work claimed, following author's instruction.
-% - Add May-July records if available. No commits found for these months on
-%   inspected HEAD ancestry. This does not establish that no work occurred.
-% - Confirm historical CS3247 pilot dates, raw cases, rubric and survey records.
-% - Complete TALE proceedings metadata/DOI/page numbers from published record.
-% - Agree next-semester protocol, recruitment, independent measures and approvals.
-% - Review generated assistance under applicable NUS/course disclosure rules.
-% 
-% EVIDENCE MAP
-% Current checkout: 35e2a0e7832654864076a2729cd434b6330dd136.
-% Inherited comparison: 69727bb, 4 April 2026, latest pre-May ancestor.
-% Some other refs have later April commits; they were not treated as this
-% branch's inherited state. Neither snapshot establishes complete team history.
-% 
-% Main paper: C:/Users/ryanc/Downloads/main.tex
-% SHA256: 89387e89948ff54d867796e5b1a6ef4cc66f81d0b4d81a11573fe9fbc16c5f20
-% Historical pilot, controlled tests, invitation count, consent account and
-% publication account follow supplied paper/user; not a live research audit.
-% 
-% Survey: local CRAG Pre-Study Survey response export in Downloads.
-% Aggregate checks: 42 rows; Year 3=26, Year 4=16; AI often/always=35/42;
-% clarifying follow-up=32/41; >=4 prompts=38/41; conceptual explainability
-% stopping criterion=36/41; instructor verification=33/41; slide citations=31/41;
-% strict course grounding=26/41. No raw participant identities copied here.
-% CSV aggregates do not establish current consent/capture eligibility.
-% 
-% Repository sources (relative to getCRAG-ed):
-% README.md; docs/architecture/README.md; backend/database/README.md;
-% docs/architecture/10_query_processing.md; docs/architecture/11_research_hcd.md;
-% backend/services/query_service.py; backend/services/retrieval_planner.py;
-% backend/services/note_audit.py; backend/services/flashcard_service.py;
-% backend/services/flashcard_scheduler.py;
-% backend/services/onboarding_session_service.py; dated Git history.
-% Historical handover/roadmap treated as planning context, reconciled with source.
-% No code, dependencies, database or deployed services changed for this report.
-% 
-% IMPORTANT RECONCILIATIONS
-% - Jina, learning modes, quizzes, dashboard and Discord predate personal work.
-% - Paper's 0.85 semantic approval reuse differs from October's exact-question
-%   or explicitly approved alternative policy. Report explains scope/safety cost.
-% - Earlier prototype's 39/50 is not current-system validation.
-% - CS3103 needs assessment is not observed uptake or learning-gain evidence.
-% - HCD learning cycle and local L1-L6 coding scheme remain distinct.
-% - Verified HCD arXiv metadata used instead of unconfirmed TALE HCD references.
-% - Ingestion remains request-based; onboarding's atomic recovery does not give
-%   ordinary uploads atomic replacement/idempotency.
-% 
-% GUIDANCE READ
-% https://advice.writing.utoronto.ca/types-of-writing/literature-review/
-% https://www.comp.nus.edu.sg/cug/plagiarism/
-% Report paraphrases and attributes prior/coauthored work rather than pasting
-% paper sections as new individual results. Literature is thematic and critical.
-% User-provided deadline is Wednesday Week 12; exact calendar date unconfirmed.
-% No submission or external messaging performed.
-% 
-% FINAL VALIDATION
-% 15 pages including title and references; local bundled Tectonic compilation
-% succeeded. No LaTeX warnings, overfull/underfull boxes or undefined references.
-% All 11 bibliography entries cited; environments and labels checked.
-% Original paper SHA256 unchanged. Built-in compile timed out; local compiler
-% completed after initial dependency downloads. No repository application checks
-% run because this task changes only separate report artifacts.
+% REPOSITORY CROSS-CHECK: 31 October 2026.
+% Original ca.tex retained unchanged; see ca.crosscheck-findings.txt for audit.
+% Inspected getCRAG-ed HEAD: 42ddfeb6b69df451e72ff358bb2a33e22badf899.
+% Application files match prior cited revision 35e2a0e; local documentation edits
+% were not treated as proof of runtime behaviour. Inherited ancestor: 69727bb.
+% Key sources: backend/services/query_service.py, retrieval_planner.py,
+% learning_mode_resolver.py, note_audit.py, flashcard_service.py;
+% backend/qa/gemini_qa.py and attribution.py; backend/routes/access.py;
+% backend/quiz_mastery.py; backend/database/migrations/025, 029, 030, 036--043;
+% frontend/lms-management/src/pages/ResearchHCDPage.tsx and HCDTrajectoryPage.tsx;
+% frontend/lms-chat/src/components/chat/ChatInterface.tsx.
+% Local supplied main.tex supports historical pilot/manuscript accounts;
+% local survey CSV supports aggregate counts, not current consent eligibility.
+% Author must confirm administrative metadata, individual contribution records,
+% publication/acceptance status, post-use dataset availability and study approvals.
+% No live providers, production database, browser workflows or deployments tested.
+% Old build/page-count comments removed: they described another report revision.
 
 \end{document}
