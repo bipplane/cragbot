@@ -315,13 +315,13 @@ doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emn
 % --- chapters/abstract.tex ---
 \begin{abstract}
 \noindent
-This project further develops CRAG, an instructor-governed, course-grounded AI tutoring platform, to improve educational assistance in higher education, while studying student reasoning using the Holistic Cognitive Development (HCD) Framework. It extends an existing student-built system built by a previous batch of NUS School of Computing students. The original platform already supported course material retrieval, separate student and instructor management dashboards, pedagogical learning modes, quiz generation, and Discord extensions. After the project was handed over, the development focused more on making the platform more intuitive to compete with existing AI study tools such as Gemini Notebook. This included strengthening the connection of course evidence with chatbot outputs, proper conversational support, and study activities such as flashcards and quiz generation services.
+This project further develops CRAG, an instructor-governed, course-grounded AI tutoring platform, to improve educational assistance in higher education, while studying student reasoning using the Holistic Cognitive Development (HCD) Framework. It extends an existing system built by a previous batch of NUS School of Computing students. The original platform already supported course material retrieval, separate student and instructor management dashboards, pedagogical learning modes, quiz generation, and Discord extensions. After the project was handed over, the development focused more on making the platform more intuitive to compete with existing AI study tools such as Gemini Notebook. This included strengthening the connection of course evidence with chatbot outputs, proper conversational support, and study activities such as flashcards and quiz generation services.
 
 The core problem when it comes to generative AI outputs is that a fluent answer is unable to show establishment of factual support, or allow instructor intervention when the answer lacks correctness. CRAG, therefore, combines course-scoped retrieval with bounded corrective search, answer attribution review and explicit answer verification by human instructors.
 
 Progress made so far comprises an extended integrated platform, integration of inline citations into responses, a custom document embedding flow, consented external search, corrective search when coverage is weak, learning mode refactoring and auto-switching, student notes auditing, dedicated student inboxes containing instructor feedback, and a successful submission of a final camera-ready manuscript for IEEE TALE as a short paper.
 
-For the next semester, from January--May 2027, research and development will draw on post-use feedback from students participating in the current semester's pilot test. Planned development includes prioritising reproducible answer-quality comparisons, assessing of source freshness and failure recovery, validation of dialogue coding with reference to HCD, and a feasible consented study of reasoning and revision to further examine how students explain ideas, critique responses, and justify reasoning.
+For the next semester, from January--May 2027, research and development will draw on post-use feedback from students participating in the current semester's pilot test. Planned development includes prioritising reproducible answer-quality comparisons, assessing source freshness and failure recovery, validation of dialogue coding with reference to HCD, and a feasible consented study of reasoning and revision to further examine how students explain ideas, critique responses, and justify reasoning.
 
 \end{abstract}
 \pagebreak
@@ -361,7 +361,7 @@ The supplied IEEE TALE paper describes this platform alongside earlier prototype
 
 \chapter{Literature review}
 \section{Actual learning versus perceived learning}
-Deslauriers et al.\ identified a clear mismatch between actual learning and the 'feeling of learning'~\parencite{deslauriers2019}. In a randomised physics course using identical material, students in active-learning classes felt they had learnt less than students in passive classes, but still ended up performing better on tests. This study showed increased cognitive effort contributed to this mismatch, due to the higher mental strain of active learning that gets wrongly interpreted as poor understsanding. It thus highlights why perceived ease and perceived learning require separate interpretation from assessed understanding.
+Deslauriers et al.\ identified a clear mismatch between actual learning and the 'feeling of learning'~\parencite{deslauriers2019}. In a randomised physics course using identical material, students in active-learning classes felt they had learnt less than students in passive classes, but still ended up performing better on tests. This study showed increased cognitive effort contributed to this mismatch, due to the higher mental strain of active learning that gets wrongly interpreted as poor understanding. It thus highlights why perceived ease and perceived learning require separate interpretation from assessed understanding.
 
 For CRAG, this suggests retaining post-use feedback as evidence about usability, perceived support and acceptance, while assessing understanding separately. A future evaluation could possibly aim to distinguish perceived learning and confidence, performance while CRAG is available, and performance on matched questions completed without AI assistance.
 
@@ -382,10 +382,10 @@ Crucially, outcomes could differ when students subsequently work without AI assi
 To effectively compare these design choices, the focus has to shift to specific system responsibilities and workflows. CRAG addresses this by integrating instructor intervention via answer corrections, reuse of verified answers, and real-time student Q\&A updates, all within a unified course workflow. This structure thus allows us to properly examine each component, and how they affect learning effectiveness.
 
 \section{The importance of self-explanation and student reasoning}
-A study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. This gives a valid rationale for students to articulate their own  reasoning process, rather than merely show explanations. However, this may not be well-received by students who are accustomed to receiving direct answers from language models, and could also lead to less thoughful articulations.
+A study found that prompting self-explanation supported deeper understanding of an expository text~\parencite{chi}. This gives a valid rationale for students to articulate their own  reasoning process, rather than merely show explanations. However, this may not be well-received by students who are accustomed to receiving direct answers from language models, and could also lead to less thoughtful articulations.
 
 
-The HCD framework categorises learning around Thinking, Creating, Criticising and Reflecting.~\parencite{hcd}. It offers a structure for examining how students develop and revise their own explanations. CRAG opens a research pathway to this by providing local L1--L6 cognitive-agency categories: delegation, explanation, application, verification, critique and metacognitive use. These categories describe the intended forms of student cognitive agency, with L6 being the most advanced state of reflection. It also serves as a more accurate baseline as compared to using conversation length to measure depth of reasoning.
+The HCD framework categorises learning around Thinking, Creating, Criticising and Reflecting~\parencite{hcd}. It offers a structure for examining how students develop and revise their own explanations. CRAG opens a research pathway to this by providing local L1--L6 cognitive-agency categories: delegation, explanation, application, verification, critique and metacognitive use. These categories describe the intended forms of student cognitive agency, with L6 being the most advanced state of reflection. They also serve as a more accurate baseline as compared to using conversation length to measure depth of reasoning.
 
 \section{Instructor approval and prompt injection}
 In CRAG, instructor approval introduces an accountable source of correction.
@@ -416,13 +416,13 @@ Discord & Registration, course access, chat and interactive quizzes & Cross-chan
 \end{table}
 
 \section{Earlier testing and reported limitations}
-The inherited CRAG project was involved in a two-week CS3247 Game Development pilot with 30 participants and a separate controlled evaluation with 39 correct answers out of 50~\parencite{cragpaper}. Report issues included mismatches between what students queried versus what CRAG could actually retrieve and answer, mixed perceived reliability and limited use of other learning modes besides Standard mode.
+The inherited CRAG project was involved in a two-week CS3247 Game Development pilot with 30 participants and a separate controlled evaluation with 39 correct answers out of 50~\parencite{cragpaper}. Reported issues included mismatches between what students queried and what CRAG could actually retrieve and answer, mixed perceived reliability and limited use of other learning modes besides Standard mode.
 
 \chapter{Development progress}
 This section describes the implementation progress of CRAG from the inherited period till October.
 
 \section{Custom document processing and embedding design}
-The previous document ingestion method was further developed and revised into a custom processing pipeline around existing Jina embedding services. A PDF-to-Markdown extraction and structure-aware chunking is now used to retain headings, lists, tables and page provenance. Selected diagrams and page regions also get visually interpreted and embedded as Markdown text. This processing and integration of course content aims to improve retrieval quality and preserve document structure as compared to undifferentiated text and image extraction.
+The previous document ingestion method was further developed and revised into a custom processing pipeline around existing Jina embedding services. PDF-to-Markdown extraction and structure-aware chunking are now used to retain headings, lists, tables and page provenance. Selected diagrams and page regions also get visually interpreted and embedded as Markdown text. This processing and integration of course content aims to improve retrieval quality and preserve document structure as compared to undifferentiated text and image extraction.
 
 A supplementary-material rule specially allows for the inclusion of additional resources that are not part of the core curriculum. This allows for CRAG to reference these documents and provide responses, while excluding them from topic-mastery calculations and quiz generation.
 
@@ -455,14 +455,14 @@ The design aims to reduce unsupported refusals and incomplete answers while boun
 \section{Answer attribution and external clarification design}
 After an answer is generated, it undergoes a validation review against the supplied passages. If validation fails due to unsupported claims, the answer goes through a repair and regeneration to fix the issues. If it fails yet again, an evidence limitation response is returned.
 
-This validation review aims to make the relationship between an answer and its evidence inspectable. However, these checks may still suffer from incorrectness, as it is dependent on the chunks retrieved and the correctness of the course material that gets embedded.
+This validation review aims to make the relationship between an answer and its evidence inspectable. However, these checks may still suffer from incorrectness, as they are dependent on the chunks retrieved and the correctness of the course material that gets embedded.
 
 But even if an answer's claims are supported, it may still leave parts of the question unresolved. To address these coverage gaps, CRAG offers external clarification via Tavily search to explore the missing details that are beyond the course material. This improves the user experience of the platform by preventing response rejection due to insufficient course coverage. Retrieved external passages and their resulting claims undergo further review, and external findings are explicitly distinguished from course materials. This allows broader exploration while keeping the limits of course support visible.
 
 \section{Instructor review and approved-answer reuse}
 The web-answer review workflow distinguishes \emph{Confirm}, \emph{Clarify} and \emph{Dismiss}. Confirm approves the existing answer; Clarify supplies a reviewed answer and explanation. Confirm and Clarify create approved Q\&A and an in-app update for the student. This helps to extend instructor oversight into a visible correction loop.
 
-The inherited query path used a similarity threshold of 0.85 for verified-answer reuse. This could cause accidental reuse of similarly worded questions that have different meanings (e.g., "HTTP/1 vs HTTP/2" and "HTTP/1.1 vs HTTP/2). Now, CRAG looks up the exact approved question or explicitly approved alternative wording to minimise this occurence.
+The inherited query path used a similarity threshold of 0.85 for verified-answer reuse. This could cause accidental reuse of similarly worded questions that have different meanings (e.g., "HTTP/1 vs HTTP/2" and "HTTP/1.1 vs HTTP/2"). Now, CRAG looks up the exact approved question or explicitly approved alternative wording to minimise this occurrence.
 
 \section{Learning modes, quizzes and study tools}
 The inherited quizzes and learning modes were extended in the current implementation. Mode resolution now considers explicit or strongly implied learning requests to switch modes automatically. Quizzes now have enhanced conversational support, and each question contains a contextual \emph{Ask CRAG} button which carries the question context into a conversation where students can explain their reasoning and ask about the explanation.
@@ -471,7 +471,7 @@ Quiz-based topic-mastery updates use Bayesian Knowledge Tracing (BKT) with fixed
 
 A new notes-audit tool allows students to check their course notes against the course materials. It separates pasted notes into claims and verifies each one, thereafter classifying them into \emph{supported}, \emph{conflicting}, \emph{needs qualification} and \emph{not established}. This grouping will help students identify gaps in their notes and revise them accordingly.
 
-A new flashcards tool uses topic-assigned course evidence, stored source snapshots and 'freshness checks' to generate individual flashcards. For this activity, spaced repetition framework is used to help students retain knowledge over time.
+A new flashcards tool uses topic-assigned course evidence, stored source snapshots and 'freshness checks' to generate individual flashcards. For this activity, a spaced repetition framework is used to help students retain knowledge over time.
 
 These new tools provide study activities and aim to make CRAG a more complete learning environment overall.
 
@@ -511,13 +511,13 @@ arr/.style={-{Latex[length=2mm]},semithick}
 CRAG's design combines course-grounded assistance with explicit evidence checks and verification. The following technical choices (TC1--TC4) explain the rationale for this design, its trade-offs, and areas for future evaluation or improvement.
 
 \begin{enumerate}[label=\textbf{TC\arabic*.}]
-\item \textbf{Bounded corrective retrieval:}  Compared with a basic RAG workflow, which only retrieves sources once for a question, CRAG can search sources multiple times to address different parts of a question. If the retrieved sources provide weak coverage, CRAG is able to revise its search and retrieve additional material before answering. These steps tend to produce better-supported answers, but will require more model calls and a longer response time. Further evalauation will look to tighten this bound to balance both coverage and response time, and measure whether additional retrievals noticeably improve answer quality.
+\item \textbf{Bounded corrective retrieval:}  Compared with a basic RAG workflow, which only retrieves sources once for a question, CRAG can search sources multiple times to address different parts of a question. If the retrieved sources provide weak coverage, CRAG is able to revise its search and retrieve additional material before answering. These steps tend to produce better-supported answers, but will require more model calls and a longer response time. Further evaluation will look to tighten this bound to balance both coverage and response time, and measure whether additional retrievals noticeably improve answer quality.
 
 \item \textbf{Reuse within instructor-approved scope:} When a student asks a question, CRAG will reuse an approved response if the question matches the original wording or any other alternative words explicitly approved by the instructor. This prevents answer reuse based on a simple similarity threshold, which could match questions with different meanings. However, it limits the reuse to questions within the scope of instructor approval, and as such, may miss other valid paraphrases. Reviewing inappropriate reuse and missed matches could possibly help determine whether this approach needs refinement.
 
 \item \textbf{Attribution review before citation rendering:} A link to a source does not necessarily mean the source supports the answer. Thus, CRAG conducts an attribution review of the answer against cited sources to verify the claims. This requires additional model calls, and the review may still make mistakes. The evaluation of falsely accepting unsupported claims and cases where CRAG declines to answer due to attribution failure could help improve this check.
 
-\item \textbf{Optional external search beyond course scope:} When course materials do not provide sufficient evidence to answer a question, CRAG returns an evidence-limited response, with an option for the student to request for external clarification. This encourages further exploration and allows students to learn things beyond the course material within the platform itself. However, this comes with the downside of unreliability and potential conflict of information with the existing course material. As such, CRAG will clearly label these sources and its information as external. Student feedback and feature uptake will help assess its usefulness.
+\item \textbf{Optional external search beyond course scope:} When course materials do not provide sufficient evidence to answer a question, CRAG returns an evidence-limited response, with an option for the student to request external clarification. This encourages further exploration and allows students to learn things beyond the course material within the platform itself. However, this comes with the downside of unreliability and potential conflict of information with the existing course material. As such, CRAG will clearly label these sources and their information as external. Student feedback and feature uptake will help assess its usefulness.
 \end{enumerate}
 
 \section{Learning mode choices}
@@ -526,7 +526,7 @@ Standard, Guided and Socratic learning modes each serve different needs. Guided 
 \chapter{Student feedback and current limitations}
 
 \section{CS3103 pre-use survey}
-110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, yielding a 38.2\% response rate~\parencite{cragpaper}. The respondents comprised of 26 Year 3 and 16 Year 4 students, with six response items having 41 valid answers.
+110 eligible CS3103 Computer Networks students were invited and 42 responded and consented, yielding a 38.2\% response rate~\parencite{cragpaper}. The respondents comprised 26 Year 3 and 16 Year 4 students, with six response items having 41 valid answers.
 
 \begin{table}[htbp]
 \centering\small
@@ -550,7 +550,7 @@ Wants strict grounding in NUS lecture materials & 26/41 & 63.4\%\\
 These findings strongly justify developing CRAG to prioritise follow-up context, source and citation transparency, and instructor-verified answers.
 
 \section{Planned post-use survey}
-A post-use feedback survey for CRAG at the end of the semester's teaching weeks will guide the next development cycle. Questions will assess perceived response quality, conversational continuity, learning-mode preferences, search efficiency and confidence in evaluating AI-generated answers. Retrospective comparisons will ask whether students continued discussions, identified answer uncertainties, requested justifications, and if they explored different assumptions when using CRAG versus other AI study assistants. Questions will also examine reasons for continuing conversations, the frequency of testing one's own understanding. and what CRAG features students found helpful or could be improved in the form of open-ended feedback. Comparisons with pre-use findings will account for differences in question wording, response options, and whether the questions focus on CRAG or AI tools in general.
+A post-use feedback survey for CRAG at the end of the semester's teaching weeks will guide the next development cycle. Questions will assess perceived response quality, conversational continuity, learning-mode preferences, search efficiency and confidence in evaluating AI-generated answers. Retrospective comparisons will ask whether students continued discussions, identified answer uncertainties, requested justifications, and if they explored different assumptions when using CRAG versus other AI study assistants. Questions will also examine reasons for why students continue conversations and how often they test their own understanding, and, through open-ended feedback, which CRAG features students found helpful and which could be improved. Comparisons with pre-use findings will account for differences in question wording, response options, and whether the questions focus on CRAG or AI tools in general.
 
 \section{Current progress, what it establishes, and remaining risks}
 The present evidence supports a system-development contribution and a motivated evaluation programme. Current progress shows and establishes extended retrieval, review, and practice workflows.
@@ -564,7 +564,7 @@ The next phase will use pilot feedback to guide improvements, evaluate how corre
 First, available post-use feedback will be reviewed alongside the needs assessment and a record of actual feature exposure. Findings will guide improvements to usability, source freshness, failure recovery and instructor updates. The evaluated build, course materials and configuration will be recorded to provide a consistent basis for evaluation.
 
 \section{Answer quality evaluation}
-A set of course questions will compare single-query retrieval and corrective retrieval, with attribution review varied separately so that the effects of the two retrievals can be properly distinguished. The comparison will use consistent course materials, prompts, model settings where applicable. Independent judgements will assess correctness, coverage, citation support and appropriate abstention.
+A set of course questions will compare single-query retrieval and corrective retrieval, with attribution review varied separately so that the effects of the two retrievals can be properly distinguished. The comparison will use consistent course materials, prompts and model settings, where applicable. Independent judgements will assess correctness, coverage, citation support and appropriate abstention.
 
 \section{Planned study of student reasoning}
 A new practice run will be conducted to establish observable indicators of student explanation, creation, critique and reflection, and document how the local L1--L6 categories relate to these indicators. Subject to approval, consent and recruitment, a small study will examine students' initial explanations, feedback interactions and justified revisions. If a sufficient number of participants can be recruited, the study could potentially split users into two groups: one with CRAG access and one with normal chatbot access, to compare the quality of their explanations and revisions across the semester, and identify if the HCD-informed workflow has any measurable effect on student reasoning.
