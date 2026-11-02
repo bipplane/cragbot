@@ -1,44 +1,49 @@
 % References are maintained here; LaTeX generates the bibliography data at build time.
 \begin{filecontents*}[overwrite]{\jobname-references.bib}
-@misc{cragpaper,
+@unpublished{cragpaper,
  author = {Chen, Ryan Rui Yang and Lim, Rik and Ang, Zi Jun Dayn and Bhojan, Anand},
  title = {{CRAG: An Instructor-Governed Course-Grounded RAG Platform for AI Teaching Assistants in Higher Education}},
  year = {2026},
- note = {IEEE International Conference on Teaching, Assessment and Learning for Engineering (TALE), 2026.
-Author-supplied manuscript source, \texttt{main.tex}.}
+ note = {Paper accepted for IEEE International Conference on Teaching, Assessment and Learning for Engineering (TALE)}
 }
 
-
-@misc{lewis,
- author = {P. Lewis and others},
+@incollection{lewis,
+ author = {Lewis, Patrick and Perez, Ethan and Piktus, Aleksandra and Petroni, Fabio and Karpukhin, Vladimir and Goyal, Naman and K{\"u}ttler, Heinrich and Lewis, Mike and Yih, Wen-tau and Rockt{\"a}schel, Tim and Riedel, Sebastian and Kiela, Douwe},
  title = {{Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks}},
+ booktitle = {Advances in Neural Information Processing Systems},
+ volume = {33},
  year = {2020},
- note = {\emph{Advances in Neural Information Processing Systems}, vol.~33, 2020.
-\url{https://papers.nips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html}.}
+ url = {https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html}
 }
 
-@misc{yan,
- author = {S.-Q. Yan and J.-C. Gu and Y. Zhu and Z.-H. Ling},
+@online{yan,
+ author = {Yan, Shi-Qi and Gu, Jia-Chen and Zhu, Yun and Ling, Zhen-Hua},
  title = {{Corrective Retrieval Augmented Generation}},
  year = {2024},
- note = {arXiv:2401.15884, 2024.
-\url{https://arxiv.org/abs/2401.15884}.}
+ note = {arXiv preprint arXiv:2401.15884},
+ url = {https://arxiv.org/abs/2401.15884}
 }
 
-@misc{gao,
- author = {T. Gao and H. Yen and J. Yu and D. Chen},
+@inproceedings{gao,
+ author = {Gao, Tianyu and Yen, Howard and Yu, Jiatong and Chen, Danqi},
  title = {{Enabling Large Language Models to Generate Text with Citations}},
+ booktitle = {Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing},
+ publisher = {Association for Computational Linguistics},
  year = {2023},
- note = {in \emph{Proceedings of EMNLP}, 2023, pp.~6465--6488.
-doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emnlp-main.398}.}
+ pages = {6465--6488},
+ doi = {10.18653/v1/2023.emnlp-main.398}
 }
 
-@misc{taneja,
- author = {K. Taneja and P. Maiti and S. Kakar and P. Guruprasad and S. Rao and A. K. Goel},
- title = {{Jill Watson: A Virtual Teaching Assistant powered by ChatGPT}},
+@incollection{taneja,
+ author = {Taneja, Karan and Maiti, Pratyusha and Kakar, Sandeep and Guruprasad, Pranav and Rao, Sanjeev and Goel, Ashok K.},
+ title = {{Jill Watson: A Virtual Teaching Assistant Powered by ChatGPT}},
+ booktitle = {Artificial Intelligence in Education},
+ series = {Lecture Notes in Computer Science},
+ volume = {14829},
+ publisher = {Springer},
  year = {2024},
- note = {arXiv:2405.11070, 2024.
-\url{https://arxiv.org/abs/2405.11070}.}
+ pages = {324--337},
+ doi = {10.1007/978-3-031-64302-6_23}
 }
 
 @article{kestin2025,
@@ -74,36 +79,40 @@ doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emn
  doi = {10.1073/pnas.2422633122}
 }
 
-@misc{chi,
- author = {M. T. H. Chi and N. de Leeuw and M.-H. Chiu and C. LaVancher},
+@article{chi,
+ author = {Chi, Michelene T. H. and de Leeuw, Nicholas and Chiu, Mei-Hung and LaVancher, Christian},
  title = {{Eliciting Self-Explanations Improves Understanding}},
+ journaltitle = {Cognitive Science},
  year = {1994},
- note = {\emph{Cognitive Science}, vol.~18, no.~3, pp.~439--477, 1994.
-\url{https://education.asu.edu/sites/g/files/litvpz656/files/lcl/chideleeuwchiulavancher_3.pdf}.}
+ volume = {18},
+ number = {3},
+ pages = {439--477},
+ doi = {10.1207/s15516709cog1803_3}
 }
 
-@misc{hcd,
- author = {A. Bhojan},
- title = {{Pedagogical Reflections on the Holistic Cognitive Development (HCD) Framework and AI-Augmented Learning in Creative Computing}},
- year = {2025},
- note = {arXiv:2511.06779, 2025, version~2, January 2026.
-\url{https://arxiv.org/abs/2511.06779v2}.}
-}
-
-@misc{greshake,
- author = {K. Greshake and S. Abdelnabi and S. Mishra and C. Endres and T. Holz and M. Fritz},
- title = {{Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection}},
- year = {2023},
- note = {arXiv:2302.12173, 2023.
-\url{https://arxiv.org/abs/2302.12173}.}
-}
-
-@misc{googlenotebook,
- author = {{Google}},
- title = {{NotebookLM is now Gemini Notebook}},
+@unpublished{hcd,
+ author = {Bhojan, Anand},
+ title = {{The Holistic Cognitive Development Framework: Designing Human-Centred AI-Augmented Project-Based Learning}},
  year = {2026},
- note = {16 July 2026.
-\url{https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/}.}
+ note = {Manuscript for the IEEE International Conference on Teaching, Assessment and Learning for Engineering (TALE)}
+}
+
+@inproceedings{greshake,
+ author = {Greshake, Kai and Abdelnabi, Sahar and Mishra, Shailesh and Endres, Christoph and Holz, Thorsten and Fritz, Mario},
+ title = {{Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection}},
+ booktitle = {Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security},
+ publisher = {Association for Computing Machinery},
+ year = {2023},
+ pages = {79--90},
+ doi = {10.1145/3605764.3623985}
+}
+
+@online{googlenotebook,
+ author = {Woodward, Josh},
+ title = {{NotebookLM is now Gemini Notebook}},
+ organization = {Google},
+ date = {2026-07-16},
+ url = {https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/}
 }
 \end{filecontents*}
 
@@ -120,15 +129,28 @@ doi: \href{https://doi.org/10.18653/v1/2023.emnlp-main.398}{10.18653/v1/2023.emn
 % https://tex.stackexchange.com/questions/51434/biblatex-citation-order
 \usepackage[
     backend=biber,
-    bibstyle=apa,
+    bibstyle=authoryear,
     citestyle=authoryear,
     sorting=nyt,
+    giveninits=true,
+    maxbibnames=99,
     citetracker=true,
     maxcitenames=5,
     mincitenames=1,
     uniquelist=false,
     uniquename=false
 ]{biblatex}
+% Reference list: surnames and initials for every author, with labelled journal details.
+\DeclareNameAlias{sortname}{family-given}
+\DeclareFieldFormat[article,incollection,inproceedings]{title}{#1}
+\DeclareFieldFormat[article]{volume}{Vol.~#1}
+\DeclareFieldFormat[article]{number}{No.~#1}
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \setunit{\addcomma\space}%
+  \printfield{number}%
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
 % Three to five authors: all surnames on first citation, first + et al. later.
 % Six or more authors: first surname + et al. from the first citation.
 \AtEveryCitekey{%
