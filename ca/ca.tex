@@ -515,11 +515,7 @@ CRAG's design combines course-grounded assistance with explicit evidence checks 
 
 \item \textbf{Attribution review before citation rendering:} A link to a source does not necessarily mean the source supporst the answer. Thus, CRAG conducts an attribution review of the answer against cited sources to verify the claims. This requires additional model calls, and the review may still make mistakes. The evaluation of falsely accepting unsupported claims and cases where CRAG declines to answer due to attribution failure could help improve this check.
 
-\item \textbf{Course-first answers with optional external clarification:} Course retrieval provides the initial evidence base, while student permission enables eligible external clarification. This preserves curriculum context while allowing broader explanations. External sources may conflict with course materials and place an additional burden on students to assess their relevance and reliability. Answers using external evidence will therefore be evaluated separately from course-only answers.
-
-\item \textbf{Request processing and recovery:} The current design retains request-based processing and existing recovery mechanisms instead of introducing a durable worker. This limits the number of operating components, but request lifetime limits remain. Measured failures and concurrency demands will inform whether a durable worker is needed.
-
-\item \textbf{Operational records and research coding:} Operational metrics and canonical research coding serve separate purposes. Independent consent controls and annotation lineage support research accountability, while adding administration and missing-data handling. Capture completeness will need auditing before these records can support study conclusions.
+\item \textbf{Optional external search that goes beyond course scope:} When course materials do not provide sufficient evidence to answer a question, CRAG returns an evidence-limited response, with an option for the student to request for external clarification. This encourages further exploration and allows students to learn things beyond the course material within the platform itself. However, this comes with the downside of unreliability and potential conflict of information with the existing course material. As such, CRAG will clearly label these sources and its information as external. Student feedback and feature uptake will help determine the feature's usefulness.
 \end{enumerate}
 
 \section{Learning mode choices}
