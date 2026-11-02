@@ -395,7 +395,7 @@ The reviewed literature establishes that effective educational AI requires a car
 
 \chapter{Inherited platform and earlier testing}
 \section{Work by previous student developers}
-The project inherited substantial work by the preceding student developers, Lim Rik and Ang Zi Jun Dayn. They built the foundation for course setup, document uploads and embeddings, Q\&A management, learning modes, quizzes, analytics and Discord integration~\parencite{repo}.
+The project inherited substantial work by the preceding student developers, Lim Rik and Ang Zi Jun Dayn. They built the foundation for course setup, document uploads and embeddings, Q\&A management, learning modes, quizzes, analytics and Discord integration.
 
 \begin{table}[htbp]
 \centering\small
@@ -506,7 +506,7 @@ arr/.style={-{Latex[length=2mm]},semithick}
 \end{figure}
 
 \section{Technical choices and trade-offs}
-CRAG's design combines course-grounded assistance with explicit evidence checks and verification. The following technical choices (TC1--TC6) explain the rationale for this design, its trade-offs, and areas for future evaluation or improvement.
+CRAG's design combines course-grounded assistance with explicit evidence checks and verification. The following technical choices (TC1--TC4) explain the rationale for this design, its trade-offs, and areas for future evaluation or improvement.
 
 \begin{enumerate}[label=\textbf{TC\arabic*.}]
 \item \textbf{Bounded corrective retrieval:} Compared with a basic RAG workflow, which only retrieves sources once for a question, CRAG can search sources multiple times to address different parts of a question. If the retrieved sources provide weak coverage, CRAG is able to revise its search and retrieve additional material before answering. These steps tend to produce better-supported answers, but will require more model calls and a longer response time. Further evalauation will look to tighten this bound to balance both coverage and response time, and measure whether additional retrievals noticeably improve answer quality.
@@ -556,7 +556,7 @@ The present evidence supports a system-development contribution and a motivated 
 Important remaining risks include stale approved answers or generated questions after material changes, model-review errors and operational failures spanning storage and database updates.
 
 \chapter{Research plan for the upcoming semester}
-The next phase will use pilot feedback to guide improvements, evaluate how corrective retrieval and attribution affect correctness, coverage and citation support, and investigate student reasoning with reference to HCD---the research questions introduced earlier will guide this work.
+The next phase will use pilot feedback to guide improvements, evaluate how corrective retrieval and attribution affect correctness, coverage and citation support, and investigate student reasoning with reference to HCD.
 
 \section{Pilot feedback and platform improvements}
 First, available post-use feedback will be reviewed alongside the needs assessment and a record of actual feature exposure. Findings will guide improvements to usability, source freshness, failure recovery and instructor updates. The evaluated build, course materials and configuration will be recorded to provide a consistent basis for evaluation.
